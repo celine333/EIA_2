@@ -75,13 +75,13 @@ body {
 @media screen and (max-width: 1000px) {
     h1 {
         position: absolute;
-        left: 80px;
+        left: 60px;
         color: white;
     }
     
     .task {
         position: absolute;
-        left: 100px;
+        left: 80px;
         top: 100px;
         background-color: white;
         width: 250px;
@@ -98,7 +98,7 @@ body {
     
     .square {
         position: absolute;
-        left: 100px;
+        left: 80px;
         top: 400px;
         background-color: white;
         width: 250px;
