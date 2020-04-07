@@ -132,12 +132,4 @@ body {
         width: 96%;
         background-color: rgb(245, 129, 87, 0.4)
     }
-    
-    footer {
-        position: absolute;
-        bottom: 5px;
-        right: 5px;
-        background-color: white;
-        font-size: 12px;
-    }
 }
