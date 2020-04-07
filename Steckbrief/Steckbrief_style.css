@@ -1,5 +1,4 @@
 body {
-    /* background-color: rgb(223, 219, 219); */
     background-color: black;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -13,8 +12,8 @@ body {
 
     .task {
         position: absolute;
-        left: 35%;
-        top: 20%;
+        left: 470px;
+        top: 100px;
         background-color: white;
         width: 25%;
         height: 30%;
@@ -30,8 +29,8 @@ body {
 
     .square {
         position: absolute;
-        left: 35%;
-        top: 60%;
+        left: 470px;
+        top: 350px;
         background-color: white;
         width: 25%;
         height: 33%;
@@ -67,8 +66,8 @@ body {
 
     footer {
         position: absolute;
-        bottom: 2%;
-        right: 2%;
+        bottom: 10px;
+        right: 10px;
         background-color: white;
     }
 }
@@ -76,17 +75,17 @@ body {
 @media screen and (max-width: 1000px) {
     h1 {
         position: absolute;
-        left: 27%;
+        left: 90px;
         color: white;
     }
     
     .task {
         position: absolute;
-        left: 30%;
-        top: 20%;
+        left: 110px;
+        top: 100px;
         background-color: white;
-        width: 45%;
-        height: 30%;
+        width: 50%;
+        height: 40%;
     }
     
     .headline {
@@ -99,11 +98,11 @@ body {
     
     .square {
         position: absolute;
-        left: 30%;
-        top: 60%;
+        left: 110px;
+        top: 240px;
         background-color: white;
-        width: 45%;
-        height: 38%;
+        width: 50%;
+        height: 85%;
     }
     
     .name {
@@ -136,8 +135,8 @@ body {
     
     footer {
         position: absolute;
-        bottom: 2%;
-        right: 2%;
+        bottom: 5px;
+        right: 5px;
         background-color: white;
         font-size: 12px;
     }
