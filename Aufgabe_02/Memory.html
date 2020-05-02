@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="Memory_style.css">
+    <script src="Memory_script.js"></script>
+</head>
+
+<body>
+    <div id="startingpage">
+        <div class="leftside">
+            <p>Willkommen auf der Seite Sequenzmemory!</p>
+            <br>
+            <p>Du als Spieler, kannst deine Sequenz selbst auswählen oder eingeben.</p>
+            <p>Die Zeit für das Spiel und für die Zeichenfolge kannst du auch frei wählen.</p>
+            <p>Spiele das Spiel in der richtigen Reihenfolge, um zu gewinnen.</p>
+            <p>Starte jetzt mit einem Klick viel Spaß!</p>
+        </div>  
+        <div class="rightside">
+            <p>Wähle deine Sequenz</p>
+            <select name="Options" id="select">
+                <option value="Medienkonzeption">MEDIENKONZEPTION</option>
+                <option value="Memory">MEMORY</option>
+                <option value="Medieninformatik">MEDIENINFORMATIK</option>
+                <option value="Furtwangen">FURTWANGEN</option>
+                <option value="Hochschule">HOCHSCHULE</option>
+                <option value="Schwarzwald">SCHWARZWALD</option>
+                <option value="Praktikum">PRAKTIKUM</option>
+                <option value="Vorlesung">VORLESUNG</option>
+                <option value="Schneefall">SCHNEEFALL</option>
+                <option value="Langeweile">LANGEWEILE</option>
+            </select>
+            <p>Gebe deine Sequenz ein</p>
+            <input type="text" id="input"> 
+            <p>Gebe deine Zeit für die Zeichenfolge ein</p>
+            <input type="time" value="00:30" id="time">
+            <br>
+            <br>
+            <button id="save">Speicher Daten</button>
+            <button class="start" id="button">Spiel Starten</button>
+        </div>
+    </div>
+    <div id="playingpage">
+        <h1>Sequenzmemory</h1>
+        <div id="mail" class="letters">
+            <div id="cardid">
+                <!-- <p class="letter">E</p> -->
+            </div>
+        </div>
+        <p class="headline" id="chosenword">MEDIENKONZEPTION</p>
+        <p class="time">Zeit: 06:34</p>
+        <div id="help" class="helpfield">
+            <p>Hilfe</p>
+        </div>
+        <div id="feedback" class="feedbackfield">
+            <p>Feedback:</p>
+            <p>Toll! Mach weiter so</p>
+        </div>
+    </div>
+    <footer class="footer">Konzept von: Hilal Bulut</footer>
+</body>
+
+</html>
