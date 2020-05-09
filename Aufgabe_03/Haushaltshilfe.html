@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haushaltshilfe</title>
+    <link rel="stylesheet" href="Haushaltshilfe_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <script src="Haushaltshilfe_script.js"></script>
+</head>
+<body>
+    
+    <header>
+        <h1>Home Helper</h1>
+        <p class="text">Wählen Sie links ihre Erledigungen aus.
+            Rechts sehen Sie die Auflistung mit dem jeweiligen Preis und dem Endpreis.
+        </p>
+    </header>
+
+    <form>
+        <div id="form" class="leftside">
+            <h2>Wähle hier</h2>
+            <fieldset>
+                <legend>EINKAUFEN</legend>
+                <table id="shop">
+                    <tr>
+                        <th>Artikel</th>
+                        <th>Menge + Einheit</th>
+                        <th>Kosten</th>
+                        <th>Wo?</th>
+                    </tr>
+                    <tbody id="row">
+                        <tr>
+                            <td><input placeholder="Artikel" name="Artikel" value="Artikel"></td>
+                            <td><input placeholder="0 kg" name="Menge+Einheit" value="0kg"></td>
+                            <td id="price"><input placeholder="0€" name="Preis" value="0€"></td>
+                            <td><input placeholder="Ort" name="Ort" value="Ort"></td>
+                            <td id="trash"><i class="fas fa-trash-alt"></i></td>
+                        </tr>
+                        <tr>
+                            <td><input placeholder="Artikel" name="Artikel" value="Artikel"></td>
+                            <td><input placeholder="0 L" name="Menge+Einheit" value="0 L"></td>
+                            <td id="price"><input placeholder="0€" name="Preis" value="0€"></td>
+                            <td><input placeholder="Ort" name="Ort" value="Ort"></td>
+                            <td id="trash"><i class="fas fa-trash-alt"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" id="addrow">Hinzufügen</button>
+                <p>Drücken Sie "Enter", um deine Auswahl zu bestätigen.</p>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>HAUSHALTSARBEITEN</legend>
+                <input type="checkbox" name="Home" value="Rasen mähen" price="10.00" id="home">
+                <label for="Rasen mähen">Rasen mähen</label>
+                <input type="checkbox" name="Home" value="Hund ausführen" price="10.00" id="home">
+                <label for="Hund ausführen">Hund ausführen</label>
+                <input type="checkbox" name="Home" value="Staubsaugen / Wischen" price="8.00" id="home">
+                <label for="Staubsaugen / Wischen">Staubsaugen</label>
+                <input type="checkbox" name="Home" value="Pflanzen gießen" price="5.00" id="home">
+                <label for="Pflanzen gießen">Pflanzen gießen</label>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>BANK</legend>
+                <input type="radio" name="Bank" value="Geld abheben" price="3" id="bank">
+                <label for="Geld abheben">Geld abheben</label>
+                <input type="radio" name="Bank" value="Geld einzahlen" price="3"  id="bank">
+                <label for="Geld einzahlen">Geld einzahlen</label>
+                <br>
+                <span id="slider">
+                    <span>
+                        0€
+                        <input type="range" name="amount" value="0" id="amount" min="0" max="500" step="5" price=".">
+                        500€
+                    </span>
+                        <p id="text">Gewünschter Betrag: 0€</p>
+                </span>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>ZAHLUNGSWEISE</legend>
+                <input type="radio" name="cash" value="Bar" id="cash">
+                <label for="Bar">Bar</label>
+                <input type="radio" name="cash" value="Bankeinzug" id="cash">
+                <label for="Bankeinzug">Bankeinzug</label>
+                <input type="radio" name="cash" value="Überweisung" id="cash">
+                <label for="Überweisung">Überweisung</label>
+            </fieldset>
+        </div>
+    </form>
+    <div id="order" class="rightside">
+        <h2>Ihre Bestellung</h2>
+        <span id="list"></span>
+    </div>
+    <footer>
+        <p>In Zusammenarbeit mit Elena Mayer</p>
+    </footer>
+</body>
+</html>
