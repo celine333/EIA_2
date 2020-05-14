@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haushaltshilfe</title>
+    <link rel="stylesheet" href="Haushaltshilfe_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <script src="Haushaltshilfe_script.js"></script>
+</head>
+<body>
+    
+    <header>
+        <h1>Home Helper</h1>
+        <p class="text">Wählen Sie links ihre Erledigungen aus.
+            Rechts sehen Sie die Auflistung mit dem jeweiligen Preis und dem Endpreis.
+        </p>
+    </header>
+
+    <form>
+        <div id="form" class="leftside">
+            <h2>Wähle hier</h2>
+            <fieldset>
+                <legend>EINKAUFEN</legend>
+                <input type="text" name="Datalist" list="options" id="datashop" placeholder="Wähle einen Artikel"/>
+		        <datalist id="options">
+                    <option name="Butter" value="Butter" price="0.79" unit="Stück">Butter</option>
+                    <option name="Milch" value="Milch" price="1.20" unit="Liter">Milch</option>
+                    <option name="Mehl" value="Mehl" price="2.30" unit="Packung(en)">Mehl</option>
+                    <option name="Zucker" value="Zucker" price="1.99" unit="Packung(en)">Zucker</option>
+                    <option name="Eier" value="Eier" price="2.99" unit="Stück">Eier</option>
+                    <option name="Salz" value="Salz" price="2.50" unit="Packung(en)">Salz</option>
+                    <option name="Brot" value="Brot" price="4.00" unit="Laib">Brot</option>
+                </datalist>
+                
+                <span id="menge">
+                    <input type="number" name="Menge" value="0" step="1" min="0" max="1000">
+                </span>
+
+                <span>
+                    <input type="text" name="DatalistSupermarkt" list="supermarket" placeholder="Wähle einen Supermarkt"/>
+                    <datalist id="supermarket">
+                        <option name="Edeka" value="Edeka">Edeka</option>
+                        <option name="Aldi" value="Aldi">Aldi</option>
+                        <option name="Lidl" value="Lidl">Lidl</option>
+                        <option name="Rewe" value="Rewe">Rewe</option>
+                    </datalist>
+                </span>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>HAUSHALTSARBEITEN</legend>
+                <input type="checkbox" name="Home" value="Rasen mähen" price="10.00" id="home">
+                <label for="Rasen mähen">Rasen mähen</label>
+                <input type="checkbox" name="Home" value="Hund ausführen" price="10.00" id="home">
+                <label for="Hund ausführen">Hund ausführen</label>
+                <input type="checkbox" name="Home" value="Staubsaugen / Wischen" price="8.00" id="home">
+                <label for="Staubsaugen / Wischen">Staubsaugen</label>
+                <input type="checkbox" name="Home" value="Pflanzen gießen" price="5.00" id="home">
+                <label for="Pflanzen gießen">Pflanzen gießen</label>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>BANK</legend>
+                <input type="radio" name="Bank" value="Geld abheben" price="3" id="bank">
+                <label for="Geld abheben">Geld abheben</label>
+                <input type="radio" name="Bank" value="Geld einzahlen" price="3"  id="bank">
+                <label for="Geld einzahlen">Geld einzahlen</label>
+                <br>
+                <span id="slider">
+                    <span>
+                        0€
+                        <input type="range" name="Amount" value="0" id="amount" min="0" max="500" step="5" price=".">
+                        500€
+                    </span>
+                        <p id="text">Gewünschter Betrag: 0€</p>
+                </span>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>ZAHLUNGSWEISE</legend>
+                <input type="radio" name="cash" value="Bar" id="cash">
+                <label for="Bar">Bar</label>
+                <input type="radio" name="cash" value="Bankeinzug" id="cash">
+                <label for="Bankeinzug">Bankeinzug</label>
+                <input type="radio" name="cash" value="Überweisung" id="cash">
+                <label for="Überweisung">Überweisung</label>
+            </fieldset>
+        </div>
+    </form>
+    <div id="order" class="rightside">
+        <h2>Ihre Bestellung</h2>
+        <span id="list"></span>
+    </div>
+    <footer>
+        <p>In Zusammenarbeit mit Elena Mayer</p>
+    </footer>
+</body>
+</html>
