@@ -16,7 +16,7 @@ body {
         top: 100px;
         background-color: white;
         width: 25%;
-        height: 30%;
+        height: 60%;
     }
 
     .headline {
@@ -30,7 +30,7 @@ body {
     .square {
         position: absolute;
         left: 470px;
-        top: 350px;
+        top: 550px;
         background-color: white;
         width: 25%;
         height: 33%;
@@ -85,7 +85,7 @@ body {
         top: 100px;
         background-color: white;
         width: 250px;
-        height: 220px;
+        height: 400px;
     }
     
     .headline {
@@ -99,7 +99,7 @@ body {
     .square {
         position: absolute;
         left: 80px;
-        top: 400px;
+        top: 600px;
         background-color: white;
         width: 250px;
         height: 220px;
