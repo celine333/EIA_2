@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haushaltshilfe</title>
+    <link rel="stylesheet" href="Haushaltshilfe_style.css">
+    <script src="GenerateContent.js"></script>
+    <script src="Haushaltshilfe_script.js"></script>
+</head>
+<body>
+    
+    <header>
+        <h1>Home Helper</h1>
+        <p class="text">Wählen Sie links ihre Erledigungen aus.
+            Rechts sehen Sie die Auflistung mit dem jeweiligen Preis und dem Endpreis.
+        </p>
+    </header>
+
+    <form id="orderForm" method="GET">
+        <div class="leftside">
+            <h2>Wähle hier</h2>
+            <fieldset id="Einkauf">
+                <legend>EINKAUFEN</legend>
+                <span id="menge">
+                    <input type="number" name="Menge" value="0" step="1" min="0" max="1000">
+                </span>
+            </fieldset>
+            <br>
+            <fieldset id="Supermarkt">
+                <legend>SUPERMARKT</legend>
+            </fieldset>
+            <br>
+            <fieldset id="Haushalt">
+                <legend>HAUSHALTSARBEITEN</legend>
+            </fieldset>
+            <br>
+            <fieldset id="Bank">
+                <legend>BANK</legend>
+                <br>
+                <span id="slider">
+                    <span>
+                        0€
+                        <input type="range" name="Amount" value="0" id="amount" min="0" max="500" step="5" price=".">
+                        500€
+                    </span>
+                        <p id="text">Gewünschter Betrag: 0€</p>
+                </span>
+            </fieldset>
+            <br>
+            <fieldset id="Zahlung">
+                <legend>ZAHLUNGSWEISE</legend>
+            </fieldset>
+        </div>
+    </form>
+
+    <div id="order" class="rightside">
+        <h2>Ihre Bestellung</h2>
+        <div id="list"></div>
+        <div id="payment"></div>
+        <button type="reset" form="orderForm">Reset</button>
+        <button type="button" form="orderForm">Order</button>
+    </div>
+
+    <footer>
+        <p>In Zusammenarbeit mit Elena Mayer</p>
+    </footer>
+
+</body>
+</html>
