@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node Aufgabe_06/Server.js"
+    "start": "node Aufgabe_06/L_06/Server.js"
   },
   "repository": {
     "type": "git",
