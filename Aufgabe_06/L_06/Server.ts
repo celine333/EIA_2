@@ -1,8 +1,8 @@
 import * as Http from "http";
-import { Url, UrlWithParsedQuery } from "url";
-// import * as Url from "url";
+// import { Url, UrlWithParsedQuery } from "url";
+import * as Url from "url";
 
-export namespace L06_CocktailBar {
+export namespace L06_Homehelper {
     let server: Http.Server = Http.createServer();
     console.log(server);
 
