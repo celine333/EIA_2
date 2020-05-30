@@ -2,6 +2,7 @@
 var L06_Homehelper;
 (function (L06_Homehelper) {
     function generateContent(_data) {
+        console.log("hallo");
         for (let category in _data) {
             let items = _data[category];
             let group = null;

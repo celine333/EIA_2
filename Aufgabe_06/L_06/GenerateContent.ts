@@ -11,6 +11,7 @@ namespace L06_Homehelper {
     }
     
     export function generateContent(_data: Data): void {
+        console.log("hallo");
 
         for (let category in _data) {
             let items: Item[] = _data[category];
