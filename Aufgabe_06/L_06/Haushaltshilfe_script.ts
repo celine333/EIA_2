@@ -32,7 +32,8 @@ namespace L06_Homehelper {
         console.log("send order");
         let formData: FormData = new FormData (document.forms[0]);
         let query: URLSearchParams = new URLSearchParams(<any>formData);
-        await fetch("Haushaltshilfe_L05.html?" + query.toString());
+        console.log("Query:" + query);
+        await fetch("Haushaltshilfe_L06.html?" + query.toString());
         alert("Order sent!");
         let response: Response = await fetch(appurl + "?" + query.toString());
         let message: string = await response.text();
