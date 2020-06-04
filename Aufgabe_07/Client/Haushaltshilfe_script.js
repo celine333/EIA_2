@@ -1,6 +1,6 @@
 "use strict";
-var L06_Homehelper;
-(function (L06_Homehelper) {
+var L07_Homehelper;
+(function (L07_Homehelper) {
     window.addEventListener("load", handleLoad);
     let appurl = "https://celineoverdose.herokuapp.com/";
     let form = document.querySelector("#orderForm");
@@ -9,7 +9,7 @@ var L06_Homehelper;
         let response = await fetch("Data.json");
         let offer = await response.text();
         let data = JSON.parse(offer);
-        L06_Homehelper.generateContent(data);
+        L07_Homehelper.generateContent(data);
         let handleform = document.querySelector("#orderForm");
         handleform.addEventListener("change", handleChange);
         let slider = document.querySelector("#amount");
@@ -106,5 +106,5 @@ var L06_Homehelper;
         let payment = document.querySelector("#payment");
         payment.innerHTML = "";
     }
-})(L06_Homehelper || (L06_Homehelper = {}));
+})(L07_Homehelper || (L07_Homehelper = {}));
 //# sourceMappingURL=Haushaltshilfe_script.js.map

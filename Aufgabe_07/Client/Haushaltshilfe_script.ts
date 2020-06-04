@@ -1,4 +1,4 @@
-namespace L06_Homehelper {
+namespace L07_Homehelper {
     window.addEventListener("load", handleLoad);
 
     let appurl: string = "https://celineoverdose.herokuapp.com/";

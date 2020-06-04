@@ -1,10 +1,21 @@
-"use strict";
-var L06_Homehelper;
-(function (L06_Homehelper) {
-    function generateContent(_data) {
+namespace L07_Homehelper {
+    export interface Item {
+        name: string;
+        value: string;
+        price: number;
+        unit: string;
+    }
+
+    export interface Data {
+        [category: string]: Item[];
+    }
+    
+    export function generateContent(_data: Data): void {
+
         for (let category in _data) {
-            let items = _data[category];
-            let group = null;
+            let items: Item[] = _data[category];
+
+            let group: HTMLElement | null = null;
             console.log("Kategorie:" + items);
             switch (category) {
                 case "Einkauf":
@@ -25,25 +36,29 @@ var L06_Homehelper;
                 default:
                     break;
             }
-            let fieldset = document.querySelector("fieldset#" + category);
+
+            let fieldset: HTMLFieldSetElement | null = document.querySelector("fieldset#" + category);
             if (fieldset && group) {
                 fieldset.appendChild(group);
             }
         }
     }
-    L06_Homehelper.generateContent = generateContent;
-    function createDataList(_items, _category) {
+    
+    function createDataList(_items: Item[], _category: string): HTMLElement | null {
         console.log("Einkauf");
-        let group = document.createElement("div");
-        let select = document.createElement("select");
+        let group: HTMLDivElement = document.createElement("div");
+        let select: HTMLSelectElement = document.createElement("select");
+        
         for (let item of _items) {
-            let option = document.createElement("option");
+            
+            let option: HTMLOptionElement = document.createElement("option"); 
             option.setAttribute("price", item.price.toFixed(2));
             option.setAttribute("unit", item.unit);
-            option.value = item.value;
-            select.name = _category;
+            option.value = item.value; 
+            select.name = _category; 
             option.id = item.name;
-            let label = document.createElement("label");
+         
+            let label: HTMLLabelElement = document.createElement("label");
             label.textContent = item.value;
             label.htmlFor = item.value;
             group.appendChild(select);
@@ -52,17 +67,19 @@ var L06_Homehelper;
         }
         return group;
     }
-    function createDataListSupermarkt(_items, _category) {
+
+    function createDataListSupermarkt(_items: Item[], _category: string): HTMLElement | null {
         console.log("Supermarkt");
-        let group = document.createElement("div");
-        let select = document.createElement("select");
+        let group: HTMLDivElement = document.createElement("div");
+        let select: HTMLSelectElement = document.createElement("select");
         for (let item of _items) {
-            let option = document.createElement("option");
+            let option: HTMLOptionElement = document.createElement("option"); 
             option.setAttribute("price", item.price.toFixed(2));
-            option.value = item.value;
-            select.name = _category;
+            option.value = item.value; 
+            select.name = _category; 
             option.id = item.name;
-            let label = document.createElement("label");
+         
+            let label: HTMLLabelElement = document.createElement("label");
             label.textContent = item.value;
             label.htmlFor = item.value;
             group.appendChild(select);
@@ -71,61 +88,74 @@ var L06_Homehelper;
         }
         return group;
     }
-    function createMultiple(_items, _category) {
+
+    function createMultiple(_items: Item[], _category: string): HTMLElement | null {
         console.log("Haushalt");
-        let group = document.createElement("div");
+        let group: HTMLDivElement = document.createElement("div");
         for (let item of _items) {
-            let checkbox = document.createElement("input");
+            let checkbox: HTMLInputElement = <HTMLInputElement>document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.setAttribute("price", item.price.toFixed(2));
-            checkbox.value = item.value;
+            checkbox.value = item.value; 
             // console.log("Hier:" + item.value);
-            checkbox.name = _category;
+            checkbox.name = _category; 
             checkbox.id = item.name;
+
             console.log("checkbox:" + checkbox);
-            let label = document.createElement("label");
+
+            let label: HTMLLabelElement = document.createElement("label");
             label.textContent = item.value;
             label.htmlFor = item.value;
+
             group.appendChild(checkbox);
             group.appendChild(label);
         }
         return group;
     }
-    function createSingle(_items, _category) {
+
+    function createSingle(_items: Item[], _category: string): HTMLElement | null {
         console.log("Bank");
-        let group = document.createElement("div");
+        let group: HTMLDivElement = document.createElement("div");
         for (let item of _items) {
-            let radio = document.createElement("input");
+            let radio: HTMLInputElement = <HTMLInputElement>document.createElement("input"); 
             radio.type = "radio";
             radio.setAttribute("price", item.price.toFixed(2));
             radio.setAttribute("id", "radio");
-            radio.value = item.value;
-            radio.name = _category;
-            let label = document.createElement("label");
+            radio.value = item.value; 
+            radio.name = _category; 
+            
+         
+            let label: HTMLLabelElement = document.createElement("label");
             label.textContent = item.value;
             label.htmlFor = item.value;
+            
             group.appendChild(radio);
             group.appendChild(label);
         }
         return group;
     }
-    function createSingleCash(_items, _category) {
+
+    function createSingleCash(_items: Item[], _category: string): HTMLElement | null {
         console.log("Zahlung");
-        let group = document.createElement("div");
+        let group: HTMLDivElement = document.createElement("div");
+
         for (let item of _items) {
-            let radio = document.createElement("input");
+            
+            let radio: HTMLInputElement = <HTMLInputElement>document.createElement("input"); 
             radio.type = "radio";
             radio.setAttribute("price", item.price.toFixed(2));
             radio.value = item.value;
-            radio.name = _category;
+            radio.name = _category; 
             radio.id = item.name;
-            let label = document.createElement("label");
+
+            let label: HTMLLabelElement = document.createElement("label");
             label.textContent = item.value;
             label.htmlFor = item.value;
+            
             group.appendChild(radio);
             group.appendChild(label);
         }
         return group;
     }
-})(L06_Homehelper || (L06_Homehelper = {}));
-//# sourceMappingURL=GenerateContent.js.map
+
+}
