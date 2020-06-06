@@ -1,8 +1,8 @@
 namespace L07_Homehelper {
     window.addEventListener("load", handleLoad);
 
-    let appurl: string = "https://celineoverdose.herokuapp.com/";
-    // let appurl: string = "http://localhost:5001";
+    // let appurl: string = "https://celineoverdose.herokuapp.com/";
+    let appurl: string = "http://localhost:5001";
     let form: HTMLFormElement = <HTMLFormElement>document.querySelector("#orderForm");
 
     async function handleLoad(_event: Event): Promise<void> {

@@ -2,8 +2,8 @@
 var L07_Homehelper;
 (function (L07_Homehelper) {
     window.addEventListener("load", handleLoad);
-    let appurl = "https://celineoverdose.herokuapp.com/";
-    // let appurl: string = "http://localhost:5001";
+    // let appurl: string = "https://celineoverdose.herokuapp.com/";
+    let appurl = "http://localhost:5001";
     let form = document.querySelector("#orderForm");
     async function handleLoad(_event) {
         console.log("Die Anwendung startet");
