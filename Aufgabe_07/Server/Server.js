@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Http = require("http");
 const Url = require("url");
 const Mongo = require("mongodb");
-//Testuser:furtwangen@eia2-7ebry.mongodb.net/test?retryWrites=true&w=majority
 var L07_Homehelper;
 (function (L07_Homehelper) {
     let orders;

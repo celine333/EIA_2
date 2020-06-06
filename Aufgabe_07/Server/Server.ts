@@ -1,7 +1,6 @@
 import * as Http from "http";
 import * as Url from "url";
 import * as Mongo from "mongodb";
-//Testuser:furtwangen@eia2-7ebry.mongodb.net/test?retryWrites=true&w=majority
 
 export namespace L07_Homehelper {
     interface Order {
