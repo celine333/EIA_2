@@ -10,7 +10,8 @@ var L07_Homehelper;
     let port = process.env.PORT;
     if (port == undefined)
         port = 5001;
-    let databaseurl = "mongodb://localhost:27017";
+    // let databaseurl: string = "mongodb://localhost:27017";
+    let databaseurl = "mongodb+srv://Testuser:furtwangen@eia2-7ebry.mongodb.net/Homehelper?retryWrites=true&w=majority";
     startServer(port);
     connectToDatabase(databaseurl);
     function startServer(_port) {
@@ -23,7 +24,7 @@ var L07_Homehelper;
         let options = { useNewUrlParser: true, useUnifiedTopology: true };
         let mongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        orders = mongoClient.db("CocktailBar").collection("Orders");
+        orders = mongoClient.db("Homehelper").collection("Orders");
         console.log("Database connection" + orders != undefined);
     }
     function handleRequest(_request, _response) {

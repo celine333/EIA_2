@@ -14,7 +14,8 @@ export namespace L07_Homehelper {
     if (port == undefined)
         port = 5001;
     
-    let databaseurl: string = "mongodb://localhost:27017";
+    // let databaseurl: string = "mongodb://localhost:27017";
+    let databaseurl: string = "mongodb+srv://Testuser:furtwangen@eia2-7ebry.mongodb.net/Homehelper?retryWrites=true&w=majority";
 
     startServer(port);
     connectToDatabase(databaseurl);
@@ -33,7 +34,7 @@ export namespace L07_Homehelper {
         let options: Mongo.MongoClientOptions = {useNewUrlParser: true, useUnifiedTopology: true};
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        orders = mongoClient.db("CocktailBar").collection("Orders");
+        orders = mongoClient.db("Homehelper").collection("Orders");
         console.log("Database connection" + orders != undefined);
     }
 
