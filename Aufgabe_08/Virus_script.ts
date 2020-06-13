@@ -15,9 +15,8 @@ namespace L08_Virus {
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
         drawBackground();
-        drawBloodvessel({x: 350, y: 200});
         drawPattern();
-        drawVirus();
+        drawVirus({x: 350, y: 50}, {x: 15, y: 15});
         drawAntibody({x: 30, y: 30}, {x: 10, y: 10});
         drawKillercells();
         drawBloodcells({x: 50, y: 50}, {x: 10, y: 5});
@@ -27,43 +26,16 @@ namespace L08_Virus {
         console.log("Background");
 
         let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
-        gradient.addColorStop(0, "darkred");
-        gradient.addColorStop(1, "black");
+        gradient.addColorStop(0, "pink");
+        gradient.addColorStop(1, "red");
 
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
     }
 
-    function drawBloodvessel(_position: Vektor): void {
-        console.log("Bloodvessel");
-
-        // let gradient: CanvasGradient = crc2.createLinearGradient(350, 100, 350, 300);
-
-        // gradient.addColorStop(0, "red");
-        // gradient.addColorStop(1, "darkred");
-
-        // crc2.fillStyle = gradient;
-        // crc2.fill();
-
-        crc2.beginPath();
-        // Obere Linie
-        crc2.moveTo(750, 150);
-        crc2.lineTo(450, 0);
-        // Untere Linie
-        crc2.moveTo(750, 250);
-        crc2.lineTo(450, 400);
-
-        // Pfad zu Ende
-        crc2.closePath();
-
-        // Linienfarbe
-        crc2.strokeStyle = "#FFFFFF";
-        crc2.stroke();
-    }
-    
     function drawPattern(): void {
         console.log("Pattern");
-        // Muster
+        //Muster
         let pattern: CanvasRenderingContext2D = <CanvasRenderingContext2D>document.createElement("canvas").getContext("2d");
         pattern.canvas.width = 40;
         pattern.canvas.height = 20;
@@ -78,33 +50,45 @@ namespace L08_Virus {
         pattern.lineTo(30, 20);
         pattern.lineTo(20, 20);
         pattern.lineTo(10, 10);
-        pattern.stroke();
-        crc2.fillStyle = crc2.createPattern(pattern.canvas, "repeat");
-        crc2.fillRect(10, 0, 450, 400);
-
-        // Ellipse
-        crc2.beginPath();
-        crc2.ellipse(240, 200, 350, 250, Math.PI / 2, 0, 2 * Math.PI);
-        crc2.closePath();
-        crc2.stroke();
-
-        // // Quadrat
-        // crc2.beginPath();
-        // crc2.moveTo(450, 0);
-        // crc2.lineTo(450, 400);
-        // crc2.moveTo(10, 0);
-        // crc2.lineTo(10, 400);
-        // crc2.closePath();
-        // crc2.stroke();
-
-
         // Linienfarbe
-        crc2.strokeStyle = "#000000";
-        crc2.stroke();
+        pattern.strokeStyle = "#8B0000";
+        pattern.stroke();
+        crc2.fillStyle = <CanvasRenderingContext2D>crc2.createPattern(pattern.canvas, "repeat");
+        crc2.fillRect(0, 0, 750, 400);
+        
     }
     
-    function drawVirus(): void {
+    function drawVirus(_position: Vektor, _size: Vektor): void {
         console.log("Virus");
+
+        let nViruses: number = 6;
+        let nProtein: number = 6;
+        let r1: number = 12.5;
+        let r2: number = 3;
+
+        for (let i: number = 0; i < nViruses; i++) {
+            // let virus: Path2D = new Path2D();
+            let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
+
+            gradient.addColorStop(0, "HSLA(60, 100%, 90%, 1)");
+            gradient.addColorStop(1, "HSLA(60, 100%, 50%, 0)");
+
+            // Kreis
+            crc2.save(); 
+            crc2.translate((Math.random() * _position.x), (Math.random() * _position.y));
+            crc2.fillStyle = gradient;
+            crc2.beginPath();
+            crc2.arc(0, 0, r1, 0, 2 * Math.PI);
+            crc2.closePath();
+            crc2.fill();
+            crc2.restore();
+
+            // for (let i: number = 0; i < nProtein; i++) {
+
+            // }
+        }
+
+
     }
     
     function drawAntibody(_position: Vektor, _size: Vektor): void {
