@@ -16,10 +16,10 @@ namespace L08_Virus {
 
         drawBackground();
         drawPattern();
-        drawVirus({x: 350, y: 50}, {x: 15, y: 15});
-        drawAntibody({x: 30, y: 30}, {x: 10, y: 10});
-        drawKillercells();
-        drawBloodcells({x: 50, y: 50}, {x: 10, y: 5});
+        drawVirus({x: 650, y: 300});
+        drawAntibody({x: 30, y: 30}, {x: 50, y: 50});
+        drawKillercells({x: 350, y: 200}, {x: 50, y: 50});
+        drawBloodcells({x: 50, y: 40}, {x: 10, y: 5});
     }
 
     function drawBackground(): void {
@@ -58,69 +58,82 @@ namespace L08_Virus {
         
     }
     
-    function drawVirus(_position: Vektor, _size: Vektor): void {
+    function drawVirus(_position: Vektor): void {
         console.log("Virus");
 
         let nViruses: number = 6;
         let nProtein: number = 6;
-        let r1: number = 12.5;
-        let r2: number = 3;
+        // Radien
+        let r1: number = 20;
+        let r2: number = 7;
 
         for (let i: number = 0; i < nViruses; i++) {
             // let virus: Path2D = new Path2D();
             let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
 
-            gradient.addColorStop(0, "HSLA(60, 100%, 90%, 1)");
-            gradient.addColorStop(1, "HSLA(60, 100%, 50%, 0)");
+            gradient.addColorStop(0, "HSLA(100, 72%, 49%, 1)");
+            gradient.addColorStop(1, "HSLA(100, 72%, 61%, 0.6)");
+            // Position
+            let x: number = (Math.random() * _position.x);
+            let y: number = (Math.random() * _position.y);
 
-            // Kreis
+
+            for (let i: number = 0; i <= nProtein; i++) {
+                crc2.beginPath();
+                crc2.rotate(60);
+                crc2.moveTo(x, y + 20);
+                crc2.lineTo(x, y + 40);
+                crc2.strokeStyle = "#757575";
+                crc2.lineWidth = 4;
+                crc2.stroke();
+                // crc2.closePath();
+                // crc2.beginPath();
+                crc2.moveTo(x, y + 10);
+                crc2.arc(x, y + 40, r2, 0, 2 * Math.PI);
+                crc2.fillStyle = "#11560B";
+                crc2.fill();
+                crc2.closePath();
+                crc2.save();
+            }
+            // Kreis bzw. Membran
             crc2.save(); 
-            crc2.translate((Math.random() * _position.x), (Math.random() * _position.y));
+            crc2.translate(x, y);
             crc2.fillStyle = gradient;
             crc2.beginPath();
             crc2.arc(0, 0, r1, 0, 2 * Math.PI);
             crc2.closePath();
             crc2.fill();
             crc2.restore();
-
-            // for (let i: number = 0; i < nProtein; i++) {
-
-            // }
         }
 
-
     }
+
+    
     
     function drawAntibody(_position: Vektor, _size: Vektor): void {
         console.log("Antibody");
 
         let nAntibodys: number = 4;
+        crc2.save();  
+        crc2.translate(_position.x, _position.y);
 
         for (let i: number = 0; i < nAntibodys; i++) {
+            // let cell: Path2D = new Path2D();
             crc2.save();  
-            let cell: Path2D = new Path2D();
-            let x: number = (Math.random() - 0.5) * _size.x;
-            let y: number = - (Math.random() * _size.y); 
-            crc2.translate(x, y);
+            crc2.translate((Math.random() * _position.x), (Math.random() * _position.y));
         
             // Antibody
             crc2.beginPath();
             crc2.moveTo(_position.x, _position.y);
-            crc2.lineWidth = 50; 
             crc2.lineTo(10, -8);
-            // crc2.lineTo(1, 0);
-            // crc2.lineTo(1, -1);
             crc2.moveTo(_position.x, _position.y);
             crc2.lineTo(-10, 8);
-            // crc2.lineTo(1, 0);
-            // crc2.lineTo(1, -1);
+            // crc2.lineWidth = 50; 
             crc2.closePath();
 
-            crc2.fill(cell);
+            crc2.fill();
             crc2.restore();
 
-            crc2.save();
-            crc2.translate(_position.x, _position.y);
             // Farbe Zellen
             crc2.fillStyle = "hsla(360, 100%, 100%, 0.56)";
             crc2.fill();
@@ -131,8 +144,32 @@ namespace L08_Virus {
 
     }
     
-    function drawKillercells(): void {
+    function drawKillercells(_position: Vektor, _size: Vektor): void {
         console.log("Killercells");
+            
+        let nKillercells: number = 4;
+        let radius: number = 15;
+            
+        for (let i: number = 0; i < nKillercells; i++) {
+        let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, radius, 0, 0, 0);
+        gradient.addColorStop(0, "#FA8E04");
+        gradient.addColorStop(1, "#FAFA04");
+        let x: number = (Math.random() * _position.x);
+        let y: number = (Math.random() * _position.y);
+        let positionx: number = x;
+        let positiony: number = y;
+            
+        crc2.save();
+            
+        // Position
+        crc2.translate(positionx, positiony);
+        crc2.fillStyle = gradient;
+        crc2.beginPath();
+        crc2.arc(0, 0, radius, 0, 2 * Math.PI);
+        crc2.closePath();
+        crc2.fill();
+        crc2.restore();
+        }
     }
     
     function drawBloodcells(_position: Vektor, _size: Vektor): void {
@@ -157,14 +194,12 @@ namespace L08_Virus {
             crc2.restore();
 
             crc2.save();
-            crc2.translate(_position.x, _position.y);
+            crc2.translate((Math.random() * _position.x), (Math.random() * _position.y));
             // Farbe Zellen
             crc2.fillStyle = "hsla(360, 100%, 100%, 0.56)";
             crc2.fill();
             // Linienfarbe
-            crc2.strokeStyle = "#FFFFFF";
+            crc2.strokeStyle = "#FBAFAF";
             crc2.stroke();
         }
     }
-
-}
