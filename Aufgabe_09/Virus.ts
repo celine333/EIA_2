@@ -53,7 +53,6 @@ namespace L09_Virus {
             crc2.fill();
             crc2.restore();
             // crc2.stroke(virusPaths[this.size]);
-
         }
     }
 }

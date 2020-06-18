@@ -1,9 +1,9 @@
 "use strict";
 var L09_Virus;
 (function (L09_Virus) {
-    class Antibody {
+    class Killercell {
         constructor(_size, _position) {
-            console.log("Antibody constructor");
+            console.log("Killercell constructor");
             if (_position)
                 this.position = _position;
             else
@@ -26,25 +26,23 @@ var L09_Virus;
                 this.position.y = L09_Virus.crc2.canvas.height;
         }
         draw() {
+            let radius = 15;
+            let gradient = L09_Virus.crc2.createRadialGradient(0, 0, radius, 0, 0, 0);
+            gradient.addColorStop(0, "#FA8E04");
+            gradient.addColorStop(1, "#FAFA04");
             L09_Virus.crc2.save();
             L09_Virus.crc2.translate(this.position.x, this.position.y);
             // Skalierung vertikal und horizontal
             L09_Virus.crc2.scale(this.size, this.size);
             L09_Virus.crc2.translate(-50, -50);
+            L09_Virus.crc2.fillStyle = gradient;
             L09_Virus.crc2.beginPath();
-            L09_Virus.crc2.moveTo(this.position.x, this.position.y);
-            L09_Virus.crc2.lineTo(10, -8);
-            L09_Virus.crc2.moveTo(this.position.x, this.position.y);
-            L09_Virus.crc2.lineTo(-10, 8);
-            // crc2.lineWidth = 50; 
+            L09_Virus.crc2.arc(0, 0, radius, 0, 2 * Math.PI);
             L09_Virus.crc2.closePath();
             L09_Virus.crc2.fill();
             L09_Virus.crc2.restore();
-            // Linienfarbe
-            L09_Virus.crc2.strokeStyle = "#FFFFFF";
-            L09_Virus.crc2.stroke();
         }
     }
-    L09_Virus.Antibody = Antibody;
+    L09_Virus.Killercell = Killercell;
 })(L09_Virus || (L09_Virus = {}));
-//# sourceMappingURL=Antibody.js.map
+//# sourceMappingURL=Killercell.js.map

@@ -4,9 +4,9 @@ namespace L09_Virus {
     export let crc2: CanvasRenderingContext2D;
 
     let viruses: Virus[] = [];
-    // let antibodys: Antibody[] = [];
-    // let killercells: Killercell[] = [];
-    // let bloodcells: Bloodcell[] = [];
+    let antibodys: Antibody[] = [];
+    let killercells: Killercell[] = [];
+    let bloodcells: Bloodcell[] = [];
 
     function handleLoad(_event: Event): void {
         console.log("Particles moving");
@@ -20,12 +20,10 @@ namespace L09_Virus {
 
         drawBackground();
         drawPattern();
-
-        // Hier Funktionen für die einzelnen Particles aufrufen
         createVirus(6);
-        // createAntibody(4);
-        // createKillercells(4);
-        // createBloodcells(9);
+        createAntibody(4);
+        createKillercell(4);
+        createBloodcell(9);
 
         //zeit für neuladen
         window.setInterval(update, 20);
@@ -76,29 +74,29 @@ namespace L09_Virus {
         }
     }
 
-    // function createAntibody(_nAntibody: number): void {
-    //     console.log("create Antibody");
-    //     for (let i: number =  0; i < _nAntibody; i++) {
-    //         let antibody: Antibody = new Antibody(1.0);
-    //         antibodys.push(antibody);
-    //     }
-    // }
+    function createAntibody(_nAntibody: number): void {
+        console.log("create Antibody");
+        for (let i: number =  0; i < _nAntibody; i++) {
+            let antibody: Antibody = new Antibody(1.0);
+            antibodys.push(antibody);
+        }
+    }
 
-    // function createKillercells(_nKillercell: number): void {
-    //     console.log("create Killercell");
-    //     for (let i: number =  0; i < _nKillercell; i++) {
-    //         let killercell: Killercell = new Killercell(1.0);
-    //         killercells.push(killercell);
-    //     }
-    // }
+    function createKillercell(_nKillercell: number): void {
+        console.log("create Killercell");
+        for (let i: number =  0; i < _nKillercell; i++) {
+            let killercell: Killercell = new Killercell(1.0);
+            killercells.push(killercell);
+        }
+    }
 
-    // function createBloodcells(_nBloodcell: number): void {
-    //     console.log("create Bloodcell");
-    //     for (let i: number =  0; i < _nBloodcell; i++) {
-    //         let bloodcell: Bloodcell = new Bloodcell(1.0);
-    //         bloodcells.push(bloodcell);
-    //     }
-    // }
+    function createBloodcell(_nBloodcell: number): void {
+        console.log("create Bloodcell");
+        for (let i: number =  0; i < _nBloodcell; i++) {
+            let bloodcell: Bloodcell = new Bloodcell(1.0);
+            bloodcells.push(bloodcell);
+        }
+    }
 
     function update(): void {
         console.log("Update");
@@ -110,17 +108,17 @@ namespace L09_Virus {
             virus.draw();
         }
 
-        // // Update Antibodys
-        // for (let antibody of antibodys) {
-        //     antibody.move(1 / 50);
-        //     antibody.draw();
-        // }
+        // Update Antibodys
+        for (let antibody of antibodys) {
+            antibody.move(1 / 50);
+            antibody.draw();
+        }
 
-        // // Update Killercells
-        // for (let killercell of killercells) {
-        //     killercell.move(1 / 50);
-        //     killercell.draw();
-        // }
+        // Update Killercells
+        for (let killercell of killercells) {
+            killercell.move(1 / 50);
+            killercell.draw();
+        }
 
         // // Update Bloodecells
         // for (let bloodcell of bloodcells) {

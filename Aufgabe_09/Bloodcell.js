@@ -1,9 +1,9 @@
 "use strict";
 var L09_Virus;
 (function (L09_Virus) {
-    class Antibody {
+    class Bloodcell {
         constructor(_size, _position) {
-            console.log("Antibody constructor");
+            console.log("Bloodcell constructor");
             if (_position)
                 this.position = _position;
             else
@@ -31,20 +31,21 @@ var L09_Virus;
             // Skalierung vertikal und horizontal
             L09_Virus.crc2.scale(this.size, this.size);
             L09_Virus.crc2.translate(-50, -50);
+            // Ellipse
             L09_Virus.crc2.beginPath();
-            L09_Virus.crc2.moveTo(this.position.x, this.position.y);
-            L09_Virus.crc2.lineTo(10, -8);
-            L09_Virus.crc2.moveTo(this.position.x, this.position.y);
-            L09_Virus.crc2.lineTo(-10, 8);
-            // crc2.lineWidth = 50; 
+            L09_Virus.crc2.ellipse(this.position.x, this.position.y, _size.x, _size.y, Math.PI / 1, 0, 2 * Math.PI);
             L09_Virus.crc2.closePath();
+            L09_Virus.crc2.stroke();
             L09_Virus.crc2.fill();
             L09_Virus.crc2.restore();
+            // Farbe Zellen
+            L09_Virus.crc2.fillStyle = "hsla(360, 100%, 100%, 0.56)";
+            L09_Virus.crc2.fill();
             // Linienfarbe
-            L09_Virus.crc2.strokeStyle = "#FFFFFF";
+            L09_Virus.crc2.strokeStyle = "#FBAFAF";
             L09_Virus.crc2.stroke();
         }
     }
-    L09_Virus.Antibody = Antibody;
+    L09_Virus.Bloodcell = Bloodcell;
 })(L09_Virus || (L09_Virus = {}));
-//# sourceMappingURL=Antibody.js.map
+//# sourceMappingURL=Bloodcell.js.map

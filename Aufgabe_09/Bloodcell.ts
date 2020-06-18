@@ -1,11 +1,11 @@
 namespace L09_Virus {
-    export class Antibody {
+    export class Bloodcell {
         position: Vector;
         velocity: Vector;
         size: number;
 
         constructor(_size: number, _position?: Vector) {
-            console.log("Antibody constructor");
+            console.log("Bloodcell constructor");
             if (_position)
                 this.position = _position;
             else
@@ -40,19 +40,20 @@ namespace L09_Virus {
             crc2.scale(this.size, this.size);
             crc2.translate(-50, -50);
 
+            // Ellipse
             crc2.beginPath();
-            crc2.moveTo(this.position.x, this.position.y);
-            crc2.lineTo(10, -8);
-            crc2.moveTo(this.position.x, this.position.y);
-            crc2.lineTo(-10, 8);
-            // crc2.lineWidth = 50; 
+            crc2.ellipse(this.position.x, this.position.y, _size.x, _size.y, Math.PI / 1, 0, 2 * Math.PI);
             crc2.closePath();
+            crc2.stroke();
 
             crc2.fill();
             crc2.restore();
 
+            // Farbe Zellen
+            crc2.fillStyle = "hsla(360, 100%, 100%, 0.56)";
+            crc2.fill();
             // Linienfarbe
-            crc2.strokeStyle = "#FFFFFF";
+            crc2.strokeStyle = "#FBAFAF";
             crc2.stroke();
         }
     }
