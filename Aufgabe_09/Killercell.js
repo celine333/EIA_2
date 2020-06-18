@@ -42,6 +42,14 @@ var L09_Virus;
             L09_Virus.crc2.fill();
             L09_Virus.crc2.restore();
         }
+        isHit() {
+            if (this.position.x > 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
     L09_Virus.Killercell = Killercell;
 })(L09_Virus || (L09_Virus = {}));

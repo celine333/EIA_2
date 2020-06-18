@@ -52,5 +52,14 @@ namespace L09_Virus {
             crc2.fill();
             crc2.restore();
         }
+
+        isHit(): boolean {
+            if (this.position.x > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }
 }
