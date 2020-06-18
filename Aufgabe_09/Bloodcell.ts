@@ -42,7 +42,7 @@ namespace L09_Virus {
 
             // Ellipse
             crc2.beginPath();
-            crc2.ellipse(this.position.x, this.position.y, _size.x, _size.y, Math.PI / 1, 0, 2 * Math.PI);
+            crc2.ellipse(this.position.x, this.position.y, 10, 5, Math.PI / 1, 0, 2 * Math.PI);
             crc2.closePath();
             crc2.stroke();
 

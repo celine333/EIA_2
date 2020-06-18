@@ -12,7 +12,7 @@ namespace L09_Virus {
                 this.position = new Vector(0, 0);
             
             this.velocity = new Vector(0, 0);
-            this.velocity.random(100, 200);
+            this.velocity.random(50, 100);
 
             this.size = _size;
         }

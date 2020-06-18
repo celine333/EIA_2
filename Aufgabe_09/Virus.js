@@ -9,7 +9,7 @@ var L09_Virus;
             else
                 this.position = new L09_Virus.Vector(0, 0);
             this.velocity = new L09_Virus.Vector(0, 0);
-            this.velocity.random(100, 200);
+            this.velocity.random(50, 100);
             this.size = _size;
         }
         move(_timeslice) {

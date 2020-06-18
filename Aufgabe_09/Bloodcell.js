@@ -33,7 +33,7 @@ var L09_Virus;
             L09_Virus.crc2.translate(-50, -50);
             // Ellipse
             L09_Virus.crc2.beginPath();
-            L09_Virus.crc2.ellipse(this.position.x, this.position.y, _size.x, _size.y, Math.PI / 1, 0, 2 * Math.PI);
+            L09_Virus.crc2.ellipse(this.position.x, this.position.y, 10, 5, Math.PI / 1, 0, 2 * Math.PI);
             L09_Virus.crc2.closePath();
             L09_Virus.crc2.stroke();
             L09_Virus.crc2.fill();

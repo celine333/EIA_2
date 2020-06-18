@@ -6,6 +6,7 @@ var L09_Virus;
     let antibodys = [];
     let killercells = [];
     let bloodcells = [];
+    let background;
     function handleLoad(_event) {
         console.log("Particles moving");
         let canvas = document.querySelector("canvas");
@@ -16,7 +17,7 @@ var L09_Virus;
         // createPaths();
         drawBackground();
         drawPattern();
-        createVirus(6);
+        createVirus(15);
         createAntibody(4);
         createKillercell(4);
         createBloodcell(9);
@@ -30,6 +31,7 @@ var L09_Virus;
         gradient.addColorStop(1, "#FD2117");
         L09_Virus.crc2.fillStyle = gradient;
         L09_Virus.crc2.fillRect(0, 0, L09_Virus.crc2.canvas.width, L09_Virus.crc2.canvas.height);
+        background = L09_Virus.crc2.getImageData(0, 0, 750, 400);
     }
     function drawPattern() {
         console.log("Bloodvessel");
@@ -37,7 +39,7 @@ var L09_Virus;
         let pattern = document.createElement("canvas").getContext("2d");
         pattern.canvas.width = 40;
         pattern.canvas.height = 20;
-        pattern.fillStyle = "hsla(0, 100%, 60%, 0.1)";
+        // pattern.fillStyle = "hsla(0, 100%, 60%, 0.1)";
         pattern.fillRect(0, 0, pattern.canvas.width, pattern.canvas.height);
         pattern.moveTo(0, 10);
         pattern.lineTo(10, 10);
@@ -47,11 +49,12 @@ var L09_Virus;
         pattern.lineTo(30, 20);
         pattern.lineTo(20, 20);
         pattern.lineTo(10, 10);
+        // pattern.strokeStyle = "#FB0C01";
         pattern.strokeStyle = "#FB0C01";
         pattern.stroke();
         L09_Virus.crc2.fillStyle = L09_Virus.crc2.createPattern(pattern.canvas, "repeat");
-        L09_Virus.crc2.fillRect(0, 0, 750, 400);
         pattern.closePath();
+        pattern.restore();
     }
     function createVirus(_nVirus) {
         console.log("create Virus");
@@ -67,9 +70,9 @@ var L09_Virus;
             antibodys.push(antibody);
         }
     }
-    function createKillercell(_nKillercell) {
+    function createKillercell(_nKillercells) {
         console.log("create Killercell");
-        for (let i = 0; i < _nKillercell; i++) {
+        for (let i = 0; i < _nKillercells; i++) {
             let killercell = new L09_Virus.Killercell(1.0);
             killercells.push(killercell);
         }
@@ -84,6 +87,7 @@ var L09_Virus;
     function update() {
         console.log("Update");
         L09_Virus.crc2.fillRect(0, 0, L09_Virus.crc2.canvas.width, L09_Virus.crc2.canvas.width);
+        L09_Virus.crc2.putImageData(background, 0, 0);
         // Update Viruses
         for (let virus of viruses) {
             virus.move(1 / 50);
@@ -99,11 +103,11 @@ var L09_Virus;
             killercell.move(1 / 50);
             killercell.draw();
         }
-        // // Update Bloodecells
-        // for (let bloodcell of bloodcells) {
-        //     bloodcell.move(1 / 50);
-        //     bloodcell.draw();
-        // }
+        // Update Bloodecells
+        for (let bloodcell of bloodcells) {
+            bloodcell.move(1 / 50);
+            bloodcell.draw();
+        }
     }
 })(L09_Virus || (L09_Virus = {}));
 //# sourceMappingURL=Main.js.map
