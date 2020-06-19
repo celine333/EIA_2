@@ -33,10 +33,9 @@ namespace L09_Virus {
         }
 
         draw(): void {
-            let nProtein: number = 6;
-            // Radien
+            // Radius
             let r1: number = 20;
-            let r2: number = 7;
+           
             let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
             gradient.addColorStop(0, "HSLA(100, 72%, 49%, 1)");
             gradient.addColorStop(1, "HSLA(100, 72%, 61%, 0.6)");
@@ -54,5 +53,12 @@ namespace L09_Virus {
             crc2.restore();
             // crc2.stroke(virusPaths[this.size]);
         }
+
+        isinfecting(_virusposition: Vector): void {
+
+            let viruspositionx = this.position.x;
+            let viruspositiony = this.position.y;
+        }
+
     }
 }

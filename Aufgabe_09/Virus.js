@@ -26,10 +26,8 @@ var L09_Virus;
                 this.position.y = L09_Virus.crc2.canvas.height;
         }
         draw() {
-            let nProtein = 6;
-            // Radien
+            // Radius
             let r1 = 20;
-            let r2 = 7;
             let gradient = L09_Virus.crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
             gradient.addColorStop(0, "HSLA(100, 72%, 49%, 1)");
             gradient.addColorStop(1, "HSLA(100, 72%, 61%, 0.6)");
@@ -45,6 +43,10 @@ var L09_Virus;
             L09_Virus.crc2.fill();
             L09_Virus.crc2.restore();
             // crc2.stroke(virusPaths[this.size]);
+        }
+        isinfecting(_virusposition) {
+            let viruspositionx = this.position.x;
+            let viruspositiony = this.position.y;
         }
     }
     L09_Virus.Virus = Virus;
