@@ -21,7 +21,7 @@ var L09_Virus;
         createAntibody(4);
         createKillercell(4);
         createBloodcell(9);
-        KillercellInfection(_event);
+        // KillercellInfection(_event);
         //zeit für neuladen
         window.setInterval(update, 20);
     }
@@ -110,30 +110,30 @@ var L09_Virus;
             bloodcell.draw();
         }
     }
-    function KillercellInfection(_event) {
-        let virusposition = new L09_Virus.Vector(L09_Virus.Virus.position.x, L09_Virus.Virus.position.y);
-        let humancellHit = getKillercellHit(virusposition);
-        for (let virus of viruses) {
-            // wenn der Virus auf die Killerzelle trifft, dann werden mehrere Funktionen aufgerufen
-            if (humancellHit) {
-                startInfection(virus);
-            }
-        }
-    }
-    function getKillercellHit(_virusposition) {
-        for (let killercell of killercells) {
-            if (killercell.isHit(_virusposition))
-                return killercell;
-        }
-        return null;
-    }
-    function startInfection(_virus) {
-        window.setTimeout(function () {
-            endInfection(_virus);
-        }, 5000);
-    }
-    function endInfection(_virus) {
-        console.log("end infection");
-    }
+    // function KillercellInfection(_event: Event): void {
+    //     let virusposition: Vector = new Vector(Virus.position.x, Virus.position.y);
+    //     let humancellHit: Killercell | null = getKillercellHit(virusposition);
+    //     for (let virus of viruses) {
+    //         // wenn der Virus auf die Killerzelle trifft, dann werden mehrere Funktionen aufgerufen
+    //         if (humancellHit)  {
+    //             startInfection(virus);
+    //         }
+    //     }
+    // }
+    // function getKillercellHit(_virusposition: Vector): Killercell | null {
+    //     for (let killercell of killercells) {
+    //         if (killercell.isHit(_virusposition))
+    //             return killercell;
+    //     }
+    //     return null;
+    // }
+    // function startInfection(_virus: Virus): void {
+    //     window.setTimeout(function (): void {
+    //         endInfection(_virus);
+    //     },                5000);
+    // }
+    // function endInfection(_virus: Virus) {
+    //     console.log("end infection");
+    // }
 })(L09_Virus || (L09_Virus = {}));
 //# sourceMappingURL=Main.js.map
