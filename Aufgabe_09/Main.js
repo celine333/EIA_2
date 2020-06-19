@@ -21,6 +21,7 @@ var L09_Virus;
         createAntibody(4);
         createKillercell(4);
         createBloodcell(9);
+        //KillercellInfection();
         //zeit für neuladen
         window.setInterval(update, 20);
     }
@@ -108,6 +109,33 @@ var L09_Virus;
             bloodcell.move(1 / 50);
             bloodcell.draw();
         }
+    }
+    function KillercellInfection(_event) {
+        // Bereich in dem der Virus auf die Killerzelle trifft 
+        let hotspot = new L09_Virus.Vector(L09_Virus.crc2.canvas.offsetTop);
+        let virusposition = new L09_Virus.Vector(L09_Virus.Virus.position.x, this.position.y);
+        let humancellHit = getKillercellHit(hotspot);
+        for (let virus of viruses) {
+            // wenn der Virus auf die Killerzelle trifft, dann werden mehrere Funktionen aufgerufen
+            if (humancellHit) {
+                startInfection(virus);
+            }
+        }
+    }
+    function getKillercellHit(_hotspot) {
+        for (let killercell of killercells) {
+            if (killercell.isHit(_hotspot))
+                return killercell;
+        }
+        return null;
+    }
+    function startInfection(_virus) {
+        window.setTimeout(function () {
+            endInfection(_virus);
+        }, 3000);
+    }
+    function endInfection(_virus) {
+        console.log("hallo");
     }
 })(L09_Virus || (L09_Virus = {}));
 //# sourceMappingURL=Main.js.map

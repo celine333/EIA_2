@@ -42,13 +42,11 @@ var L09_Virus;
             L09_Virus.crc2.fill();
             L09_Virus.crc2.restore();
         }
-        isHit() {
-            if (this.position.x > 0) {
-                return true;
-            }
-            else {
-                return false;
-            }
+        isHit(_virusposition) {
+            let hitsize = 15 * this.size;
+            let difference = new L09_Virus.Vector(_virusposition.x - this.position.x, _virusposition.y - this.position.y);
+            // && = beide Werte müssen kleiner sein
+            return (Math.abs(difference.x) < hitsize && Math.abs(difference.y) < hitsize);
         }
     }
     L09_Virus.Killercell = Killercell;

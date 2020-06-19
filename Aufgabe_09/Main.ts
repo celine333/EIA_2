@@ -27,6 +27,8 @@ namespace L09_Virus {
         createKillercell(4);
         createBloodcell(9);
 
+        //KillercellInfection();
+
         //zeit für neuladen
         window.setInterval(update, 20);
     }
@@ -135,6 +137,39 @@ namespace L09_Virus {
             bloodcell.move(1 / 50);
             bloodcell.draw();
         }
+    }
+
+    function KillercellInfection(_event: Event): void {
+        // Bereich in dem der Virus auf die Killerzelle trifft 
+        let hotspot: Vector = new Vector(, crc2.canvas.offsetTop);
+        let virusposition: Vector = new Vector(Virus.position.x, this.position.y);
+        let humancellHit: Killercell | null = getKillercellHit(hotspot);
+        for (let virus of viruses) {
+            // wenn der Virus auf die Killerzelle trifft, dann werden mehrere Funktionen aufgerufen
+            if (humancellHit)  {
+                startInfection(virus);
+            }
+        }
+    }
+
+    function getKillercellHit(_hotspot: Vector): Killercell | null {
+        for (let killercell of killercells) {
+            if (killercell.isHit(_hotspot))
+                return killercell;
+        }
+        return null;
+    }
+
+    function startInfection(_virus: Virus): void {
+
+    
+        window.setTimeout(function (): void {
+            endInfection(_virus);
+        }, 3000);
+    }
+
+    function endInfection(_virus: Virus) {
+        console.log("hallo");
     }
 
 }

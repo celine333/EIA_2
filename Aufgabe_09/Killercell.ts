@@ -53,12 +53,11 @@ namespace L09_Virus {
             crc2.restore();
         }
 
-        isHit(): boolean {
-            if (this.position.x > 0) {
-                return true;
-            } else {
-                return false;
-            }
+        isHit(_virusposition: Vector): boolean {
+            let hitsize: number = 15 * this.size;
+            let difference: Vector = new Vector(_virusposition.x - this.position.x, _virusposition.y - this.position.y);
+            // && = beide Werte müssen kleiner sein
+            return (Math.abs(difference.x) < hitsize && Math.abs(difference.y) < hitsize);
         }
 
     }
