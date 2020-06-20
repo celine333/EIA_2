@@ -9,7 +9,8 @@ namespace L09_Virus {
     let bloodcells: Bloodcell[] = [];
 
     let background: ImageData;
-    
+
+
     function handleLoad(_event: Event): void {
         console.log("Particles moving");
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
@@ -17,17 +18,13 @@ namespace L09_Virus {
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
-        // Pfade kreieren
-        // createPaths();
-
         drawBackground();
-        drawPattern();
         createVirus(15);
         createAntibody(4);
         createKillercell(4);
         createBloodcell(9);
 
-        // KillercellInfection(_event);
+        testPosition(_event);
 
         //zeit für neuladen
         window.setInterval(update, 20);
@@ -42,22 +39,15 @@ namespace L09_Virus {
         
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-
-        background = crc2.getImageData(0, 0, 750, 400);
-
-    }
         
-        
-    function drawPattern(): void {
         console.log("Bloodvessel");
-
+        
         // Muster
         let pattern: CanvasRenderingContext2D = <CanvasRenderingContext2D>document.createElement("canvas").getContext("2d");
         pattern.canvas.width = 40;
         pattern.canvas.height = 20;
         
-        // pattern.fillStyle = "hsla(0, 100%, 60%, 0.1)";
-        pattern.fillRect(0, 0, pattern.canvas.width, pattern.canvas.height);
+        pattern.beginPath();
         pattern.moveTo(0, 10);
         pattern.lineTo(10, 10);
         pattern.lineTo(20, 0);
@@ -66,14 +56,15 @@ namespace L09_Virus {
         pattern.lineTo(30, 20);
         pattern.lineTo(20, 20);
         pattern.lineTo(10, 10);
-        // pattern.strokeStyle = "#FB0C01";
-       
         pattern.strokeStyle = "#FB0C01";
         pattern.stroke();
         crc2.fillStyle = <CanvasRenderingContext2D>crc2.createPattern(pattern.canvas, "repeat");
-
+        crc2.fillRect(0, 0, 750, 400);
+        
         pattern.closePath();
         pattern.restore();
+        
+        background = crc2.getImageData(0, 0, 750, 400);
     }
 
     function createVirus(_nVirus: number): void {
@@ -139,34 +130,31 @@ namespace L09_Virus {
         }
     }
 
-    // function KillercellInfection(_event: Event): void {
-    //     let virusposition: Vector = new Vector(Virus.position.x, Virus.position.y);
-    //     let humancellHit: Killercell | null = getKillercellHit(virusposition);
-    //     for (let virus of viruses) {
-    //         // wenn der Virus auf die Killerzelle trifft, dann werden mehrere Funktionen aufgerufen
-    //         if (humancellHit)  {
-    //             startInfection(virus);
-    //         }
-    //     }
-    // }
+    function testPosition(_event: Event): void {
+        for (let virus of viruses) {
+            let humancellHit: Killercell | null = getKillercellHit(virus.position);
+            // wenn der Virus auf die Killerzelle trifft, dann werden mehrere Funktionen aufgerufen
+            if (humancellHit)  {
+               getKillercellHit(virus.position);
+            }
+        }
+    }
 
-    // function getKillercellHit(_virusposition: Vector): Killercell | null {
-    //     for (let killercell of killercells) {
-    //         if (killercell.isHit(_virusposition))
-    //             return killercell;
-    //     }
-    //     return null;
-    // }
+    function startInfection(): void {
 
-    // function startInfection(_virus: Virus): void {
+        window.setTimeout(function (): void {
+            console.log("setTiemout");
+        },                5000);
+    }
 
-    //     window.setTimeout(function (): void {
-    //         endInfection(_virus);
-    //     },                5000);
-    // }
-
-    // function endInfection(_virus: Virus) {
-    //     console.log("end infection");
-    // }
+    function getKillercellHit(_virusposition: Vector): Killercell | null {
+        for (let killercell of killercells) {
+            if (killercell.isHit(_virusposition)) {
+                startInfection();
+                return killercell;
+            }
+        }
+        return null;
+    }
 
 }

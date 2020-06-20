@@ -54,11 +54,5 @@ namespace L09_Virus {
             // crc2.stroke(virusPaths[this.size]);
         }
 
-        // isinfecting(_virusposition: Vector): void {
-
-        //     let viruspositionx = this.position.x;
-        //     let viruspositiony = this.position.y;
-        // }
-
     }
 }
