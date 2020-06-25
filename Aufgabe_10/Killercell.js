@@ -13,19 +13,6 @@ var L10_Virus;
             this.velocity.random(50, 100);
             this.size = _size;
         }
-        // move(_timeslice: number): void {
-        //     let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
-        //     offset.scale(_timeslice);
-        //     this.position.add(offset);
-        //     if (this.position.x < 0)
-        //         this.position.add(offset);
-        //     if (this.position.y < 0)
-        //         this.position.y = crc2.canvas.height;
-        //     if (this.position.x > crc2.canvas.width)
-        //         this.position.y = crc2.canvas.width;
-        //     if (this.position.y > crc2.canvas.height)
-        //         this.position.y = crc2.canvas.height;
-        // }
         draw() {
             let radius = 15;
             let gradient = L10_Virus.crc2.createRadialGradient(0, 0, radius, 0, 0, 0);
