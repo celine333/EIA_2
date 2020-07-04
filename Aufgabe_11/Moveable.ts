@@ -3,13 +3,13 @@ namespace L11_Virus {
         public position: Vector;
         public velocity: Vector;
         public size: number;
-        public radius: number = 10;
+        public radius: number = 3;
         public contact: boolean = false;
 
         constructor(_position?: Vector) {
             // console.log("Moveable constructor");
             if (_position)
-                this.position = _position;
+                this.position = _position.copy();
             else
                 // this.position = new Vector(Math.round((Math.random() * 750)), 0);
                 this.position = new Vector(0, 0);

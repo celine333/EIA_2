@@ -29,10 +29,6 @@ namespace L11_Virus {
             crc2.translate(-50, -50);
 
             crc2.beginPath();
-            // crc2.moveTo(this.position.x, this.position.y);
-            // crc2.lineTo(10, -8);
-            // crc2.moveTo(this.position.x, this.position.y);
-            // crc2.lineTo(-10, 8);
             crc2.moveTo(75, 50);
             crc2.lineTo(100, 100);
             crc2.lineTo(100, 10);

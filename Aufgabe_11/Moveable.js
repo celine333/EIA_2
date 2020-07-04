@@ -3,11 +3,11 @@ var L11_Virus;
 (function (L11_Virus) {
     class Moveable {
         constructor(_position) {
-            this.radius = 10;
+            this.radius = 3;
             this.contact = false;
             // console.log("Moveable constructor");
             if (_position)
-                this.position = _position;
+                this.position = _position.copy();
             else
                 // this.position = new Vector(Math.round((Math.random() * 750)), 0);
                 this.position = new L11_Virus.Vector(0, 0);

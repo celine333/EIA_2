@@ -79,35 +79,17 @@ namespace L11_Virus {
             crc2.restore();
         }
 
-        public isHit(_virusposition: Vector, _radiusvirus: number): boolean {
-            let distX: number = this.position.x - _virusposition.x;
-            let distY: number = this.position.y - _virusposition.y;
-            let rSum: number = _radiusvirus + this.radius + 10;
-            let distance: number = (distX * distX) + (distY * distY);
-            
-            if (distance <= rSum * rSum) {
-            return true;
-            } else {
-            return false;
-            }
-        }
-
         // public isHit(_virusposition: Vector, _radiusvirus: number): boolean {
-        //     let hitsize: number = 15 * this.size;
-        //     let difference: Vector = new Vector(_virusposition.x - this.position.x, _virusposition.y - this.position.y);
-        //     // && = beide Werte müssen kleiner sein
-        //     return (Math.abs(difference.x) < hitsize && Math.abs(difference.y) < hitsize);
-        //     // let distX: number = this.position.x - _virusposition.x;
-        //     // let distY: number = this.position.y - _virusposition.y;
-        //     // let rSum: number = _radiusvirus + this.radius + 10;
-        //     // let distance: number = (distX * distX) + (distY * distY);
-
-        //     // if (distance <= rSum * rSum) {
-        //     // return true;
-        //     // } else {
-        //     // return false;
-        //     // }
-        //     // }
+        //     let distX: number = this.position.x - _virusposition.x;
+        //     let distY: number = this.position.y - _virusposition.y;
+        //     let rSum: number = _radiusvirus + this.radius + 10;
+        //     let distance: number = (distX * distX) + (distY * distY);
+            
+        //     if (distance <= rSum * rSum) {
+        //     return true;
+        //     } else {
+        //     return false;
+        //     }
         // }
 
     }

@@ -60,18 +60,6 @@ var L11_Virus;
             L11_Virus.crc2.fill();
             L11_Virus.crc2.restore();
         }
-        isHit(_virusposition, _radiusvirus) {
-            let distX = this.position.x - _virusposition.x;
-            let distY = this.position.y - _virusposition.y;
-            let rSum = _radiusvirus + this.radius + 10;
-            let distance = (distX * distX) + (distY * distY);
-            if (distance <= rSum * rSum) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
     }
     L11_Virus.Killercell = Killercell;
 })(L11_Virus || (L11_Virus = {}));
