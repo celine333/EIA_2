@@ -9,6 +9,7 @@ var L11_Virus;
             if (_position)
                 this.position = _position;
             else
+                // this.position = new Vector(Math.round((Math.random() * 750)), 0);
                 this.position = new L11_Virus.Vector(0, 0);
             this.velocity = new L11_Virus.Vector(0, 0);
         }

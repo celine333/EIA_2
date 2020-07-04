@@ -20,14 +20,14 @@ var L11_Virus;
         }
         draw() {
             if (this.contact == true) {
-                this.virusInfected();
+                this.KillercellInfected();
             }
             else {
-                this.drawVirus();
+                this.drawKillercell();
             }
         }
-        drawVirus() {
-            let radius = 15;
+        drawKillercell() {
+            let radius = 20;
             let gradient = L11_Virus.crc2.createRadialGradient(0, 0, radius, 0, 0, 0);
             gradient.addColorStop(0, "#FA8E04");
             gradient.addColorStop(1, "#FAFA04");
@@ -43,9 +43,9 @@ var L11_Virus;
             L11_Virus.crc2.fill();
             L11_Virus.crc2.restore();
         }
-        virusInfected() {
+        KillercellInfected() {
             console.log("Infected");
-            let radius = 15;
+            let radius = 20;
             let gradient = L11_Virus.crc2.createRadialGradient(0, 0, radius, 0, 0, 0);
             gradient.addColorStop(0, "#FE5252");
             gradient.addColorStop(1, "#BD0101");

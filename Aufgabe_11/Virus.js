@@ -4,7 +4,6 @@ var L11_Virus;
     class Virus extends L11_Virus.Moveable {
         constructor(_size, _position) {
             super(_position);
-            this.radius = 10;
             console.log("Virus constructor");
             if (_position)
                 this.position = _position.copy();

@@ -3,7 +3,7 @@ namespace L11_Virus {
         public position: Vector;
         public velocity: Vector;
         public size: number;
-        public radius: number = 10;
+        public radius: number;
 
         constructor(_size: number, _position?: Vector) {
             super(_position);

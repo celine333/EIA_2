@@ -11,13 +11,6 @@ var L11_Virus;
             return;
         L11_Virus.crc2 = canvas.getContext("2d");
         drawBackground();
-        createVirus(12);
-        createAntibody(4);
-        createKillercell(4);
-        createBloodcell(9);
-        // testPosition(_event);
-        // canvas.addEventListener("click", destroyVirus);
-        handleContact();
         //zeit für neuladen
         window.setInterval(update, 20);
     }
@@ -57,18 +50,6 @@ var L11_Virus;
             moveables.push(virus);
         }
     }
-    // function destroyVirus(_event: MouseEvent): void {
-    //     // let virus: Virus = new Virus(1.0);
-    //     console.log("destroy virus with antibody");
-    //     // if (virus.clicked == true) {
-    //     //     // dann bewegt sich der Antibody zum Virus und zerstört ihn
-    //     // }
-    //     // for (let moveable of moveables) {
-    //     //     if (moveable instanceof Antibody) {
-    //     //         let antibodyposition: Vector = moveable.position;
-    //     //     }
-    //     // }
-    // }
     function createAntibody(_nAntibody) {
         console.log("create Antibody");
         for (let i = 0; i < _nAntibody; i++) {
@@ -91,37 +72,28 @@ var L11_Virus;
         }
     }
     function update() {
-        console.log("Update");
+        if (Math.random() * 100 > 99) {
+            createVirus(1);
+            // deleteMoveable();
+        }
+        if (Math.random() * 100 > 99) {
+            createAntibody(1);
+        }
+        if (Math.random() * 100 > 99) {
+            createKillercell(1);
+        }
+        if (Math.random() * 100 > 98) {
+            createBloodcell(1);
+        }
         L11_Virus.crc2.fillRect(0, 0, L11_Virus.crc2.canvas.width, L11_Virus.crc2.canvas.width);
         L11_Virus.crc2.putImageData(background, 0, 0);
         // Update 
         for (let moveable of moveables) {
             moveable.move(1 / 50);
+            handleContact();
             moveable.draw();
         }
-        // Funktionsaufruf für eine neue Funktion: Prüfen ob 2 moveables nah sind
     }
-    // function testPosition(): void {
-    //     // Bereich in dem der Virus auf die Killerzelle trifft 
-    //     for (let moveable of moveables) {
-    //         if (moveable instanceof Virus) {
-    //             let radiusvirus: number = moveable.radius;
-    //             let virusposition: Vector = moveable.position;
-    //             let cellHit: Killercell | null = getcellHit(virusposition, radiusvirus);
-    //             if (cellHit) {
-    //                 cellHit.infected = true;
-    //             }
-    //         }
-    //     }
-    // }
-    // function getcellHit(_virusposition: Vector, _radiusvirus: number): Killercell | null {
-    //     for (let moveable of moveables) {
-    //         if (moveable instanceof Killercell && moveable.isHit(_virusposition, _radiusvirus)) {
-    //             return moveable;
-    //         }
-    //     }
-    //     return null;
-    // }
     function handleContact() {
         let outerIndex = 0;
         let innerIndex = 0;
@@ -132,7 +104,6 @@ var L11_Virus;
             xContact = false;
             yContact = false;
             for (innerIndex = 0; innerIndex < moveables.length; innerIndex++) {
-                moveables[outerIndex].contact = false;
                 // Nicht sich selbst vergleichen
                 if (innerIndex != outerIndex) {
                     // X Koordinaten prüfen 
@@ -153,7 +124,7 @@ var L11_Virus;
                         }
                     }
                     else {
-                        if (moveables[outerIndex].position.y <= moveables[innerIndex].position.y + moveables[outerIndex].radius) {
+                        if (moveables[outerIndex].position.y <= moveables[innerIndex].position.y + moveables[innerIndex].radius) {
                             yContact = true;
                         }
                     }
@@ -165,15 +136,19 @@ var L11_Virus;
             }
         }
     }
-    // Funktion mit 2 For Schleifen mit moveables 
-    // in der 2ten Forschleife if else mit wenn index der gleiche wie in der ersten dann nicht
-    // innerhalb for schleife mit Abstand überprüfen
-    // dann draw mit einer anderen Farbe
-    // formoveables index aussen
-    //  moveabe.contact = false
-    //  for movables inner schleife index innen
-    //      if indexaussen != indexinnen prüfen pos
-    // Abstand : (position.x + 2* radius) && (position.y + 2* radius) dann collision 
-    //      ist contact da dann Contact für moveable aussen = true, break for 
+    // function deleteMoveable(): void  {
+    //     for (let outerIndex: number = 0; outerIndex < moveables.length; outerIndex++) {
+    //         if (moveables[outerIndex].position.x > 800 || moveables[outerIndex].position.y > 450) {
+    //             console.log("xPosition:" + moveables[outerIndex].position.x);
+    //             console.log("yPosition:" + moveables[outerIndex].position.y);
+    //             moveables.splice(outerIndex);
+    //         }
+    //         if (moveables[outerIndex].position.x < - 50 || moveables[outerIndex].position.y < - 50) {
+    //             console.log("xPosition:" + moveables[outerIndex].position.x);
+    //             console.log("yPosition:" + moveables[outerIndex].position.y);
+    //             moveables.splice(outerIndex);
+    //         }
+    //     }  
+    // }
 })(L11_Virus || (L11_Virus = {}));
 //# sourceMappingURL=Main.js.map

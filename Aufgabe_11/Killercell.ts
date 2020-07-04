@@ -3,8 +3,8 @@ namespace L11_Virus {
         public position: Vector;
         public velocity: Vector;
         public size: number;
-        radius: number;
-        infected: boolean = false;
+        public radius: number;
+        public infected: boolean = false;
 
         constructor(_size: number, _position?: Vector) {
             super (_position);
@@ -29,14 +29,14 @@ namespace L11_Virus {
 
         public draw(): void {
             if (this.contact == true) {
-            this.virusInfected();
+            this.KillercellInfected();
             } else {
-            this.drawVirus();
+            this.drawKillercell();
             }
         }
 
-        public drawVirus(): void {
-            let radius: number = 15;
+        public drawKillercell(): void {
+            let radius: number = 20;
             let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, radius, 0, 0, 0);
             gradient.addColorStop(0, "#FA8E04");
             gradient.addColorStop(1, "#FAFA04");
@@ -56,9 +56,9 @@ namespace L11_Virus {
             crc2.restore();
         }
 
-        public virusInfected(): void {
+        public KillercellInfected(): void {
             console.log("Infected");
-            let radius: number = 15;
+            let radius: number = 20;
             
             let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, radius, 0, 0, 0);
             gradient.addColorStop(0, "#FE5252");
