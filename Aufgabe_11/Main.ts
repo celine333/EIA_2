@@ -153,6 +153,7 @@ namespace L11_Virus {
                     }
                     if (yContact == true && xContact == true) {
                         moveables[outerIndex].contact = true;
+                        
                         break;
                     }
                 }
