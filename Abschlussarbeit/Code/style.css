@@ -1,0 +1,275 @@
+body {
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-image: url("hogwarts_halle.jpg");
+}
+
+h1 {
+    text-align: center;
+}
+
+canvas {
+    padding: 0;
+    margin: auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-style: solid;
+    border-color: grey;
+    background-color: white;
+}
+
+/* Spielregeln */
+
+.rulesclass {
+    position: absolute;
+    top: 2%;
+    left: 1%;
+    background-color: steelblue;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5%;
+    color: white;
+}
+
+.rulesclass:hover {
+   border-style: solid;
+   border-color: black;
+}
+
+/* ausgewähltes Symbol + Farbe */
+
+.color {
+    border-style: solid;
+    border-color: grey;
+    background-color: white;
+    position: absolute;
+    width: 5%;
+    height: 30%;
+    top: 10%;
+}
+
+.forms {
+    border-style: solid;
+    border-color: grey;
+    background-color: white;
+    position: absolute;
+    width: 5%;
+    height: 30%;
+    top: 45%;
+}
+
+/* Farben */
+.wanddiv {
+    position: relative;
+    top: 5%;
+    left: 16%;
+    width: 60%;
+    height: 10%;
+    border-style: solid;
+    border-color: gray;
+    border-radius: 3px;
+}
+
+.wanddiv:hover {
+    border-color: red;
+}
+
+.redcolor {
+    position: relative;
+    top: 10%;
+    left: 20%;
+    width: 60%;
+    height: 10%;
+    background-color: #7F0909;
+    border-radius: 3px;
+}
+
+.redcolor:hover {
+    border-style: solid;
+    border-color: red;
+}
+
+.bluecolor {
+    position: relative;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 10%;
+    background-color: #000890;
+    border-radius: 3px;
+}
+
+.bluecolor:hover {
+    border-style: solid;
+    border-color: red;
+}
+
+.greencolor {
+    position: relative;
+    top: 30%;
+    left: 20%;
+    width: 60%;
+    height: 10%;
+    background-color: #0D6217;
+    border-radius: 3px;
+}
+
+.greencolor:hover {
+    border-style: solid;
+    border-color: red;
+}
+
+.yellowcolor {
+    position: relative;
+    top: 40%;
+    left: 20%;
+    width: 60%;
+    height: 10%;
+    background-color: #EEE117;
+    border-radius: 3px;
+}
+
+.yellowcolor:hover {
+    border-style: solid;
+    border-color: red;
+}
+
+/* Überschrift für Choose */
+
+.choose {
+    position: absolute;
+    top: 77%;
+    left: 1%;
+}
+
+/* Animationsformen */
+
+.positionclass {
+    position: absolute;
+    background-color: slategray;
+    padding: 0.5%;
+    top: 85%; 
+    left: 1%;
+    border-radius: 5px;
+    color: white; 
+}
+
+.positionclass:hover {
+    border-style: solid;
+    border-color: red;
+}
+
+.rotateclass {
+    position: absolute;
+    background-color: slategray;
+    top: 85%;
+    left: 8%; 
+    border-radius: 5px;
+    padding: 0.5%;
+    color: white;
+}
+
+.rotateclass:hover {
+    border-style: solid;
+    border-color: red;
+}
+
+/* Generier Button */
+
+.generateclass {
+    position: absolute;
+    top: 80%;
+    right: 32%;
+    padding: 0.5%;
+    border: none;
+    background-color: rgb(139, 186, 224);
+    border-radius: 5px;
+    color: white;
+}
+
+.generateclass:hover {
+    border-style: solid;
+    border-color: black;
+}
+
+/* Größe des Canvas */
+
+.canvassize {
+    position: absolute;
+    border-style: solid;
+    border-color: grey;
+    top: 60%;
+    right: 1%;
+    padding: 1%;
+    width: 12%;
+}
+
+/* Bildname speichern */
+
+.saveclass {
+    position: absolute;
+    top: 4%;
+    right: 1%;
+    background-color: steelblue;
+    border-radius: 5px;
+    border: none;
+    padding: 0.5%;
+    color: white;
+}
+
+.saveclass:hover {
+    border-style: solid;
+    border-color: black;
+}
+
+.name {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+/* Alle Elemente des Canvas löschen */
+
+.deleteclass {
+    position: absolute;
+    background-color: steelblue;
+    top: 5%;
+    right: 31%;
+    border-radius: 5px;
+    border: none;
+    padding: 0.5%;
+    color: white;
+}
+
+.deleteclass:hover {
+    border-style: solid;
+    border-color: black;
+}
+
+/* Div für die gespeicherten Bildnamen */
+
+.picturesclass {
+    position: absolute;
+    top: 12%;
+    right: 1%;
+    padding: 1%;
+    border-style: solid;
+    border-color: grey;
+    height: 40%;
+    width: 12%;
+}
+
+
+
+.footer {
+    position: absolute;
+    bottom: 1%;
+    right: 2%;
+    font-size: small;
+}
+

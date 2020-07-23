@@ -4,8 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magic Canvas</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="Main.js"></script>
 </head>
+
 <body>
-    
+    <div id="main">
+        <h1>Magic Canvas</h1>
+        <!--Linke Seite-->
+        <button id="rules" class="rulesclass">rules</button>
+        <canvas width="500" height="300"></canvas>
+
+        <div class="color">
+            <div id="wand" class="wanddiv"></div>
+            <div id="red" class="redcolor"></div>
+            <div id="blue" class="bluecolor"></div>
+            <div id="green" class="greencolor"></div>
+            <div id="yellow" class="yellowcolor"></div>
+        </div>
+
+        <div class="forms">
+            <!-- gezeichnete elemente -->
+        </div>
+
+        <p class="choose">Choose one:</p>
+        <span id="position" class="positionclass">position</span>
+        <span id="rotate" class="rotateclass">rotate</span>
+        <button id="generate" class="generateclass">generate</button>
+
+        <!--Rechte Seite-->
+        <button id="delete" class="deleteclass">delete</button>
+      
+        <input type="text" placeholder="Enter name" class="name">
+        <button id="save" class="saveclass">save</button>
+        
+        <div id="pictures" class="picturesclass">
+            <h3>Latest pictures</h3>
+        </div>
+
+        <div class="canvassize">
+            <h3>Canvas Size</h3>
+                <input type="radio" name="canvassize" value="standard" id="standard" checked>
+                <label for="standard">standard</label>
+                <br>
+                <input type="radio" name="canvassize" value="small" id="small">
+                <label for="small">small</label>
+                <br>
+                <input type="radio" name="canvassize" value="medium" id="medium">
+                <label for="medium">medium</label>
+                <br>
+                <input type="radio" name="canvassize" value="large" id="large">
+                <label for="large">large</label>
+        </div>
+    </div>
 </body>
+
+<footer>
+  <p class="footer">In Zusammenarbeit mit Elena Mayer</p>
+</footer>
+
 </html>
