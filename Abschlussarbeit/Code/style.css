@@ -1,12 +1,13 @@
 body {
     font-size: medium;
     font-family: Arial, Helvetica, sans-serif;
-    color: white;
+    color: black;
     background-image: url("hogwarts_halle.jpg");
 }
 
 h1 {
     text-align: center;
+    color: white;
 }
 
 canvas {
@@ -25,6 +26,24 @@ canvas {
 
 /* Spielregeln */
 
+.overlayclass {
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 95%;
+    top: 0;
+    left: 8%;
+    background-color: rgba(255,255,255,0.8);
+    z-index: 10;
+}
+
+.overlaytextclass {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    font-size: large;
+}
+
 .rulesclass {
     position: absolute;
     top: 2%;
@@ -41,12 +60,27 @@ canvas {
    border-color: black;
 }
 
+/* Farbpalette */
+
+.wand {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+}
+
+.palette{
+    position: relative;
+    left: 20%;
+    bottom: 20%;
+    }
+
+
 /* ausgewähltes Symbol + Farbe */
 
 .color {
     border-style: solid;
     border-color: grey;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.6);
     position: absolute;
     width: 5%;
     height: 30%;
@@ -56,11 +90,35 @@ canvas {
 .forms {
     border-style: solid;
     border-color: grey;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.6);
     position: absolute;
     width: 5%;
     height: 30%;
     top: 45%;
+}
+
+.circleclass {
+    width: 60%;
+    position: relative;
+    left: 20%;
+}
+
+.triangleclass{
+    width: 60%;
+    position: relative;
+    left: 20%;
+}
+
+.rectangleclass {
+    width: 60%;
+    position: relative;
+    left: 20%;
+}
+
+.flashclass {
+    width: 60%;
+    position: relative;
+    left: 20%;
 }
 
 /* Farben */
@@ -144,7 +202,8 @@ canvas {
 .choose {
     position: absolute;
     top: 77%;
-    left: 1%;
+    left: 0.5%;
+    color: white;
 }
 
 /* Animationsformen */
@@ -167,8 +226,10 @@ canvas {
 .rotateclass {
     position: absolute;
     background-color: slategray;
-    top: 85%;
-    left: 8%; 
+    top: 92%;
+    left: 1%; 
+    width: 4%;
+    text-align: center;
     border-radius: 5px;
     padding: 0.5%;
     color: white;
@@ -203,6 +264,7 @@ canvas {
     position: absolute;
     border-style: solid;
     border-color: grey;
+    background-color: rgba(255, 255, 255, 0.6);
     top: 60%;
     right: 1%;
     padding: 1%;
@@ -260,6 +322,7 @@ canvas {
     padding: 1%;
     border-style: solid;
     border-color: grey;
+    background-color: rgba(255, 255, 255, 0.6);
     height: 40%;
     width: 12%;
 }
@@ -271,5 +334,6 @@ canvas {
     bottom: 1%;
     right: 2%;
     font-size: small;
+    color: white;
 }
 

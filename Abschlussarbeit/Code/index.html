@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magic Canvas</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <script src="Main.js"></script>
 </head>
 
@@ -13,10 +14,26 @@
         <h1>Magic Canvas</h1>
         <!--Linke Seite-->
         <button id="rules" class="rulesclass">rules</button>
+        <div id="overlay" class="overlayclass">
+            <div id="overlayText" class="overlaytextclass">
+                Welcome to hogwarts!
+                <br>
+                Build your own magic canvas with the tools on the left side.
+                Choose a canvas size, a color, a symbol and one form of animation.
+                <br>
+                Then hit the generate button and your symbol will apear on the canvas.
+                You can do this as many times as you would like. 
+                <br>
+                You can also clear your canvas with the delete button.
+                Enter a name for your finished picture and press "save" to save it.
+                <br>
+                You can find your saved pictures on the right side.
+            </div>
+        </div>
         <canvas width="500" height="300"></canvas>
 
         <div class="color">
-            <div id="wand" class="wanddiv"></div>
+            <div id="wand" class="wanddiv"><img src="palette.svg" class="palette"></div>
             <div id="red" class="redcolor"></div>
             <div id="blue" class="bluecolor"></div>
             <div id="green" class="greencolor"></div>
@@ -24,7 +41,10 @@
         </div>
 
         <div class="forms">
-            <!-- gezeichnete elemente -->
+            <img src="circle.svg" class="circleclass">
+            <img src="triangle.svg" class="triangleclass">
+            <img src="square.svg" class="rectangleclass">
+            <img src="flash.svg" class="flashclass">
         </div>
 
         <p class="choose">Choose one:</p>
@@ -42,20 +62,22 @@
             <h3>Latest pictures</h3>
         </div>
 
+        <form id="canvasForm">
         <div class="canvassize">
             <h3>Canvas Size</h3>
-                <input type="radio" name="canvassize" value="standard" id="standard" checked>
+                <input type="radio" name="canvassize" value="standard" id="radio" checked>
                 <label for="standard">standard</label>
                 <br>
-                <input type="radio" name="canvassize" value="small" id="small">
+                <input type="radio" name="canvassize" value="small" id="radio">
                 <label for="small">small</label>
                 <br>
-                <input type="radio" name="canvassize" value="medium" id="medium">
+                <input type="radio" name="canvassize" value="medium" id="radio">
                 <label for="medium">medium</label>
                 <br>
-                <input type="radio" name="canvassize" value="large" id="large">
+                <input type="radio" name="canvassize" value="large" id="radio">
                 <label for="large">large</label>
         </div>
+        </form>
     </div>
 </body>
 
