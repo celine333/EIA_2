@@ -5,14 +5,11 @@ var MagicCanvas;
     var selectedcolor = "#ff0000";
     var selectedform = "circle";
     var selectedanimation = "position";
-    var canvasheight;
-    var canvaswidth;
-    // Canvas sizes
-    var standardsize = document.querySelector("#standard");
-    var smallsize = document.querySelector("#small");
-    var mediumsize = document.querySelector("#medium");
-    var largesize = document.querySelector("#large");
-    var canvas = document.querySelector("canvas");
+    var symbols = [];
+    var chosenName;
+    // Ausprobieren
+    // let canvasheight: number;
+    // let canvaswidth: number;
     function handleLoad(_event) {
         var canvas = document.querySelector("canvas");
         if (!canvas)
@@ -36,6 +33,7 @@ var MagicCanvas;
         // Delete Button, um den Canvas zu säubern
         document.querySelector("#delete").addEventListener("click", clearCanvas);
         document.querySelector("#save").addEventListener("click", savePicture);
+        document.querySelector("#picturename").addEventListener("oninput", enterName);
         // Klick auf die verschiedenen Form Icons
         document.querySelector("#circleicon").addEventListener("click", setForm);
         document.querySelector("#triangleicon").addEventListener("click", setForm);
@@ -56,12 +54,16 @@ var MagicCanvas;
         }
     }
     function handleCanvasSize() {
+        // Canvas sizes
+        var standardsize = document.querySelector("#standard");
+        var smallsize = document.querySelector("#small");
+        var mediumsize = document.querySelector("#medium");
+        var largesize = document.querySelector("#large");
+        var canvas = document.querySelector("canvas");
         if (standardsize.checked == true) {
             canvas.setAttribute("style", "width: 500px");
             canvas.setAttribute("style", "height: 300px");
             console.log("standard");
-            canvaswidth = 500;
-            canvasheight = 300;
         }
         if (smallsize.checked == true) {
             console.log("small");
@@ -81,51 +83,18 @@ var MagicCanvas;
         console.log("generate Symbols");
         // Bedingung: erst geklickt werden, wenn alles nötige ausgewählt wurde
         // neues Element kreieren
-        // let element: canvasElement = new canvasElement();
-        // Kreis ------------------------------
-        var r = 4;
-        MagicCanvas.crc2.save();
-        MagicCanvas.crc2.translate(40, 40);
-        // Skalierung vertikal und horizontal
-        MagicCanvas.crc2.scale(5, 5);
-        // crc2.translate(-50, -50);
-        MagicCanvas.crc2.beginPath();
-        MagicCanvas.crc2.arc(0, 0, r, 0, 2 * Math.PI);
-        MagicCanvas.crc2.closePath();
-        MagicCanvas.crc2.restore();
-        // Linienfarbe
-        MagicCanvas.crc2.strokeStyle = "#000000";
-        MagicCanvas.crc2.stroke();
-        // Dreieck
-        MagicCanvas.crc2.beginPath();
-        MagicCanvas.crc2.moveTo(70, 70);
-        MagicCanvas.crc2.lineTo(10, 70);
-        MagicCanvas.crc2.lineTo(10, 25);
-        MagicCanvas.crc2.closePath();
-        // Linienfarbe
-        MagicCanvas.crc2.strokeStyle = "#000000";
-        MagicCanvas.crc2.stroke();
-        //Rectangle
-        MagicCanvas.crc2.beginPath();
-        MagicCanvas.crc2.rect(10, 10, 55, 40);
-        // Linienfarbe
-        MagicCanvas.crc2.strokeStyle = "#000000";
-        MagicCanvas.crc2.stroke();
-        // Flash
-        MagicCanvas.crc2.beginPath();
-        MagicCanvas.crc2.translate(40, 40);
-        MagicCanvas.crc2.moveTo(0, 0);
-        MagicCanvas.crc2.lineTo(20, 0);
-        MagicCanvas.crc2.lineTo(15, 25);
-        MagicCanvas.crc2.lineTo(25, 25);
-        MagicCanvas.crc2.lineTo(10, 50);
-        MagicCanvas.crc2.moveTo(0, 0);
-        MagicCanvas.crc2.lineTo(0, 30);
-        MagicCanvas.crc2.lineTo(12, 30);
-        MagicCanvas.crc2.lineTo(10, 50);
-        // Linienfarbe
-        MagicCanvas.crc2.strokeStyle = "#000000";
-        MagicCanvas.crc2.stroke();
+        var element = new MagicCanvas.canvasElement();
+        // crc2.selectedform.fill(selectedcolor);
+        // if (selectedform)
+        //         crc2.fillStyle = selectedcolor;
+        // crc2.fill();
+        // let position: Vector = new Vector(x, y);
+        var circle = new MagicCanvas.Circle(position);
+        circle.draw();
+        symbols.push(circle);
+        // element.drawTriangle();
+        // element.drawRectangle();
+        // element.drawFlash();    
     }
     function setColor(event) {
         // Element wird über das Event mit Hilfe der id geholt 
@@ -179,19 +148,57 @@ var MagicCanvas;
     }
     function clearCanvas() {
         console.log("delete");
-        // Store the current transformation matrix
-        MagicCanvas.crc2.save();
-        // Use the identity matrix while clearing the canvas
-        MagicCanvas.crc2.setTransform(1, 0, 0, 1, 0, 0);
-        MagicCanvas.crc2.clearRect(0, 0, canvaswidth, canvasheight);
-        // Restore the transform
-        MagicCanvas.crc2.restore();
+        // Array leeren
+        // // Store the current transformation matrix
+        // crc2.save();
+        // // Use the identity matrix while clearing the canvas
+        // crc2.setTransform(1, 0, 0, 1, 0, 0);
+        // crc2.clearRect(0, 0, canvaswidth, canvasheight);
+        // // Restore the transform
+        // crc2.restore();
     }
-    function savePicture() {
+    function enterName() {
+        // let name: any = (<HTMLInputElement>document.getElementById("#picturename")).value;
+        // chosenName = name;
+        // console.log("name:" + chosenName);
+        var name = document.getElementById("#picturename").value;
+        document.getElementById("pictures").innerHTML = "You wrote: " + name;
+    }
+    function savePicture(event) {
         // let name: any;
         // (document.querySelector("#picturename") as HTMLInputElement).value = name;
-        var name = document.getElementById("#picturename").value;
-        console.log("name:" + name);
+        // let name: any = (<HTMLInputElement>document.getElementById("#picturename")).value;
+        // let namepicture: string = event.currentTarget.value;
+        console.log("name:" + chosenName);
+    }
+    function draganddrop(_event) {
+        console.log("it is draganddropping");
+        //Funktion nacher so aufrufen
+        symbol.onmousedown = function (event) {
+            // (1) prepare to moving: make absolute and on top by z-index
+            symbol.style.position = "absolute";
+            symbol.style.zIndex = 1000;
+            // move it out of any current parents directly into body
+            // to make it positioned relative to the body
+            document.body.append(symbol);
+            // centers the symbol at (pageX, pageY) coordinates
+            function moveAt(pageX, pageY) {
+                symbol.style.left = pageX - symbol.offsetWidth / 2 + "px";
+                symbol.style.top = pageY - symbol.offsetHeight / 2 + "px";
+            }
+            // move our absolutely positioned symbol under the pointer
+            moveAt(event.pageX, event.pageY);
+            function onMouseMove(event) {
+                moveAt(event.pageX, event.pageY);
+            }
+            // (2) move the symbol on mousemove
+            document.addEventListener("mousemove", onMouseMove);
+            // (3) drop the symbol, remove unneeded handlers
+            symbol.onmouseup = function () {
+                document.removeEventListener("mousemove", onMouseMove);
+                symbol.onmouseup = null;
+            };
+        };
     }
 })(MagicCanvas || (MagicCanvas = {}));
 // Klasse für alle Canvas Elemente
