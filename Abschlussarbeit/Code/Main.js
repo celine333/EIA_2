@@ -33,6 +33,7 @@ var MagicCanvas;
         document.querySelector("#large").addEventListener("click", handleCanvasSize);
         // Delete Button, um den Canvas zu säubern
         document.querySelector("#delete").addEventListener("click", clearCanvas);
+        document.querySelector("#save").addEventListener("click", savePicture);
         // Klick auf die verschiedenen Form Icons
         document.querySelector("#circleicon").addEventListener("click", setForm);
         document.querySelector("#triangleicon").addEventListener("click", setForm);
@@ -151,6 +152,12 @@ var MagicCanvas;
         MagicCanvas.crc2.clearRect(0, 0, canvaswidth, canvasheight);
         // Restore the transform
         MagicCanvas.crc2.restore();
+    }
+    function savePicture() {
+        // let name: any;
+        // (document.querySelector("#picturename") as HTMLInputElement).value = name;
+        var name = document.getElementById("#picturename").value;
+        console.log("name:" + name);
     }
 })(MagicCanvas || (MagicCanvas = {}));
 // Klasse für alle Canvas Elemente

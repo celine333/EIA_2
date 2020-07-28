@@ -44,12 +44,13 @@ namespace MagicCanvas {
         // Delete Button, um den Canvas zu säubern
         document.querySelector("#delete").addEventListener("click", clearCanvas);
 
+        document.querySelector("#save").addEventListener("click", savePicture);
+
         // Klick auf die verschiedenen Form Icons
         document.querySelector("#circleicon").addEventListener("click", setForm);
         document.querySelector("#triangleicon").addEventListener("click", setForm);
         document.querySelector("#squareicon").addEventListener("click", setForm);
         document.querySelector("#flashicon").addEventListener("click", setForm);
-
     }
     
     function rulesVisibility(): void {
@@ -179,6 +180,13 @@ namespace MagicCanvas {
         // Restore the transform
         crc2.restore();
         
+    }
+
+    function savePicture(): void {
+        // let name: any;
+        // (document.querySelector("#picturename") as HTMLInputElement).value = name;
+        let name: any = (<HTMLInputElement>document.getElementById("#picturename")).value;
+        console.log("name:" + name);
     }
 }
 
