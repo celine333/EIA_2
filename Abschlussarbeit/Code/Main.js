@@ -3,6 +3,14 @@ var MagicCanvas;
     window.addEventListener("load", handleLoad);
     // ausgwählte Farbe zum Füllen
     var selectedcolor = "#ff0000";
+    var canvasheight;
+    var canvaswidth;
+    // Canvas sizes
+    var standardsize = document.querySelector("#standard");
+    var smallsize = document.querySelector("#small");
+    var mediumsize = document.querySelector("#medium");
+    var largesize = document.querySelector("#large");
+    var canvas = document.querySelector("canvas");
     function handleLoad(_event) {
         var canvas = document.querySelector("canvas");
         if (!canvas)
@@ -16,12 +24,20 @@ var MagicCanvas;
         document.querySelector("#yellow").addEventListener("click", setColor);
         // Klick auf Regel Button
         document.querySelector("#rules").addEventListener("click", rulesVisibility);
+        // Generate
+        document.querySelector("#generate").addEventListener("click", generateSymbols);
         // Klick auf Canvas Größe
         document.querySelector("#standard").addEventListener("click", handleCanvasSize);
         document.querySelector("#small").addEventListener("click", handleCanvasSize);
         document.querySelector("#medium").addEventListener("click", handleCanvasSize);
         document.querySelector("#large").addEventListener("click", handleCanvasSize);
-        document.querySelector("#generate").addEventListener("click", generateSymbols);
+        // Delete Button, um den Canvas zu säubern
+        document.querySelector("#delete").addEventListener("click", clearCanvas);
+        // Klick auf die verschiedenen Form Icons
+        document.querySelector("#circleicon").addEventListener("click", setForm);
+        document.querySelector("#triangleicon").addEventListener("click", setForm);
+        document.querySelector("#squareicon").addEventListener("click", setForm);
+        document.querySelector("#flashicon").addEventListener("click", setForm);
     }
     function rulesVisibility() {
         console.log("show rules");
@@ -34,15 +50,12 @@ var MagicCanvas;
         }
     }
     function handleCanvasSize() {
-        var standardsize = document.querySelector("#standard");
-        var smallsize = document.querySelector("#small");
-        var mediumsize = document.querySelector("#medium");
-        var largesize = document.querySelector("#large");
-        var canvas = document.querySelector("canvas");
         if (standardsize.checked == true) {
             canvas.setAttribute("style", "width: 500px");
             canvas.setAttribute("style", "height: 300px");
             console.log("standard");
+            canvaswidth = 500;
+            canvasheight = 300;
         }
         if (smallsize.checked == true) {
             console.log("small");
@@ -109,7 +122,9 @@ var MagicCanvas;
         MagicCanvas.crc2.stroke();
     }
     function setColor(event) {
+        // Element wird über das Event mit Hilfe der id geholt 
         var actualid = event.target.getAttribute("id");
+        // wenn die id des childs zb red ist dann wird die farbe mit selectedcolor überschrieben
         if (actualid == "red") {
             selectedcolor = "#7F0909";
         }
@@ -123,6 +138,19 @@ var MagicCanvas;
             selectedcolor = "#EEE117";
         }
         console.log("Event:" + event.target.getAttribute("id"));
+    }
+    function setForm() {
+        console.log("hallo");
+    }
+    function clearCanvas() {
+        console.log("delete");
+        // Store the current transformation matrix
+        MagicCanvas.crc2.save();
+        // Use the identity matrix while clearing the canvas
+        MagicCanvas.crc2.setTransform(1, 0, 0, 1, 0, 0);
+        MagicCanvas.crc2.clearRect(0, 0, canvaswidth, canvasheight);
+        // Restore the transform
+        MagicCanvas.crc2.restore();
     }
 })(MagicCanvas || (MagicCanvas = {}));
 // Klasse für alle Canvas Elemente

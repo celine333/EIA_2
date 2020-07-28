@@ -7,6 +7,8 @@ namespace MagicCanvas {
         public form: string;
         public rotateangle: number;
         public animationtype: string;
+        // ELement ist aktiv wenn es nicht mehr in der Mitte ist
+    //     active: boolean;
 
         // constructor(_size: number, _position?: Vector) {
         //     // super(_position);

@@ -6,6 +6,15 @@ namespace MagicCanvas {
 
     // ausgwählte Farbe zum Füllen
     let selectedcolor: string = "#ff0000";
+    let canvasheight: number;
+    let canvaswidth: number;
+
+    // Canvas sizes
+    let standardsize: HTMLInputElement = <HTMLInputElement>document.querySelector("#standard");
+    let smallsize: HTMLInputElement = <HTMLInputElement>document.querySelector("#small");
+    let mediumsize: HTMLInputElement = <HTMLInputElement>document.querySelector("#medium");
+    let largesize: HTMLInputElement = <HTMLInputElement>document.querySelector("#large");
+    let canvas = document.querySelector("canvas");
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
@@ -23,12 +32,24 @@ namespace MagicCanvas {
         // Klick auf Regel Button
         document.querySelector("#rules").addEventListener("click", rulesVisibility);
 
+        // Generate
+        document.querySelector("#generate").addEventListener("click", generateSymbols);
+        
         // Klick auf Canvas Größe
         document.querySelector("#standard").addEventListener("click", handleCanvasSize);
         document.querySelector("#small").addEventListener("click", handleCanvasSize);
         document.querySelector("#medium").addEventListener("click", handleCanvasSize);
         document.querySelector("#large").addEventListener("click", handleCanvasSize);
-        document.querySelector("#generate").addEventListener("click", generateSymbols);
+
+        // Delete Button, um den Canvas zu säubern
+        document.querySelector("#delete").addEventListener("click", clearCanvas);
+
+        // Klick auf die verschiedenen Form Icons
+        document.querySelector("#circleicon").addEventListener("click", setForm);
+        document.querySelector("#triangleicon").addEventListener("click", setForm);
+        document.querySelector("#squareicon").addEventListener("click", setForm);
+        document.querySelector("#flashicon").addEventListener("click", setForm);
+
     }
     
     function rulesVisibility(): void {
@@ -43,16 +64,12 @@ namespace MagicCanvas {
     }
 
     function handleCanvasSize(): void {
-        let standardsize: HTMLInputElement = <HTMLInputElement>document.querySelector("#standard");
-        let smallsize: HTMLInputElement = <HTMLInputElement>document.querySelector("#small");
-        let mediumsize: HTMLInputElement = <HTMLInputElement>document.querySelector("#medium");
-        let largesize: HTMLInputElement = <HTMLInputElement>document.querySelector("#large");
-        let canvas = document.querySelector("canvas");
-
         if (standardsize.checked == true) {
             canvas.setAttribute("style", "width: 500px");
             canvas.setAttribute("style", "height: 300px");
             console.log("standard");
+            canvaswidth = 500;
+            canvasheight = 300;
         }
         if (smallsize.checked == true) {
             console.log("small");
@@ -130,7 +147,9 @@ namespace MagicCanvas {
     }
 
     function setColor(event): void {
+        // Element wird über das Event mit Hilfe der id geholt 
         let actualid: string = event.target.getAttribute("id");
+        // wenn die id des childs zb red ist dann wird die farbe mit selectedcolor überschrieben
         if (actualid == "red") {
             selectedcolor = "#7F0909";
         } else if (actualid == "blue") {
@@ -142,6 +161,24 @@ namespace MagicCanvas {
         }
        
         console.log("Event:" + event.target.getAttribute("id"));
+    }
+
+    function setForm(): void {
+        console.log("hallo");
+    }
+
+    function clearCanvas(): void  {
+        console.log("delete");
+        // Store the current transformation matrix
+        crc2.save();
+
+        // Use the identity matrix while clearing the canvas
+        crc2.setTransform(1, 0, 0, 1, 0, 0);
+        crc2.clearRect(0, 0, canvaswidth, canvasheight);
+
+        // Restore the transform
+        crc2.restore();
+        
     }
 }
 

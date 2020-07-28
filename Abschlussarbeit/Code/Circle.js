@@ -3,6 +3,8 @@ var MagicCanvas;
     var canvasElement = /** @class */ (function () {
         function canvasElement() {
         }
+        // ELement ist aktiv wenn es nicht mehr in der Mitte ist
+        //     active: boolean;
         // constructor(_size: number, _position?: Vector) {
         //     // super(_position);
         //     if (_position)
