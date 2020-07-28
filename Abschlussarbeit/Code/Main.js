@@ -3,6 +3,8 @@ var MagicCanvas;
     window.addEventListener("load", handleLoad);
     // ausgwählte Farbe zum Füllen
     var selectedcolor = "#ff0000";
+    var selectedform = "circle";
+    var selectedanimation = "position";
     var canvasheight;
     var canvaswidth;
     // Canvas sizes
@@ -39,6 +41,9 @@ var MagicCanvas;
         document.querySelector("#triangleicon").addEventListener("click", setForm);
         document.querySelector("#squareicon").addEventListener("click", setForm);
         document.querySelector("#flashicon").addEventListener("click", setForm);
+        // Klick auf die verschiedenen Animationsformen
+        document.querySelector("#position").addEventListener("click", setAnimation);
+        document.querySelector("#rotate").addEventListener("click", setAnimation);
     }
     function rulesVisibility() {
         console.log("show rules");
@@ -139,9 +144,38 @@ var MagicCanvas;
             selectedcolor = "#EEE117";
         }
         console.log("Event:" + event.target.getAttribute("id"));
+        console.log(selectedcolor);
     }
-    function setForm() {
-        console.log("hallo");
+    function setForm(event) {
+        // console.log("hallo");
+        var formid = event.currentTarget.getAttribute("id");
+        if (formid == "circleicon") {
+            selectedform = "circle";
+            console.log("rufe drawcircle auf");
+        }
+        else if (formid == "triangleicon") {
+            selectedform = "triangle";
+            console.log("rufe drawtriangle auf");
+        }
+        else if (formid == "squareicon") {
+            selectedform = "square";
+            console.log("rufe drawsquare auf");
+        }
+        else if (formid == "flashicon") {
+            selectedform = "flash";
+            console.log("rufe drawflash auf");
+        }
+        console.log(selectedform);
+    }
+    function setAnimation(event) {
+        var animationid = event.currentTarget.getAttribute("id");
+        if (animationid == "position") {
+            selectedanimation = "position";
+        }
+        if (animationid == "rotate") {
+            selectedanimation = "rotate";
+        }
+        console.log(selectedanimation);
     }
     function clearCanvas() {
         console.log("delete");
