@@ -82,16 +82,19 @@ var MagicCanvas;
     function generateSymbols(_event) {
         console.log("generate Symbols");
         // Bedingung: erst geklickt werden, wenn alles nötige ausgewählt wurde
-        // neues Element kreieren
-        var element = new MagicCanvas.canvasElement();
-        // crc2.selectedform.fill(selectedcolor);
-        // if (selectedform)
-        //         crc2.fillStyle = selectedcolor;
-        // crc2.fill();
-        // let position: Vector = new Vector(x, y);
-        var circle = new MagicCanvas.Circle(position);
-        circle.draw();
-        symbols.push(circle);
+        // // neues Element kreieren
+        // let element: canvasElement = new canvasElement();
+        // // crc2.selectedform.fill(selectedcolor);
+        // // if (selectedform)
+        // //         crc2.fillStyle = selectedcolor;
+        // // crc2.fill();
+        // // let position: Vector = new Vector(x, y);
+        // let circle: Circle = new Circle(position);
+        // circle.draw();
+        // symbols.push(circle);
+        var element = new MagicCanvas.canvasElement(selectedform, selectedcolor, selectedanimation);
+        symbols.push(element);
+        element.draw();
         // element.drawTriangle();
         // element.drawRectangle();
         // element.drawFlash();    
@@ -174,31 +177,31 @@ var MagicCanvas;
     function draganddrop(_event) {
         console.log("it is draganddropping");
         //Funktion nacher so aufrufen
-        symbol.onmousedown = function (event) {
-            // (1) prepare to moving: make absolute and on top by z-index
-            symbol.style.position = "absolute";
-            symbol.style.zIndex = 1000;
-            // move it out of any current parents directly into body
-            // to make it positioned relative to the body
-            document.body.append(symbol);
-            // centers the symbol at (pageX, pageY) coordinates
-            function moveAt(pageX, pageY) {
-                symbol.style.left = pageX - symbol.offsetWidth / 2 + "px";
-                symbol.style.top = pageY - symbol.offsetHeight / 2 + "px";
-            }
-            // move our absolutely positioned symbol under the pointer
-            moveAt(event.pageX, event.pageY);
-            function onMouseMove(event) {
-                moveAt(event.pageX, event.pageY);
-            }
-            // (2) move the symbol on mousemove
-            document.addEventListener("mousemove", onMouseMove);
-            // (3) drop the symbol, remove unneeded handlers
-            symbol.onmouseup = function () {
-                document.removeEventListener("mousemove", onMouseMove);
-                symbol.onmouseup = null;
-            };
-        };
+        //     symbol.onmousedown = function(event): void {
+        //         // (1) prepare to moving: make absolute and on top by z-index
+        //         symbol.style.position = "absolute";
+        //         symbol.style.zIndex = 1000;
+        //         // move it out of any current parents directly into body
+        //         // to make it positioned relative to the body
+        //         document.body.append(symbol);
+        //         // centers the symbol at (pageX, pageY) coordinates
+        //         function moveAt(pageX, pageY): void {
+        //           symbol.style.left = pageX - symbol.offsetWidth / 2 + "px";
+        //           symbol.style.top = pageY - symbol.offsetHeight / 2 + "px";
+        //         }
+        //         // move our absolutely positioned symbol under the pointer
+        //         moveAt(event.pageX, event.pageY);
+        //         function onMouseMove(event): void {
+        //           moveAt(event.pageX, event.pageY);
+        //         }
+        //         // (2) move the symbol on mousemove
+        //         document.addEventListener("mousemove", onMouseMove);
+        //         // (3) drop the symbol, remove unneeded handlers
+        //         symbol.onmouseup = function() {
+        //           document.removeEventListener("mousemove", onMouseMove);
+        //           symbol.onmouseup = null;
+        //         };
+        //       };
     }
 })(MagicCanvas || (MagicCanvas = {}));
 // Klasse für alle Canvas Elemente

@@ -3,7 +3,7 @@ var MagicCanvas;
     var canvasElement = /** @class */ (function () {
         // ELement ist aktiv wenn es nicht mehr in der Mitte ist
         //     active: boolean;
-        function canvasElement(_position) {
+        function canvasElement(_form, _color, _animation, _position) {
             // super(_position);
             if (_position)
                 this.position = _position;
@@ -11,10 +11,23 @@ var MagicCanvas;
                 this.position = new MagicCanvas.Vector(0, 0);
             this.velocity = new MagicCanvas.Vector(0, 0);
             this.velocity.random(20, 80);
+            this.selectedform = _form;
+            this.selectedcolor = _color;
+            this.selectedanimation = _animation;
             // if (_selectedform)
             //     crc2.fillStyle = _selectedcolor;
             // crc2.fill();   
         }
+        canvasElement.prototype.draw = function () {
+            if (this.selectedform == "circle")
+                this.drawCircle();
+            else if (this.selectedform == "square")
+                this.drawSquare();
+            else if (this.selectedform == "triangle")
+                this.drawTriangle();
+            else if (this.selectedform == "flash")
+                this.drawFlash();
+        };
         canvasElement.prototype.drawCircle = function () {
             var r = 4;
             MagicCanvas.crc2.save();
@@ -29,6 +42,9 @@ var MagicCanvas;
             // Linienfarbe
             MagicCanvas.crc2.strokeStyle = "#000000";
             MagicCanvas.crc2.stroke();
+            // mit Farbe füllen
+            MagicCanvas.crc2.fillStyle = this.selectedcolor;
+            MagicCanvas.crc2.fill();
         };
         canvasElement.prototype.drawTriangle = function () {
             MagicCanvas.crc2.beginPath();
@@ -39,13 +55,19 @@ var MagicCanvas;
             // Linienfarbe
             MagicCanvas.crc2.strokeStyle = "#000000";
             MagicCanvas.crc2.stroke();
+            // mit Farbe füllen
+            MagicCanvas.crc2.fillStyle = this.selectedcolor;
+            MagicCanvas.crc2.fill();
         };
-        canvasElement.prototype.drawRectangle = function () {
+        canvasElement.prototype.drawSquare = function () {
             MagicCanvas.crc2.beginPath();
             MagicCanvas.crc2.rect(10, 10, 55, 40);
             // Linienfarbe
             MagicCanvas.crc2.strokeStyle = "#000000";
             MagicCanvas.crc2.stroke();
+            // mit Farbe füllen
+            MagicCanvas.crc2.fillStyle = this.selectedcolor;
+            MagicCanvas.crc2.fill();
         };
         canvasElement.prototype.drawFlash = function () {
             MagicCanvas.crc2.beginPath();
@@ -62,6 +84,9 @@ var MagicCanvas;
             // Linienfarbe
             MagicCanvas.crc2.strokeStyle = "#000000";
             MagicCanvas.crc2.stroke();
+            // mit Farbe füllen
+            MagicCanvas.crc2.fillStyle = this.selectedcolor;
+            MagicCanvas.crc2.fill();
         };
         return canvasElement;
     }());

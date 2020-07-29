@@ -10,7 +10,7 @@ namespace MagicCanvas {
         // ELement ist aktiv wenn es nicht mehr in der Mitte ist
     //     active: boolean;
 
-        constructor(_position?: Vector) {
+        constructor(_form: string, _color: string, _animation: string, _position?: Vector) {
             // super(_position);
 
             if (_position)
@@ -21,10 +21,24 @@ namespace MagicCanvas {
             this.velocity = new Vector(0, 0);
             this.velocity.random(20, 80);
 
+            this.selectedform = _form;
+            this.selectedcolor = _color;
+            this.selectedanimation = _animation; 
             // if (_selectedform)
             //     crc2.fillStyle = _selectedcolor;
             // crc2.fill();   
             
+        }
+
+        public draw(): void {
+            if (this.selectedform == "circle")
+                this.drawCircle();
+            else if (this.selectedform == "square")
+                this.drawSquare();
+            else if (this.selectedform == "triangle")
+                this.drawTriangle();
+            else if (this.selectedform == "flash")
+                this.drawFlash();
         }
 
         public drawCircle(): void {
@@ -41,6 +55,9 @@ namespace MagicCanvas {
             // Linienfarbe
             crc2.strokeStyle = "#000000";
             crc2.stroke();
+            // mit Farbe füllen
+            crc2.fillStyle = this.selectedcolor;
+            crc2.fill();
         }
 
         public drawTriangle(): void {
@@ -52,14 +69,20 @@ namespace MagicCanvas {
             // Linienfarbe
             crc2.strokeStyle = "#000000";
             crc2.stroke();
+            // mit Farbe füllen
+            crc2.fillStyle = this.selectedcolor;
+            crc2.fill();
         }
 
-        public drawRectangle(): void {
+        public drawSquare(): void {
             crc2.beginPath();
             crc2.rect(10, 10, 55, 40);
             // Linienfarbe
             crc2.strokeStyle = "#000000";
             crc2.stroke();
+            // mit Farbe füllen
+            crc2.fillStyle = this.selectedcolor;
+            crc2.fill();
         }
 
         public drawFlash(): void {
@@ -77,6 +100,9 @@ namespace MagicCanvas {
             // Linienfarbe
             crc2.strokeStyle = "#000000";
             crc2.stroke();
+            // mit Farbe füllen
+            crc2.fillStyle = this.selectedcolor;
+            crc2.fill();
         }
 
         // public move(_timeslice: number): void {
