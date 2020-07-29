@@ -30,6 +30,37 @@ namespace MagicCanvas {
             
         }
 
+        public animate(): void {
+            if (this.selectedanimation == "position")
+                this.move(20);
+            else if (this.selectedanimation == "rotate")
+                this.rotate();
+        }
+
+        public move(_timeslice: number): void {
+            // console.log("Moveable move");
+            let offset: Vector = this.velocity.copy();
+            offset.scale(_timeslice);
+            this.position.add(offset);
+
+            if (this.position.x < 0) {
+                this.position.x += crc2.canvas.width;
+            }
+            if (this.position.y < 0) {
+                this.position.y += crc2.canvas.height;
+            }
+            if (this.position.x > crc2.canvas.width) {
+                this.position.x -= crc2.canvas.width;
+            }
+            if (this.position.y > crc2.canvas.height) {
+                this.position.y -= crc2.canvas.height;
+            }
+        }
+
+        public rotate(): void {
+            // noch bearbeiten
+        }
+
         public draw(): void {
             if (this.selectedform == "circle")
                 this.drawCircle();
@@ -41,7 +72,7 @@ namespace MagicCanvas {
                 this.drawFlash();
         }
 
-        public drawCircle(): void {
+        private drawCircle(): void {
             let r: number = 4;
             crc2.save();
             crc2.translate(40, 40);
@@ -60,7 +91,7 @@ namespace MagicCanvas {
             crc2.fill();
         }
 
-        public drawTriangle(): void {
+        private drawTriangle(): void {
             crc2.beginPath();
             crc2.moveTo(70, 70);
             crc2.lineTo(10, 70);
@@ -74,7 +105,7 @@ namespace MagicCanvas {
             crc2.fill();
         }
 
-        public drawSquare(): void {
+        private drawSquare(): void {
             crc2.beginPath();
             crc2.rect(10, 10, 55, 40);
             // Linienfarbe
@@ -85,7 +116,7 @@ namespace MagicCanvas {
             crc2.fill();
         }
 
-        public drawFlash(): void {
+        private drawFlash(): void {
             crc2.beginPath();
             crc2.translate(40, 40);
             crc2.moveTo(0, 0);
@@ -104,25 +135,5 @@ namespace MagicCanvas {
             crc2.fillStyle = this.selectedcolor;
             crc2.fill();
         }
-
-        // public move(_timeslice: number): void {
-        //     // console.log("Moveable move");
-        //     let offset: Vector = this.velocity.copy();
-        //     offset.scale(_timeslice);
-        //     this.position.add(offset);
-
-        //     if (this.position.x < 0) {
-        //         this.position.x += crc2.canvas.width;
-        //     }
-        //     if (this.position.y < 0) {
-        //         this.position.y += crc2.canvas.height;
-        //     }
-        //     if (this.position.x > crc2.canvas.width) {
-        //         this.position.x -= crc2.canvas.width;
-        //     }
-        //     if (this.position.y > crc2.canvas.height) {
-        //         this.position.y -= crc2.canvas.height;
-        //     }
-        // }
     }
 }    

@@ -18,6 +18,33 @@ var MagicCanvas;
             //     crc2.fillStyle = _selectedcolor;
             // crc2.fill();   
         }
+        canvasElement.prototype.animate = function () {
+            if (this.selectedanimation == "position")
+                this.move(20);
+            else if (this.selectedanimation == "rotate")
+                this.rotate();
+        };
+        canvasElement.prototype.move = function (_timeslice) {
+            // console.log("Moveable move");
+            var offset = this.velocity.copy();
+            offset.scale(_timeslice);
+            this.position.add(offset);
+            if (this.position.x < 0) {
+                this.position.x += MagicCanvas.crc2.canvas.width;
+            }
+            if (this.position.y < 0) {
+                this.position.y += MagicCanvas.crc2.canvas.height;
+            }
+            if (this.position.x > MagicCanvas.crc2.canvas.width) {
+                this.position.x -= MagicCanvas.crc2.canvas.width;
+            }
+            if (this.position.y > MagicCanvas.crc2.canvas.height) {
+                this.position.y -= MagicCanvas.crc2.canvas.height;
+            }
+        };
+        canvasElement.prototype.rotate = function () {
+            // noch bearbeiten
+        };
         canvasElement.prototype.draw = function () {
             if (this.selectedform == "circle")
                 this.drawCircle();

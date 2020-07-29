@@ -24,7 +24,6 @@ namespace MagicCanvas {
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
         // Klick auf Farbe
-        document.querySelector("#paletteid").addEventListener("click", setColor);
         document.querySelector("#red").addEventListener("click", setColor);
         document.querySelector("#blue").addEventListener("click", setColor);
         document.querySelector("#green").addEventListener("click", setColor);
@@ -45,8 +44,8 @@ namespace MagicCanvas {
         // Delete Button, um den Canvas zu säubern
         document.querySelector("#delete").addEventListener("click", clearCanvas);
 
+        // Name + Bild speichern
         document.querySelector("#save").addEventListener("click", savePicture);
-        document.querySelector("#picturename").addEventListener("oninput", enterName);
 
         // Klick auf die verschiedenen Form Icons
         document.querySelector("#circleicon").addEventListener("click", setForm);
@@ -101,24 +100,10 @@ namespace MagicCanvas {
     function generateSymbols (_event: Event): void {
         console.log("generate Symbols");
         // Bedingung: erst geklickt werden, wenn alles nötige ausgewählt wurde
-        
-        // // neues Element kreieren
-        // let element: canvasElement = new canvasElement();
-        // // crc2.selectedform.fill(selectedcolor);
-        // // if (selectedform)
-        // //         crc2.fillStyle = selectedcolor;
-        // // crc2.fill();
-        // // let position: Vector = new Vector(x, y);
-        // let circle: Circle = new Circle(position);
-        // circle.draw();
-        // symbols.push(circle);
 
         let element: canvasElement = new canvasElement(selectedform, selectedcolor, selectedanimation);
         symbols.push(element);
-        element.draw();
-        // element.drawTriangle();
-        // element.drawRectangle();
-        // element.drawFlash();    
+        element.draw();   
     }
 
     function setColor(event): void {
@@ -127,8 +112,10 @@ namespace MagicCanvas {
         // wenn die id des childs zb red ist dann wird die farbe mit selectedcolor überschrieben
         if (actualid == "red") {
             selectedcolor = "#7F0909";
+            // colorred.style.border = "solid #FF0000";
         } else if (actualid == "blue") {
             selectedcolor = "#000890";
+            // colorblue.style.border = "solid #FF0000";
         } else if (actualid == "green") {
             selectedcolor = "#0D6217";
         } else if (actualid == "yellow") {
@@ -175,6 +162,8 @@ namespace MagicCanvas {
     function clearCanvas(): void  {
         console.log("delete");
         // Array leeren
+        let index: number = canvasElement[length];
+        symbols.splice(index, 1);
 
         // // Store the current transformation matrix
         // crc2.save();
@@ -188,59 +177,51 @@ namespace MagicCanvas {
         
     }
 
-    function enterName(): void {
-        // let name: any = (<HTMLInputElement>document.getElementById("#picturename")).value;
-        // chosenName = name;
-        // console.log("name:" + chosenName);
-        let name = (<HTMLInputElement>document.getElementById("#picturename")).value;
-        document.getElementById("pictures").innerHTML = "You wrote: " + name;
-    }
-    
-    function savePicture(event): void {
+    function savePicture(): void {
         // let name: any;
         // (document.querySelector("#picturename") as HTMLInputElement).value = name;
-        // let name: any = (<HTMLInputElement>document.getElementById("#picturename")).value;
-        // let namepicture: string = event.currentTarget.value;
-        console.log("name:" + chosenName);
+        let name = (<HTMLInputElement>document.getElementById("#picturename")).value;
+        let namevalue = document.getElementsByClassName("name")[0].nodeValue;
+        console.log("name:" + namevalue);
     }
 
     
 
     function draganddrop(_event: MouseEvent): void {
         console.log("it is draganddropping");
-        //Funktion nacher so aufrufen
-    //     symbol.onmousedown = function(event): void {
-    //         // (1) prepare to moving: make absolute and on top by z-index
-    //         symbol.style.position = "absolute";
-    //         symbol.style.zIndex = 1000;
+        // Funktion nacher so aufrufen
+        // symbols.onmousedown = function(event): void {
+        //     // (1) prepare to moving: make absolute and on top by z-index
+        //     symbols.style.position = "absolute";
+        //     symbols.style.zIndex = 1000;
           
-    //         // move it out of any current parents directly into body
-    //         // to make it positioned relative to the body
-    //         document.body.append(symbol);
+        //     // move it out of any current parents directly into body
+        //     // to make it positioned relative to the body
+        //     document.body.append(symbols);
           
-    //         // centers the symbol at (pageX, pageY) coordinates
-    //         function moveAt(pageX, pageY): void {
-    //           symbol.style.left = pageX - symbol.offsetWidth / 2 + "px";
-    //           symbol.style.top = pageY - symbol.offsetHeight / 2 + "px";
-    //         }
+        //     // centers the symbols at (pageX, pageY) coordinates
+        //     function moveAt(pageX, pageY): void {
+        //       symbols.style.left = pageX - symbols.offsetWidth / 2 + "px";
+        //       symbols.style.top = pageY - symbols.offsetHeight / 2 + "px";
+        //     }
           
-    //         // move our absolutely positioned symbol under the pointer
-    //         moveAt(event.pageX, event.pageY);
+        //     // move our absolutely positioned symbols under the pointer
+        //     moveAt(event.pageX, event.pageY);
           
-    //         function onMouseMove(event): void {
-    //           moveAt(event.pageX, event.pageY);
-    //         }
+        //     function onMouseMove(event): void {
+        //       moveAt(event.pageX, event.pageY);
+        //     }
           
-    //         // (2) move the symbol on mousemove
-    //         document.addEventListener("mousemove", onMouseMove);
+        //     // (2) move the symbols on mousemove
+        //     document.addEventListener("mousemove", onMouseMove);
           
-    //         // (3) drop the symbol, remove unneeded handlers
-    //         symbol.onmouseup = function() {
-    //           document.removeEventListener("mousemove", onMouseMove);
-    //           symbol.onmouseup = null;
-    //         };
+        //     // (3) drop the symbols, remove unneeded handlers
+        //     symbols.onmouseup = function() {
+        //       document.removeEventListener("mousemove", onMouseMove);
+        //       symbols.onmouseup = null;
+        //     };
           
-    //       };
+        //   };
     }
 }
 
