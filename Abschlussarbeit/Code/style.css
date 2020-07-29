@@ -103,10 +103,20 @@ canvas {
     left: 20%;
 }
 
+.circlediv:hover{
+    border-style: solid;
+    border-color: black;
+}
+
 .triangleclass{
     width: 60%;
     position: relative;
     left: 20%;
+}
+
+.trianglediv:hover {
+    border-style: solid;
+    border-color: black;
 }
 
 .rectangleclass {
@@ -115,10 +125,20 @@ canvas {
     left: 20%;
 }
 
+.squarediv:hover{
+    border-style: solid;
+    border-color: black;
+}
+
 .flashclass {
     width: 60%;
     position: relative;
     left: 20%;
+}
+
+.flashdiv:hover{
+    border-style: solid;
+    border-color: black;
 }
 
 /* Farben */
