@@ -56,7 +56,7 @@ namespace MagicCanvas {
             // Matrix transformation
             crc2.save();
             crc2.translate(70, -10);
-            // um 180 Grad rotieren
+            // um 45 Grad rotieren
             crc2.rotate(Math.PI / 4);
         }
 

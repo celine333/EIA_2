@@ -44,7 +44,7 @@ var MagicCanvas;
             // Matrix transformation
             MagicCanvas.crc2.save();
             MagicCanvas.crc2.translate(70, -10);
-            // um 180 Grad rotieren
+            // um 45 Grad rotieren
             MagicCanvas.crc2.rotate(Math.PI / 4);
         };
         CanvasElement.prototype.draw = function () {

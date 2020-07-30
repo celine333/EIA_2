@@ -1,7 +1,7 @@
 var MagicCanvas;
 (function (MagicCanvas) {
     window.addEventListener("load", handleLoad);
-    MagicCanvas.canvas = document.querySelector("canvas");
+    var canvas = document.querySelector("canvas");
     // ausgwählte Farbe zum Füllen
     var selectedcolor = "#ff0000";
     var selectedform = "circle";
@@ -40,8 +40,8 @@ var MagicCanvas;
         document.querySelector("#rotate").addEventListener("click", setAnimation);
         // Element verschieben
         canvas.addEventListener("mousedown", draganddrop);
-        //zeit für neuladen
-        // window.setInterval(updatePosition, 20);
+        // zeit für neuladen
+        // window.setInterval(updateAnimation, 20);
     }
     function rulesVisibility() {
         console.log("show rules");
@@ -86,9 +86,6 @@ var MagicCanvas;
         if (selectedanimation == "rotate") {
             MagicCanvas.crc2.restore();
             element.rotate();
-        }
-        else if (selectedanimation == "position") {
-            element.move(1 / 50);
         }
         element.draw();
     }
@@ -173,24 +170,58 @@ var MagicCanvas;
     }
     function setAnimation(event) {
         var animationid = event.currentTarget.getAttribute("id");
-        var positiondiv = document.querySelector("#position");
-        var rotatediv = document.querySelector("#rotate");
+        // let positiondiv: HTMLDivElement = <HTMLDivElement>document.querySelector("#position");
+        // let rotatediv: HTMLDivElement = <HTMLDivElement>document.querySelector("#rotate");
         if (animationid == "position") {
             selectedanimation = "position";
-            positiondiv.style.border = "1px solid #ff0000";
-            rotatediv.style.border = "none";
+            // positiondiv.style.border = "1px solid #ff0000";
+            // rotatediv.style.border = "none";
         }
         if (animationid == "rotate") {
             selectedanimation = "rotate";
-            rotatediv.style.border = "1px solid #ff0000";
-            positiondiv.style.border = "none";
+            // rotatediv.style.border = "1px solid #ff0000";
+            // positiondiv.style.border = "none";
         }
         console.log(selectedanimation);
     }
+    function updateAnimation() {
+        console.log("bewege dich");
+        var element = new MagicCanvas.CanvasElement(selectedform, selectedcolor, selectedanimation);
+        if (selectedanimation == "position") {
+            for (var i = 0; i < symbols.length; i++) {
+                element.move(1 / 50);
+            }
+        }
+    }
+    // function animateElementsStart(): void {
+    //     let index: number;
+    //     let xpos: number;        
+    //     let ypos: number;   
+    //     let animationRunning: boolean = true;
+    //     for (; animationRunning;) {
+    //         if (symbols.length > 0) {
+    //             for (index = 0; index < symbols.length; index++) {
+    //                 xpos = symbols[index].position.x;
+    //                 ypos = symbols[index].position.y;                
+    //                 // Hier jetzt x und y verändern. Hier hast du ja bestimmt ein Beispiel ?!?
+    //                 xpos = xpos + 1;
+    //                 ypos = ypos + 1;                
+    //                 symbols[index].position.x = xpos;
+    //                 symbols[index].position.y = ypos;    
+    //                 symbols[index].draw();
+    //             }
+    //         }
+    //         else {
+    //             console.log("else");
+    //         }
+    //         // Eventuell kurz warten
+    //     }
+    // }
     function clearCanvas() {
         console.log("delete");
         var canvas = document.querySelector("canvas");
         MagicCanvas.crc2.clearRect(0, 0, canvas.width, canvas.height);
+        symbols = [];
     }
     function savePicture() {
         var name = document.getElementById("picturename").value;
@@ -200,40 +231,62 @@ var MagicCanvas;
         console.log("it is draganddropping");
         // Code aus dem Internet, funktioniert für normale html elemente?
         // muss noch umgeändert und angepasst werden
-        element.onmousedown = function (event) {
-            //     // (1) prepare to moving: make absolute and on top by z-index
-            //     element.style.position = "absolute";
-            //     element.style.zIndex = 1000;
-            //     // move it out of any current parents directly into body
-            //     // to make it positioned relative to the body
-            //     document.body.append(element);
-            //     // centers the element at (pageX, pageY) coordinates
-            //     function moveAt(pageX, pageY): void {
-            //       element.style.left = pageX - element.offsetWidth / 2 + "px";
-            //       element.style.top = pageY - element.offsetHeight / 2 + "px";
-            //     }
-            //     // move our absolutely positioned element under the pointer
-            //     moveAt(event.pageX, event.pageY);
-            //     function onMouseMove(event): void {
-            //       moveAt(event.pageX, event.pageY);
-            //     }
-            //     // (2) move the element on mousemove
-            //     document.addEventListener("mousemove", onMouseMove);
-            //     // (3) drop the element, remove unneeded handlers
-            //     element.onmouseup = function() {
-            //       document.removeEventListener("mousemove", onMouseMove);
-            //       symbols.onmouseup = null;
-            //     };
-            //   };
-        };
+        // element.onmousedown = function(event): void {
+        //     // (1) prepare to moving: make absolute and on top by z-index
+        //     element.style.position = "absolute";
+        //     element.style.zIndex = 1000;
+        //     // move it out of any current parents directly into body
+        //     // to make it positioned relative to the body
+        //     document.body.append(element);
+        //     // centers the element at (pageX, pageY) coordinates
+        //     function moveAt(pageX, pageY): void {
+        //       element.style.left = pageX - element.offsetWidth / 2 + "px";
+        //       element.style.top = pageY - element.offsetHeight / 2 + "px";
+        //     }
+        //     // move our absolutely positioned element under the pointer
+        //     moveAt(event.pageX, event.pageY);
+        //     function onMouseMove(event): void {
+        //       moveAt(event.pageX, event.pageY);
+        //     }
+        //     // (2) move the element on mousemove
+        //     document.addEventListener("mousemove", onMouseMove);
+        //     // (3) drop the element, remove unneeded handlers
+        //     element.onmouseup = function() {
+        //       document.removeEventListener("mousemove", onMouseMove);
+        //       symbols.onmouseup = null;
+        //     };
+        //   };
+        // Element muss draggable sein
+        // draggable: true;
+        // add cursor styling
+        // element.on("mouseover", function (): void {
+        //     document.body.style.cursor = "pointer";
+        // });
+        // element.on("mouseout", function (): void {
+        //     document.body.style.cursor = "default";
+        // });
+        var isDragging = false;
+        function handleMousedown(_event) {
+            // wo ist MausPosition (x,y)
+            isDragging = true;
+        }
+        function handleMouseUp(_event) {
+            // wo ist MausPosition (x,y)
+            isDragging = false;
+        }
+        function handleMouseOut(e) {
+            // wo ist MausPosition (x,y)
+            // Nutzer ist außerhalb von Canvas
+            isDragging = false;
+        }
+        function handleMouseMove(e) {
+            // wo ist MausPosition (x,y)
+            // if the drag flag is set, clear the canvas and draw the image
+            if (isDragging == true) {
+                //
+            }
+        }
     }
-    // Klasse für alle Canvas Elemente
-    // Main: alle Werte holen (Farbe, Form, Animationsform)
-    // die Infos werden mit new Canvaselement mit paramtern mitgegeben (müssen im Constructor 
-    // vorher auch mitgegeben werden)
-    // neues Element wird in ein Array gepusht --> alle Canvas Elmente
-    // dieses array läuft durch eine Dauerschleife (für alle die sich bewegen oder rotieren)
-    // Optional: alle Elemente hören sich auf zu bewegen während das neue ELement verschoben wird
 })(MagicCanvas || (MagicCanvas = {}));
 // Klasse für alle Canvas Elemente
 // Main: alle Werte holen (Farbe, Form, Animationsform)
