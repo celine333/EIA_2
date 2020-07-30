@@ -39,7 +39,7 @@ var MagicCanvas;
         document.querySelector("#position").addEventListener("click", setAnimation);
         document.querySelector("#rotate").addEventListener("click", setAnimation);
         // Element verschieben
-        // draganddrop();
+        canvas.addEventListener("mousedown", draganddrop);
         //zeit für neuladen
         // window.setInterval(updatePosition, 20);
     }
@@ -198,28 +198,29 @@ var MagicCanvas;
     }
     function draganddrop(_event) {
         console.log("it is draganddropping");
-        // Funktion nacher so aufrufen
+        // Code aus dem Internet, funktioniert für normale html elemente?
+        // muss noch umgeändert und angepasst werden
         // element.onmousedown = function(event): void {
         //     // (1) prepare to moving: make absolute and on top by z-index
-        //     symbols.style.position = "absolute";
-        //     symbols.style.zIndex = 1000;
+        //     element.style.position = "absolute";
+        //     element.style.zIndex = 1000;
         //     // move it out of any current parents directly into body
         //     // to make it positioned relative to the body
-        //     document.body.append(symbols);
-        //     // centers the symbols at (pageX, pageY) coordinates
+        //     document.body.append(element);
+        //     // centers the element at (pageX, pageY) coordinates
         //     function moveAt(pageX, pageY): void {
-        //       symbols.style.left = pageX - symbols.offsetWidth / 2 + "px";
-        //       symbols.style.top = pageY - symbols.offsetHeight / 2 + "px";
+        //       element.style.left = pageX - element.offsetWidth / 2 + "px";
+        //       element.style.top = pageY - element.offsetHeight / 2 + "px";
         //     }
-        //     // move our absolutely positioned symbols under the pointer
+        //     // move our absolutely positioned element under the pointer
         //     moveAt(event.pageX, event.pageY);
         //     function onMouseMove(event): void {
         //       moveAt(event.pageX, event.pageY);
         //     }
-        //     // (2) move the symbols on mousemove
+        //     // (2) move the element on mousemove
         //     document.addEventListener("mousemove", onMouseMove);
-        //     // (3) drop the symbols, remove unneeded handlers
-        //     symbols.onmouseup = function() {
+        //     // (3) drop the element, remove unneeded handlers
+        //     element.onmouseup = function() {
         //       document.removeEventListener("mousemove", onMouseMove);
         //       symbols.onmouseup = null;
         //     };
