@@ -41,6 +41,7 @@ canvas {
     position: absolute;
     top: 40%;
     left: 10%;
+    width: 50%;
     font-size: large;
 }
 
@@ -48,7 +49,7 @@ canvas {
     position: absolute;
     top: 2%;
     left: 1%;
-    background-color: steelblue;
+    background-color: #3d2e21;
     border: none;
     border-radius: 5px;
     padding: 0.5%;
@@ -56,24 +57,10 @@ canvas {
 }
 
 .rulesclass:hover {
+   background-color: #c59d48;
    border-style: solid;
    border-color: black;
 }
-
-/* Farbpalette */
-
-.wand {
-    position: absolute;
-    top: 5%;
-    left: 50%;
-}
-
-.palette{
-    position: relative;
-    left: 20%;
-    bottom: 20%;
-    }
-
 
 /* ausgewähltes Symbol + Farbe */
 
@@ -221,7 +208,7 @@ canvas {
 
 .positionclass {
     position: absolute;
-    background-color: slategray;
+    background-color: #3d2e21;
     padding: 0.5%;
     top: 85%; 
     left: 1%;
@@ -230,13 +217,14 @@ canvas {
 }
 
 .positionclass:hover {
+    background-color: #c59d48;
     border-style: solid;
     border-color: black;
 }
 
 .rotateclass {
     position: absolute;
-    background-color: slategray;
+    background-color: #3d2e21;
     top: 92%;
     left: 1%; 
     width: 4%;
@@ -247,6 +235,7 @@ canvas {
 }
 
 .rotateclass:hover {
+    background-color: #c59d48;
     border-style: solid;
     border-color: black;
 }
@@ -259,15 +248,53 @@ canvas {
     right: 32%;
     padding: 0.5%;
     border: none;
-    background-color: rgb(139, 186, 224);
+    background-color: #c59d48;
     border-radius: 5px;
     color: white;
 }
 
 .generateclass:hover {
+    background-color: #3d2e21;
     border-style: solid;
     border-color: black;
 }
+
+/* Animations Buttons */
+
+.startclass {
+    position: absolute;
+    top: 90%;
+    right: 66%;
+    padding: 0.5%;
+    border: none;
+    background-color: #c59d48;
+    border-radius: 5px;
+    color: white;
+}
+
+.startclass:hover{
+    background-color: #3d2e21;
+    border: solid;
+    border-color: black;
+}
+
+.stopclass {
+    position: absolute;
+    top: 90%;
+    right: 62%;
+    padding: 0.5%;
+    border: none;
+    background-color: #c59d48;
+    border-radius: 5px;
+    color: white;
+}
+
+.stopclass:hover{
+    background-color: #3d2e21;
+    border: solid;
+    border-color: black;
+}
+
 
 /* Größe des Canvas */
 
@@ -276,9 +303,22 @@ canvas {
     border-style: solid;
     border-color: grey;
     background-color: rgba(255, 255, 255, 0.6);
-    top: 60%;
+    top: 47%;
     right: 1%;
-    padding: 1%;
+    padding: 0.5%;
+    width: 12%;
+}
+
+/* Farbe des Canvas */
+
+.canvascolor {
+    position: absolute;
+    border-style: solid;
+    border-color: grey;
+    background-color: rgba(255, 255, 255, 0.6);
+    top: 75%;
+    right: 1%;
+    padding: 0.5%;
     width: 12%;
 }
 
@@ -288,7 +328,7 @@ canvas {
     position: absolute;
     top: 4%;
     right: 1%;
-    background-color: steelblue;
+    background-color: #3d2e21;
     border-radius: 5px;
     border: none;
     padding: 0.5%;
@@ -296,6 +336,7 @@ canvas {
 }
 
 .saveclass:hover {
+    background-color: #c59d48;
     border-style: solid;
     border-color: black;
 }
@@ -310,7 +351,7 @@ canvas {
 
 .deleteclass {
     position: absolute;
-    background-color: steelblue;
+    background-color: #3d2e21;
     top: 5%;
     right: 31%;
     border-radius: 5px;
@@ -320,6 +361,7 @@ canvas {
 }
 
 .deleteclass:hover {
+    background-color: #c59d48;
     border-style: solid;
     border-color: black;
 }
@@ -330,21 +372,12 @@ canvas {
     position: absolute;
     top: 12%;
     right: 1%;
-    padding: 1%;
+    padding: 0.5%;
     border-style: solid;
     border-color: grey;
     background-color: rgba(255, 255, 255, 0.6);
-    height: 40%;
+    height: 30%;
     width: 12%;
 }
 
-
-
-.footer {
-    position: absolute;
-    bottom: 1%;
-    right: 2%;
-    font-size: small;
-    color: white;
-}
 

@@ -3,14 +3,21 @@ namespace MagicCanvas {
     window.addEventListener("load", handleLoad);
 
     export let crc2: CanvasRenderingContext2D;
-    let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
+    export let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
 
     // ausgwählte Farbe zum Füllen
     let selectedcolor: string = "#ff0000";
     let selectedform: string = "circle";
     let selectedanimation: string = "position";
 
-    let symbols: CanvasElement[] = [];
+    export let symbols: CanvasElement[] = [];
+
+    let timeOut: any;
+
+    let animationRunning: boolean = false;
+    export let xpos: number;
+    export let ypos: number;
+    export let index: number;
 
 
     function handleLoad(_event: Event): void {
@@ -18,6 +25,11 @@ namespace MagicCanvas {
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
+
+        //Klick auf Hintergrundfarbe
+        document.querySelector("#white").addEventListener("click", setBackground);
+        document.querySelector("#black").addEventListener("click", setBackground);
+        document.querySelector("#beige").addEventListener("click", setBackground);
 
         // Klick auf Farbe
         document.querySelector("#red").addEventListener("click", setColor);
@@ -30,6 +42,10 @@ namespace MagicCanvas {
 
         // Generate
         document.querySelector("#generate").addEventListener("click", generateSymbols);
+
+        // Animationen
+        document.querySelector("#startanimation").addEventListener("click", animateElementsStart);
+        document.querySelector("#stopanimation").addEventListener("click", animateElementsStop);
 
         // Klick auf Canvas Größe
         document.querySelector("#standard").addEventListener("click", handleCanvasSize);
@@ -55,9 +71,6 @@ namespace MagicCanvas {
 
         // Element verschieben
         canvas.addEventListener("mousedown", draganddrop);
-
-        // zeit für neuladen
-        // window.setInterval(updateAnimation, 20);
     }
 
     function rulesVisibility(): void {
@@ -95,6 +108,29 @@ namespace MagicCanvas {
         if (largesize.checked == true) {
             canvas.setAttribute("style", "width: 600px");
             canvas.setAttribute("style", "height: 400px");
+        }
+    }
+
+    function setBackground(): void {
+
+        let white: HTMLInputElement = <HTMLInputElement>document.querySelector("#white");
+        let black: HTMLInputElement = <HTMLInputElement>document.querySelector("#black");
+        let beige: HTMLInputElement = <HTMLInputElement>document.querySelector("#beige");
+
+        if (white.checked == true) {
+            crc2.fillStyle = "#FFFFFF";
+            crc2.fill();
+            crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas. height);
+        }
+        if (black.checked == true) {
+            crc2.fillStyle = "#000000";
+            crc2.fill();
+            crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas. height);
+        }
+        if (beige.checked == true) {
+            crc2.fillStyle = "#FFE3BD";
+            crc2.fill();
+            crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas. height);
         }
     }
 
@@ -195,67 +231,79 @@ namespace MagicCanvas {
 
     function setAnimation(event): void {
         let animationid: string = event.currentTarget.getAttribute("id");
-        // let positiondiv: HTMLDivElement = <HTMLDivElement>document.querySelector("#position");
-        // let rotatediv: HTMLDivElement = <HTMLDivElement>document.querySelector("#rotate");
 
         if (animationid == "position") {
             selectedanimation = "position";
-            // positiondiv.style.border = "1px solid #ff0000";
-            // rotatediv.style.border = "none";
         }
         if (animationid == "rotate") {
             selectedanimation = "rotate";
-            // rotatediv.style.border = "1px solid #ff0000";
-            // positiondiv.style.border = "none";
         }
-
-        console.log(selectedanimation);
     }
 
-    function updateAnimation(): void {
-        console.log("bewege dich");
+    function animateElementsStop(): void {
+        animationRunning = false;
+        animateElements(animationRunning);
+        console.log("Stop");
+    }
+
+    function animateElementsStart(): void {
+        animationRunning = true;
+        animateElements(animationRunning);
+        console.log("Start");
+    }
+
+    function animateElements(state: boolean = false): void {
+        let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
         let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
 
-        if (selectedanimation == "position") {
-            for (let i: number = 0; i < symbols.length; i++) {
-                element.move(1 / 50);
+        if (state == false) {
+            clearTimeout(timeOut);
+        } else {
+            for (index = 0; index < symbols.length; index++) {
+                if (selectedanimation == "position") {
+                    // element.move();
+                    xpos = symbols[index].position.x;
+                    ypos = symbols[index].position.y;
+
+                    if (xpos > canvas.width)
+                        // -1 damit es sich in die entgegengesetze Richtung weiter bewegt
+                        symbols[index].directionx = -1;
+
+                    if (ypos > canvas.height)
+                        symbols[index].directiony = -1;
+
+                    if (xpos < 0)
+                        symbols[index].directionx = 1;
+
+                    if (ypos < 0)
+                        symbols[index].directiony = 1;
+
+                    xpos = xpos + symbols[index].directionx;
+                    ypos = ypos + symbols[index].directiony;
+
+                    // Kommentar einfügen
+                    symbols[index].position.x = xpos;
+                    symbols[index].position.y = ypos;
+
+                    // console.log("symbols[index].position.y: " + symbols[index].position.y.toString);
+                    // console.log("symbols[index].directiony " + symbols[index].directiony.toString);
+
+
+                    symbols[index].draw();
+                }
+                if (selectedanimation == "rotate") {
+                    element.rotate();
+                }
             }
+
+            // do something
+            timeOut = setTimeout(function (): void {
+                // Kommentar einfügen
+                // clearCanvas();
+                animateElements(animationRunning);
+            }, 25);
         }
-        
     }
-
-    // function animateElementsStart(): void {
-    //     let index: number;
-    //     let xpos: number;        
-    //     let ypos: number;   
-        
-    //     let animationRunning: boolean = true;
-
-    //     for (; animationRunning;) {
-    //         if (symbols.length > 0) {
-    //             for (index = 0; index < symbols.length; index++) {
-    //                 xpos = symbols[index].position.x;
-    //                 ypos = symbols[index].position.y;                
-
-    //                 // Hier jetzt x und y verändern. Hier hast du ja bestimmt ein Beispiel ?!?
-    //                 xpos = xpos + 1;
-    //                 ypos = ypos + 1;                
-
-    //                 symbols[index].position.x = xpos;
-    //                 symbols[index].position.y = ypos;    
-                    
-    //                 symbols[index].draw();
-    //             }
-    //         }
-    //         else {
-    //             console.log("else");
-    //         }
-
-
-    //         // Eventuell kurz warten
-
-    //     }
-    // }
 
     function clearCanvas(): void {
         console.log("delete");
@@ -320,31 +368,31 @@ namespace MagicCanvas {
         //     document.body.style.cursor = "default";
         // });
 
-        let isDragging: boolean = false;
+        // let isDragging: boolean = false;
 
-        function handleMousedown(_event: MouseEvent): void {
-            // wo ist MausPosition (x,y)
-            isDragging = true;
-        }
+        // function handleMousedown(_event: MouseEvent): void {
+        //     // wo ist MausPosition (x,y)
+        //     isDragging = true;
+        // }
 
-        function handleMouseUp(_event: MouseEvent): void {
-            // wo ist MausPosition (x,y)
-            isDragging = false;
-        }
+        // function handleMouseUp(_event: MouseEvent): void {
+        //     // wo ist MausPosition (x,y)
+        //     isDragging = false;
+        // }
 
-        function handleMouseOut(e) {
-            // wo ist MausPosition (x,y)
-            // Nutzer ist außerhalb von Canvas
-            isDragging = false;
-        }
+        // function handleMouseOut(e) {
+        //     // wo ist MausPosition (x,y)
+        //     // Nutzer ist außerhalb von Canvas
+        //     isDragging = false;
+        // }
 
-        function handleMouseMove(e) {
-            // wo ist MausPosition (x,y)
-            // if the drag flag is set, clear the canvas and draw the image
-            if (isDragging == true) {
-                //
-            }
-        }
+        // function handleMouseMove(e) {
+        //     // wo ist MausPosition (x,y)
+        //     // if the drag flag is set, clear the canvas and draw the image
+        //     if (isDragging == true) {
+        //         //
+        //     }
+        // }
     }
 }
 

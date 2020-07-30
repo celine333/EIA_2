@@ -17,15 +17,16 @@
         <button id="rules" class="rulesclass">rules</button>
         <div id="overlay" class="overlayclass">
             <div id="overlayText" class="overlaytextclass">
-                Welcome to hogwarts!
+                Welcome to Hogwarts!
                 <br>
-                Build your own magic canvas with the tools on the left side.
-                Choose a canvas size, a color, a symbol and one form of animation.
+                Build your own magic canvas with the tools on both sides.
+                Start by choosing a size and background color for your canvas.
+                You can then choose a color, a symbol and one form of animation, if you would like.
                 <br>
-                Then hit the generate button and your symbol will apear on the canvas.
-                You can do this as many times as you would like. 
+                Hit the generate button and your symbol will apear on the canvas.
+                You can also start and stop the animation by hitting the buttons underneath the canvas.
                 <br>
-                You can also clear your canvas with the delete button.
+                Hit the delete button to clear the entire canvas.
                 Enter a name for your finished picture and press "save" to save it.
                 <br>
                 You can find your saved pictures on the right side.
@@ -51,6 +52,20 @@
         <span id="position" class="positionclass">position</span>
         <span id="rotate" class="rotateclass">rotate</span>
         <button id="generate" class="generateclass">generate</button>
+        <button id="startanimation" class="startclass">start</button>
+        <button id="stopanimation" class="stopclass">stop</button>
+
+        <div class="canvascolor">
+            <h3>Background color</h3>
+                <input type="radio" name="canvascolor" value="white" id="white" checked>
+                <label for="white">white</label>
+                <br>
+                <input type="radio" name="canvascolor" value="black" id="black">
+                <label for="black">black</label>
+                <br>
+                <input type="radio" name="canvascolor" value="beige" id="beige">
+                <label for="beige">beige</label>
+        </div>
 
         <!--Rechte Seite-->
         <button id="delete" class="deleteclass">delete</button>
@@ -78,10 +93,7 @@
                 <label for="large">large</label>
         </div>
     </div>
+    <!-- In Zusammenarbeit mit Elena Mayer -->
 </body>
-
-<footer>
-  <p class="footer">In Zusammenarbeit mit Elena Mayer</p>
-</footer>
 
 </html>
