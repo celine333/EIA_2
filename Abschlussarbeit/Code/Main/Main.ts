@@ -231,7 +231,7 @@ namespace MagicCanvas {
 
         // Code aus dem Internet, funktioniert für normale html elemente?
         // muss noch umgeändert und angepasst werden
-        // element.onmousedown = function(event): void {
+        element.onmousedown = function(event): void {
         //     // (1) prepare to moving: make absolute and on top by z-index
         //     element.style.position = "absolute";
         //     element.style.zIndex = 1000;

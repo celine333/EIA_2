@@ -200,32 +200,40 @@ var MagicCanvas;
         console.log("it is draganddropping");
         // Code aus dem Internet, funktioniert für normale html elemente?
         // muss noch umgeändert und angepasst werden
-        // element.onmousedown = function(event): void {
-        //     // (1) prepare to moving: make absolute and on top by z-index
-        //     element.style.position = "absolute";
-        //     element.style.zIndex = 1000;
-        //     // move it out of any current parents directly into body
-        //     // to make it positioned relative to the body
-        //     document.body.append(element);
-        //     // centers the element at (pageX, pageY) coordinates
-        //     function moveAt(pageX, pageY): void {
-        //       element.style.left = pageX - element.offsetWidth / 2 + "px";
-        //       element.style.top = pageY - element.offsetHeight / 2 + "px";
-        //     }
-        //     // move our absolutely positioned element under the pointer
-        //     moveAt(event.pageX, event.pageY);
-        //     function onMouseMove(event): void {
-        //       moveAt(event.pageX, event.pageY);
-        //     }
-        //     // (2) move the element on mousemove
-        //     document.addEventListener("mousemove", onMouseMove);
-        //     // (3) drop the element, remove unneeded handlers
-        //     element.onmouseup = function() {
-        //       document.removeEventListener("mousemove", onMouseMove);
-        //       symbols.onmouseup = null;
-        //     };
-        //   };
+        element.onmousedown = function (event) {
+            //     // (1) prepare to moving: make absolute and on top by z-index
+            //     element.style.position = "absolute";
+            //     element.style.zIndex = 1000;
+            //     // move it out of any current parents directly into body
+            //     // to make it positioned relative to the body
+            //     document.body.append(element);
+            //     // centers the element at (pageX, pageY) coordinates
+            //     function moveAt(pageX, pageY): void {
+            //       element.style.left = pageX - element.offsetWidth / 2 + "px";
+            //       element.style.top = pageY - element.offsetHeight / 2 + "px";
+            //     }
+            //     // move our absolutely positioned element under the pointer
+            //     moveAt(event.pageX, event.pageY);
+            //     function onMouseMove(event): void {
+            //       moveAt(event.pageX, event.pageY);
+            //     }
+            //     // (2) move the element on mousemove
+            //     document.addEventListener("mousemove", onMouseMove);
+            //     // (3) drop the element, remove unneeded handlers
+            //     element.onmouseup = function() {
+            //       document.removeEventListener("mousemove", onMouseMove);
+            //       symbols.onmouseup = null;
+            //     };
+            //   };
+        };
     }
+    // Klasse für alle Canvas Elemente
+    // Main: alle Werte holen (Farbe, Form, Animationsform)
+    // die Infos werden mit new Canvaselement mit paramtern mitgegeben (müssen im Constructor 
+    // vorher auch mitgegeben werden)
+    // neues Element wird in ein Array gepusht --> alle Canvas Elmente
+    // dieses array läuft durch eine Dauerschleife (für alle die sich bewegen oder rotieren)
+    // Optional: alle Elemente hören sich auf zu bewegen während das neue ELement verschoben wird
 })(MagicCanvas || (MagicCanvas = {}));
 // Klasse für alle Canvas Elemente
 // Main: alle Werte holen (Farbe, Form, Animationsform)
