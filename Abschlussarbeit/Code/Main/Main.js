@@ -6,10 +6,6 @@ var MagicCanvas;
     var selectedform = "circle";
     var selectedanimation = "position";
     var symbols = [];
-    var chosenName;
-    // Ausprobieren
-    // let canvasheight: number;
-    // let canvaswidth: number;
     function handleLoad(_event) {
         var canvas = document.querySelector("canvas");
         if (!canvas)
@@ -43,6 +39,8 @@ var MagicCanvas;
         document.querySelector("#rotate").addEventListener("click", setAnimation);
         // Element verschieben
         // draganddrop();
+        // Update Move und Rotate Funktion
+        updateSymbols();
     }
     function rulesVisibility() {
         console.log("show rules");
@@ -82,13 +80,9 @@ var MagicCanvas;
     }
     function generateSymbols(_event) {
         console.log("generate Symbols");
-        // Bedingung: erst geklickt werden, wenn alles nötige ausgewählt wurde
         var element = new MagicCanvas.canvasElement(selectedform, selectedcolor, selectedanimation);
         symbols.push(element);
         element.draw();
-        var colordiv = document.querySelector("#colordiv");
-        colordiv.style.border = "0px solid #FFFFFF";
-        console.log("colordiv:" + colordiv.style.border);
     }
     function setColor(event) {
         // Element wird über das Event mit Hilfe der id geholt 
@@ -129,12 +123,10 @@ var MagicCanvas;
             green.style.border = "none";
             red.style.border = "none";
         }
-        // event.currentTarget.style.border = "1px solid #ff0000";
         console.log("Event:" + event.target.getAttribute("id"));
         console.log(selectedcolor);
     }
     function setForm(event) {
-        // console.log("hallo");
         var formid = event.currentTarget.getAttribute("id");
         // Formen divs
         var circle = document.querySelector("#circleicon");
@@ -173,11 +165,17 @@ var MagicCanvas;
     }
     function setAnimation(event) {
         var animationid = event.currentTarget.getAttribute("id");
+        var positiondiv = document.querySelector("#position");
+        var rotatediv = document.querySelector("#rotate");
         if (animationid == "position") {
             selectedanimation = "position";
+            positiondiv.style.border = "1px solid #ff0000";
+            rotatediv.style.border = "none";
         }
         if (animationid == "rotate") {
             selectedanimation = "rotate";
+            rotatediv.style.border = "1px solid #ff0000";
+            positiondiv.style.border = "none";
         }
         console.log(selectedanimation);
     }
@@ -189,6 +187,12 @@ var MagicCanvas;
     function savePicture() {
         var name = document.getElementById("picturename").value;
         console.log("name:" + name);
+    }
+    function updateSymbols() {
+        for (var i = 0; i < symbols.length; i++) {
+            // symbols.move(1 / 50);
+            console.log("alle Elemente laufen durch");
+        }
     }
     function draganddrop(_event) {
         console.log("it is draganddropping");

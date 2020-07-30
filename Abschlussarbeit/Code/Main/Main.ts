@@ -11,11 +11,7 @@ namespace MagicCanvas {
 
     let symbols: canvasElement[] = [];
 
-    let chosenName: string;
 
-    // Ausprobieren
-    // let canvasheight: number;
-    // let canvaswidth: number;
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
@@ -60,6 +56,9 @@ namespace MagicCanvas {
         // Element verschieben
         // draganddrop();
 
+        // Update Move und Rotate Funktion
+        updateSymbols();
+
     }
     
     function rulesVisibility(): void {
@@ -102,15 +101,10 @@ namespace MagicCanvas {
     
     function generateSymbols (_event: Event): void {
         console.log("generate Symbols");
-        // Bedingung: erst geklickt werden, wenn alles nötige ausgewählt wurde
 
         let element: canvasElement = new canvasElement(selectedform, selectedcolor, selectedanimation);
         symbols.push(element);
         element.draw(); 
-        
-        let colordiv: HTMLDivElement = <HTMLDivElement>document.querySelector("#colordiv");
-        colordiv.style.border = "0px solid #FFFFFF";
-        console.log("colordiv:" + colordiv.style.border);
     }
 
     function setColor(event): void {
@@ -152,14 +146,11 @@ namespace MagicCanvas {
             red.style.border = "none";
         }
         
-        // event.currentTarget.style.border = "1px solid #ff0000";
-        
         console.log("Event:" + event.target.getAttribute("id"));
         console.log(selectedcolor);
     }
 
     function setForm(event): void {
-        // console.log("hallo");
         let formid: string = event.currentTarget.getAttribute("id");
 
         // Formen divs
@@ -199,11 +190,18 @@ namespace MagicCanvas {
 
     function setAnimation(event): void {
         let animationid: string = event.currentTarget.getAttribute("id");
+        let positiondiv: HTMLDivElement = <HTMLDivElement>document.querySelector("#position");
+        let rotatediv: HTMLDivElement = <HTMLDivElement>document.querySelector("#rotate");
+
         if (animationid == "position") {
             selectedanimation = "position";
+            positiondiv.style.border = "1px solid #ff0000";
+            rotatediv.style.border = "none";
         }
         if (animationid == "rotate") {
             selectedanimation = "rotate";
+            rotatediv.style.border = "1px solid #ff0000";
+            positiondiv.style.border = "none";
         }
 
         console.log(selectedanimation);
@@ -218,6 +216,13 @@ namespace MagicCanvas {
     function savePicture(): void {
         let name: string = (<HTMLInputElement>document.getElementById("picturename")).value;
         console.log("name:" + name);
+    }
+
+    function updateSymbols(): void {
+        for (let i: number = 0; i < symbols.length; i++) {
+            // symbols.move(1 / 50);
+            console.log("alle Elemente laufen durch");
+        }
     }
 
     
