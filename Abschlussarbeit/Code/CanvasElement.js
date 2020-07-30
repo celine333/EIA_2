@@ -1,6 +1,7 @@
 var MagicCanvas;
 (function (MagicCanvas) {
     var canvasElement = /** @class */ (function () {
+        // public rotateangle: number;
         // ELement ist aktiv wenn es nicht mehr in der Mitte ist
         //     active: boolean;
         function canvasElement(_form, _color, _animation, _position) {
@@ -14,9 +15,6 @@ var MagicCanvas;
             this.selectedform = _form;
             this.selectedcolor = _color;
             this.selectedanimation = _animation;
-            // if (_selectedform)
-            //     crc2.fillStyle = _selectedcolor;
-            // crc2.fill();   
         }
         canvasElement.prototype.animate = function () {
             if (this.selectedanimation == "position")

@@ -41,6 +41,8 @@ var MagicCanvas;
         // Klick auf die verschiedenen Animationsformen
         document.querySelector("#position").addEventListener("click", setAnimation);
         document.querySelector("#rotate").addEventListener("click", setAnimation);
+        // Element verschieben
+        // draganddrop();
     }
     function rulesVisibility() {
         console.log("show rules");
@@ -54,11 +56,11 @@ var MagicCanvas;
     }
     function handleCanvasSize() {
         // Canvas sizes
+        var canvas = document.querySelector("canvas");
         var standardsize = document.querySelector("#standard");
         var smallsize = document.querySelector("#small");
         var mediumsize = document.querySelector("#medium");
         var largesize = document.querySelector("#large");
-        var canvas = document.querySelector("canvas");
         if (standardsize.checked == true) {
             canvas.setAttribute("style", "width: 500px");
             canvas.setAttribute("style", "height: 300px");
@@ -84,46 +86,88 @@ var MagicCanvas;
         var element = new MagicCanvas.canvasElement(selectedform, selectedcolor, selectedanimation);
         symbols.push(element);
         element.draw();
+        var colordiv = document.querySelector("#colordiv");
+        colordiv.style.border = "0px solid #FFFFFF";
+        console.log("colordiv:" + colordiv.style.border);
     }
     function setColor(event) {
         // Element wird über das Event mit Hilfe der id geholt 
         var actualid = event.target.getAttribute("id");
+        console.log("Event:" + event.target);
+        // Farben divs
+        var red = document.querySelector("#red");
+        var blue = document.querySelector("#blue");
+        var green = document.querySelector("#green");
+        var yellow = document.querySelector("#yellow");
         // wenn die id des childs zb red ist dann wird die farbe mit selectedcolor überschrieben
         if (actualid == "red") {
             selectedcolor = "#7F0909";
-            // colorred.style.border = "solid #FF0000";
+            red.style.border = "1px solid #ff0000";
+            blue.style.border = "none";
+            green.style.border = "none";
+            yellow.style.border = "none";
         }
         else if (actualid == "blue") {
             selectedcolor = "#000890";
+            blue.style.border = "1px solid #ff0000";
+            red.style.border = "none";
+            green.style.border = "none";
+            yellow.style.border = "none";
             // colorblue.style.border = "solid #FF0000";
         }
         else if (actualid == "green") {
             selectedcolor = "#0D6217";
+            green.style.border = "1px solid #ff0000";
+            blue.style.border = "none";
+            red.style.border = "none";
+            yellow.style.border = "none";
         }
         else if (actualid == "yellow") {
             selectedcolor = "#EEE117";
+            yellow.style.border = "1px solid #ff0000";
+            blue.style.border = "none";
+            green.style.border = "none";
+            red.style.border = "none";
         }
+        // event.currentTarget.style.border = "1px solid #ff0000";
         console.log("Event:" + event.target.getAttribute("id"));
         console.log(selectedcolor);
     }
     function setForm(event) {
         // console.log("hallo");
         var formid = event.currentTarget.getAttribute("id");
+        // Formen divs
+        var circle = document.querySelector("#circleicon");
+        var triangle = document.querySelector("#triangleicon");
+        var square = document.querySelector("#squareicon");
+        var flash = document.querySelector("#flashicon");
         if (formid == "circleicon") {
             selectedform = "circle";
-            console.log("rufe drawcircle auf");
+            circle.style.border = "1px solid #ff0000";
+            triangle.style.border = "none";
+            square.style.border = "none";
+            flash.style.border = "none";
         }
         else if (formid == "triangleicon") {
             selectedform = "triangle";
-            console.log("rufe drawtriangle auf");
+            triangle.style.border = "1px solid #ff0000";
+            circle.style.border = "none";
+            square.style.border = "none";
+            flash.style.border = "none";
         }
         else if (formid == "squareicon") {
             selectedform = "square";
-            console.log("rufe drawsquare auf");
+            square.style.border = "1px solid #ff0000";
+            flash.style.border = "none";
+            circle.style.border = "none";
+            triangle.style.border = "none";
         }
         else if (formid == "flashicon") {
             selectedform = "flash";
-            console.log("rufe drawflash auf");
+            flash.style.border = "1px solid #ff0000";
+            square.style.border = "none";
+            circle.style.border = "none";
+            triangle.style.border = "none";
         }
         console.log(selectedform);
     }
@@ -139,28 +183,17 @@ var MagicCanvas;
     }
     function clearCanvas() {
         console.log("delete");
-        // Array leeren
-        var index = MagicCanvas.canvasElement[length];
-        symbols.splice(index, 1);
-        // // Store the current transformation matrix
-        // crc2.save();
-        // // Use the identity matrix while clearing the canvas
-        // crc2.setTransform(1, 0, 0, 1, 0, 0);
-        // crc2.clearRect(0, 0, canvaswidth, canvasheight);
-        // // Restore the transform
-        // crc2.restore();
+        var canvas = document.querySelector("canvas");
+        MagicCanvas.crc2.clearRect(0, 0, canvas.width, canvas.height);
     }
     function savePicture() {
-        // let name: any;
-        // (document.querySelector("#picturename") as HTMLInputElement).value = name;
-        var name = document.getElementById("#picturename").value;
-        var namevalue = document.getElementsByClassName("name")[0].nodeValue;
-        console.log("name:" + namevalue);
+        var name = document.getElementById("picturename").value;
+        console.log("name:" + name);
     }
     function draganddrop(_event) {
         console.log("it is draganddropping");
         // Funktion nacher so aufrufen
-        // symbols.onmousedown = function(event): void {
+        // element.onmousedown = function(event): void {
         //     // (1) prepare to moving: make absolute and on top by z-index
         //     symbols.style.position = "absolute";
         //     symbols.style.zIndex = 1000;

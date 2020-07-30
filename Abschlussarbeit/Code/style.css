@@ -231,7 +231,7 @@ canvas {
 
 .positionclass:hover {
     border-style: solid;
-    border-color: red;
+    border-color: black;
 }
 
 .rotateclass {
@@ -248,7 +248,7 @@ canvas {
 
 .rotateclass:hover {
     border-style: solid;
-    border-color: red;
+    border-color: black;
 }
 
 /* Generier Button */

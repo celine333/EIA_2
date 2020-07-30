@@ -2,11 +2,10 @@ namespace MagicCanvas {
     export class canvasElement {
         public position: Vector;
         public velocity: Vector;
-        // public size: number;
         public selectedcolor: string;
         public selectedform: string;
-        // public rotateangle: number;
         public selectedanimation: string;
+        // public rotateangle: number;
         // ELement ist aktiv wenn es nicht mehr in der Mitte ist
     //     active: boolean;
 
@@ -24,10 +23,6 @@ namespace MagicCanvas {
             this.selectedform = _form;
             this.selectedcolor = _color;
             this.selectedanimation = _animation; 
-            // if (_selectedform)
-            //     crc2.fillStyle = _selectedcolor;
-            // crc2.fill();   
-            
         }
 
         public animate(): void {
