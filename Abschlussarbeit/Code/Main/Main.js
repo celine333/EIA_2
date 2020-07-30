@@ -83,14 +83,14 @@ var MagicCanvas;
         console.log("generate Symbols");
         var element = new MagicCanvas.CanvasElement(selectedform, selectedcolor, selectedanimation);
         symbols.push(element);
-        element.draw();
         if (selectedanimation == "rotate") {
+            MagicCanvas.crc2.restore();
             element.rotate();
         }
         else if (selectedanimation == "position") {
             element.move(1 / 50);
         }
-        console.log("rotate:" + selectedanimation);
+        element.draw();
     }
     function setColor(event) {
         // Element wird über das Event mit Hilfe der id geholt 

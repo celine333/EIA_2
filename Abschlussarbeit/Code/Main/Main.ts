@@ -103,16 +103,15 @@ namespace MagicCanvas {
 
         let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
         symbols.push(element);
-        element.draw();
 
         if (selectedanimation == "rotate") {
+            crc2.restore();
             element.rotate();
         } else if (selectedanimation == "position") {
             element.move(1 / 50);
         }
-        
 
-        console.log("rotate:" + selectedanimation);
+        element.draw();
     }
 
     function setColor(event): void {
