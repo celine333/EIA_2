@@ -1,6 +1,7 @@
 var MagicCanvas;
 (function (MagicCanvas) {
     window.addEventListener("load", handleLoad);
+    MagicCanvas.canvas = document.querySelector("canvas");
     // ausgwählte Farbe zum Füllen
     var selectedcolor = "#ff0000";
     var selectedform = "circle";
@@ -39,8 +40,8 @@ var MagicCanvas;
         document.querySelector("#rotate").addEventListener("click", setAnimation);
         // Element verschieben
         // draganddrop();
-        // Update Move und Rotate Funktion
-        updateSymbols();
+        //zeit für neuladen
+        // window.setInterval(updatePosition, 20);
     }
     function rulesVisibility() {
         console.log("show rules");
@@ -80,9 +81,16 @@ var MagicCanvas;
     }
     function generateSymbols(_event) {
         console.log("generate Symbols");
-        var element = new MagicCanvas.canvasElement(selectedform, selectedcolor, selectedanimation);
+        var element = new MagicCanvas.CanvasElement(selectedform, selectedcolor, selectedanimation);
         symbols.push(element);
         element.draw();
+        if (selectedanimation == "rotate") {
+            element.rotate();
+        }
+        else if (selectedanimation == "position") {
+            element.move(1 / 50);
+        }
+        console.log("rotate:" + selectedanimation);
     }
     function setColor(event) {
         // Element wird über das Event mit Hilfe der id geholt 
@@ -187,12 +195,6 @@ var MagicCanvas;
     function savePicture() {
         var name = document.getElementById("picturename").value;
         console.log("name:" + name);
-    }
-    function updateSymbols() {
-        for (var i = 0; i < symbols.length; i++) {
-            // symbols.move(1 / 50);
-            console.log("alle Elemente laufen durch");
-        }
     }
     function draganddrop(_event) {
         console.log("it is draganddropping");

@@ -1,5 +1,5 @@
 namespace MagicCanvas {
-    export class canvasElement {
+    export class CanvasElement {
         public position: Vector;
         public velocity: Vector;
         public selectedcolor: string;
@@ -53,7 +53,21 @@ namespace MagicCanvas {
         }
 
         public rotate(): void {
-            // noch bearbeiten
+            // Matrix transformation
+            // crc2.save();
+            crc2.translate(70, -10);
+            // um 180 Grad rotieren
+            crc2.rotate(Math.PI / 2);
+            // crc2.save();
+            // crc2.restore();
+           
+    
+            // crc2.translate(-50, -50);
+
+            // transalte crc2 to center of canvas
+            // let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
+            // crc2.translate(canvas.width / 2, canvas.height / 2);
+            // crc2.rotate(Math.PI / 2);
         }
 
         public draw(): void {

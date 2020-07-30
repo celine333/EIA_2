@@ -3,14 +3,14 @@ namespace MagicCanvas {
     window.addEventListener("load", handleLoad);
 
     export let crc2: CanvasRenderingContext2D;
+    export let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
 
     // ausgwählte Farbe zum Füllen
     let selectedcolor: string = "#ff0000";
     let selectedform: string = "circle";
     let selectedanimation: string = "position";
 
-    let symbols: canvasElement[] = [];
-
+    let symbols: CanvasElement[] = [];
 
 
     function handleLoad(_event: Event): void {
@@ -56,9 +56,8 @@ namespace MagicCanvas {
         // Element verschieben
         // draganddrop();
 
-        // Update Move und Rotate Funktion
-        updateSymbols();
-
+        //zeit für neuladen
+        // window.setInterval(updatePosition, 20);
     }
     
     function rulesVisibility(): void {
@@ -102,9 +101,18 @@ namespace MagicCanvas {
     function generateSymbols (_event: Event): void {
         console.log("generate Symbols");
 
-        let element: canvasElement = new canvasElement(selectedform, selectedcolor, selectedanimation);
+        let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
         symbols.push(element);
-        element.draw(); 
+        element.draw();
+
+        if (selectedanimation == "rotate") {
+            element.rotate();
+        } else if (selectedanimation == "position") {
+            element.move(1 / 50);
+        }
+        
+
+        console.log("rotate:" + selectedanimation);
     }
 
     function setColor(event): void {
@@ -216,13 +224,6 @@ namespace MagicCanvas {
     function savePicture(): void {
         let name: string = (<HTMLInputElement>document.getElementById("picturename")).value;
         console.log("name:" + name);
-    }
-
-    function updateSymbols(): void {
-        for (let i: number = 0; i < symbols.length; i++) {
-            // symbols.move(1 / 50);
-            console.log("alle Elemente laufen durch");
-        }
     }
 
     

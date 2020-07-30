@@ -1,10 +1,10 @@
 var MagicCanvas;
 (function (MagicCanvas) {
-    var canvasElement = /** @class */ (function () {
+    var CanvasElement = /** @class */ (function () {
         // public rotateangle: number;
         // ELement ist aktiv wenn es nicht mehr in der Mitte ist
         //     active: boolean;
-        function canvasElement(_form, _color, _animation, _position) {
+        function CanvasElement(_form, _color, _animation, _position) {
             // super(_position);
             if (_position)
                 this.position = _position;
@@ -16,13 +16,13 @@ var MagicCanvas;
             this.selectedcolor = _color;
             this.selectedanimation = _animation;
         }
-        canvasElement.prototype.animate = function () {
+        CanvasElement.prototype.animate = function () {
             if (this.selectedanimation == "position")
                 this.move(20);
             else if (this.selectedanimation == "rotate")
                 this.rotate();
         };
-        canvasElement.prototype.move = function (_timeslice) {
+        CanvasElement.prototype.move = function (_timeslice) {
             // console.log("Moveable move");
             var offset = this.velocity.copy();
             offset.scale(_timeslice);
@@ -40,10 +40,21 @@ var MagicCanvas;
                 this.position.y -= MagicCanvas.crc2.canvas.height;
             }
         };
-        canvasElement.prototype.rotate = function () {
-            // noch bearbeiten
+        CanvasElement.prototype.rotate = function () {
+            // Matrix transformation
+            // crc2.save();
+            MagicCanvas.crc2.translate(70, -10);
+            // um 180 Grad rotieren
+            MagicCanvas.crc2.rotate(Math.PI / 2);
+            // crc2.save();
+            // crc2.restore();
+            // crc2.translate(-50, -50);
+            // transalte crc2 to center of canvas
+            // let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
+            // crc2.translate(canvas.width / 2, canvas.height / 2);
+            // crc2.rotate(Math.PI / 2);
         };
-        canvasElement.prototype.draw = function () {
+        CanvasElement.prototype.draw = function () {
             if (this.selectedform == "circle")
                 this.drawCircle();
             else if (this.selectedform == "square")
@@ -53,7 +64,7 @@ var MagicCanvas;
             else if (this.selectedform == "flash")
                 this.drawFlash();
         };
-        canvasElement.prototype.drawCircle = function () {
+        CanvasElement.prototype.drawCircle = function () {
             var r = 4;
             MagicCanvas.crc2.save();
             MagicCanvas.crc2.translate(40, 40);
@@ -71,7 +82,7 @@ var MagicCanvas;
             MagicCanvas.crc2.fillStyle = this.selectedcolor;
             MagicCanvas.crc2.fill();
         };
-        canvasElement.prototype.drawTriangle = function () {
+        CanvasElement.prototype.drawTriangle = function () {
             MagicCanvas.crc2.beginPath();
             MagicCanvas.crc2.moveTo(70, 70);
             MagicCanvas.crc2.lineTo(10, 70);
@@ -84,7 +95,7 @@ var MagicCanvas;
             MagicCanvas.crc2.fillStyle = this.selectedcolor;
             MagicCanvas.crc2.fill();
         };
-        canvasElement.prototype.drawSquare = function () {
+        CanvasElement.prototype.drawSquare = function () {
             MagicCanvas.crc2.beginPath();
             MagicCanvas.crc2.rect(10, 10, 55, 40);
             // Linienfarbe
@@ -94,7 +105,7 @@ var MagicCanvas;
             MagicCanvas.crc2.fillStyle = this.selectedcolor;
             MagicCanvas.crc2.fill();
         };
-        canvasElement.prototype.drawFlash = function () {
+        CanvasElement.prototype.drawFlash = function () {
             MagicCanvas.crc2.beginPath();
             MagicCanvas.crc2.translate(40, 40);
             MagicCanvas.crc2.moveTo(0, 0);
@@ -113,8 +124,8 @@ var MagicCanvas;
             MagicCanvas.crc2.fillStyle = this.selectedcolor;
             MagicCanvas.crc2.fill();
         };
-        return canvasElement;
+        return CanvasElement;
     }());
-    MagicCanvas.canvasElement = canvasElement;
+    MagicCanvas.CanvasElement = CanvasElement;
 })(MagicCanvas || (MagicCanvas = {}));
 //# sourceMappingURL=CanvasElement.js.map
