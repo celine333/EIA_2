@@ -216,7 +216,6 @@ var MagicCanvas;
     }
     function animateElements(state) {
         if (state === void 0) { state = false; }
-        var canvas = document.querySelector("canvas");
         var element = new MagicCanvas.CanvasElement(selectedform, selectedcolor, selectedanimation);
         if (state == false) {
             clearTimeout(timeOut);
@@ -224,26 +223,7 @@ var MagicCanvas;
         else {
             for (MagicCanvas.index = 0; MagicCanvas.index < MagicCanvas.symbols.length; MagicCanvas.index++) {
                 if (selectedanimation == "position") {
-                    // element.move();
-                    MagicCanvas.xpos = MagicCanvas.symbols[MagicCanvas.index].position.x;
-                    MagicCanvas.ypos = MagicCanvas.symbols[MagicCanvas.index].position.y;
-                    if (MagicCanvas.xpos > canvas.width)
-                        // -1 damit es sich in die entgegengesetze Richtung weiter bewegt
-                        MagicCanvas.symbols[MagicCanvas.index].directionx = -1;
-                    if (MagicCanvas.ypos > canvas.height)
-                        MagicCanvas.symbols[MagicCanvas.index].directiony = -1;
-                    if (MagicCanvas.xpos < 0)
-                        MagicCanvas.symbols[MagicCanvas.index].directionx = 1;
-                    if (MagicCanvas.ypos < 0)
-                        MagicCanvas.symbols[MagicCanvas.index].directiony = 1;
-                    MagicCanvas.xpos = MagicCanvas.xpos + MagicCanvas.symbols[MagicCanvas.index].directionx;
-                    MagicCanvas.ypos = MagicCanvas.ypos + MagicCanvas.symbols[MagicCanvas.index].directiony;
-                    // Kommentar einfügen
-                    MagicCanvas.symbols[MagicCanvas.index].position.x = MagicCanvas.xpos;
-                    MagicCanvas.symbols[MagicCanvas.index].position.y = MagicCanvas.ypos;
-                    // console.log("symbols[index].position.y: " + symbols[index].position.y.toString);
-                    // console.log("symbols[index].directiony " + symbols[index].directiony.toString);
-                    MagicCanvas.symbols[MagicCanvas.index].draw();
+                    element.move();
                 }
                 if (selectedanimation == "rotate") {
                     element.rotate();

@@ -25,25 +25,25 @@ var MagicCanvas;
                 this.rotate();
         };
         CanvasElement.prototype.move = function () {
-            console.log("hallo");
-            // xpos = symbols[index].position.x;
-            // ypos = symbols[index].position.y;
-            // if (xpos > canvas.width)
-            //     // -1 damit es sich in die entgegengesetze Richtung weiter bewegt
-            //     symbols[index].directionx = -1;
-            // if (ypos > canvas.height)
-            //     symbols[index].directiony = -1;
-            // if (xpos < 0)
-            //     symbols[index].directionx = 1;
-            // if (ypos < 0)
-            //     symbols[index].directiony = 1;
-            // xpos = xpos + symbols[index].directionx;
-            // ypos = ypos + symbols[index].directiony;
-            // symbols[index].position.x = xpos;
-            // symbols[index].position.y = ypos;
+            var canvas = document.querySelector("canvas");
+            MagicCanvas.xpos = MagicCanvas.symbols[MagicCanvas.index].position.x;
+            MagicCanvas.ypos = MagicCanvas.symbols[MagicCanvas.index].position.y;
+            if (MagicCanvas.xpos > canvas.width)
+                // -1 damit es sich in die entgegengesetze Richtung weiter bewegt
+                MagicCanvas.symbols[MagicCanvas.index].directionx = -1;
+            if (MagicCanvas.ypos > canvas.height)
+                MagicCanvas.symbols[MagicCanvas.index].directiony = -1;
+            if (MagicCanvas.xpos < 0)
+                MagicCanvas.symbols[MagicCanvas.index].directionx = 1;
+            if (MagicCanvas.ypos < 0)
+                MagicCanvas.symbols[MagicCanvas.index].directiony = 1;
+            MagicCanvas.xpos = MagicCanvas.xpos + MagicCanvas.symbols[MagicCanvas.index].directionx;
+            MagicCanvas.ypos = MagicCanvas.ypos + MagicCanvas.symbols[MagicCanvas.index].directiony;
+            MagicCanvas.symbols[MagicCanvas.index].position.x = MagicCanvas.xpos;
+            MagicCanvas.symbols[MagicCanvas.index].position.y = MagicCanvas.ypos;
             // console.log("symbols[index].position.y: " + symbols[index].position.y.toString);
             // console.log("symbols[index].directiony " + symbols[index].directiony.toString);
-            // symbols[index].draw();
+            MagicCanvas.symbols[MagicCanvas.index].draw();
         };
         CanvasElement.prototype.rotate = function () {
             // Matrix transformation
