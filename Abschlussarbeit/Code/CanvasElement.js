@@ -5,7 +5,7 @@ var MagicCanvas;
         //     active: boolean;
         function CanvasElement(_form, _color, _animation, _position) {
             // super(_position);
-            // public rotateangle: number = Math.PI / 4;
+            this.rotateangle = Math.PI / 4;
             this.directionx = 1;
             this.directiony = 1;
             if (_position)
@@ -50,8 +50,12 @@ var MagicCanvas;
             MagicCanvas.crc2.save();
             MagicCanvas.crc2.translate(70, -10);
             // um 45 Grad rotieren
-            MagicCanvas.crc2.rotate(Math.PI / 4);
+            for (MagicCanvas.index = 0; MagicCanvas.index < MagicCanvas.symbols.length; MagicCanvas.index++) {
+                MagicCanvas.crc2.rotate(Math.PI / 4);
+                MagicCanvas.symbols[MagicCanvas.index].draw();
+            }
             // Nullpunkt auf die Mitte des Canvas
+            // let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
             // crc2.translate(canvas.width / 2, canvas.height / 2);    
             // crc2.rotate(this.rotateangle);
             // crc2.restore();   

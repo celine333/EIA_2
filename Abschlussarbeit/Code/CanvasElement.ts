@@ -5,7 +5,7 @@ namespace MagicCanvas {
         public selectedcolor: string;
         public selectedform: string;
         public selectedanimation: string;
-        // public rotateangle: number = Math.PI / 4;
+        public rotateangle: number = Math.PI / 4;
         public directionx: number = 1;
         public directiony: number = 1;
         // ELement ist aktiv wenn es nicht mehr in der Mitte ist
@@ -70,9 +70,13 @@ namespace MagicCanvas {
             crc2.save();
             crc2.translate(70, -10);
             // um 45 Grad rotieren
-            crc2.rotate(Math.PI / 4);
+            for (index = 0; index < symbols.length; index++) {
+                crc2.rotate(Math.PI / 4);
+                symbols[index].draw();
+            }
 
             // Nullpunkt auf die Mitte des Canvas
+            // let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
             // crc2.translate(canvas.width / 2, canvas.height / 2);    
             // crc2.rotate(this.rotateangle);
             // crc2.restore();   

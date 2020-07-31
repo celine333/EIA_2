@@ -263,7 +263,7 @@ namespace MagicCanvas {
                     element.move();
                 }
                 if (selectedanimation == "rotate") {
-                    element.rotate();
+                        element.rotate();
                 }
             }
 
