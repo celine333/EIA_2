@@ -28,9 +28,6 @@ namespace MagicCanvas {
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-
-        let response: Response = await fetch("Data.json");
-        let offer: string = await response.text();
         
         //Klick auf Hintergrundfarbe
         document.querySelector("#white").addEventListener("click", setBackground);
@@ -88,7 +85,9 @@ namespace MagicCanvas {
         let data: string = JSON.stringify(symbols);
         
         let query: URLSearchParams = new URLSearchParams(<any>data);
-        let response: Response = await fetch("index.html?" + query.toString());
+        let response: Response = await fetch("index.html?" + name + "&" + query.toString());
+        let responseText: string = await response.text();
+        console.log(responseText);
         alert("Picture saved!");
     }
 

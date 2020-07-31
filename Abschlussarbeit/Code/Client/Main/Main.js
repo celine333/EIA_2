@@ -48,63 +48,54 @@ var MagicCanvas;
     var animationRunning = false;
     function handleLoad(_event) {
         return __awaiter(this, void 0, void 0, function () {
-            var canvas, response, offer;
+            var canvas;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        canvas = document.querySelector("canvas");
-                        if (!canvas)
-                            return [2 /*return*/];
-                        MagicCanvas.crc2 = canvas.getContext("2d");
-                        return [4 /*yield*/, fetch("Data.json")];
-                    case 1:
-                        response = _a.sent();
-                        return [4 /*yield*/, response.text()];
-                    case 2:
-                        offer = _a.sent();
-                        //Klick auf Hintergrundfarbe
-                        document.querySelector("#white").addEventListener("click", setBackground);
-                        document.querySelector("#black").addEventListener("click", setBackground);
-                        document.querySelector("#beige").addEventListener("click", setBackground);
-                        // Klick auf Farbe
-                        document.querySelector("#red").addEventListener("click", setColor);
-                        document.querySelector("#blue").addEventListener("click", setColor);
-                        document.querySelector("#green").addEventListener("click", setColor);
-                        document.querySelector("#yellow").addEventListener("click", setColor);
-                        // Klick auf Regel Button
-                        document.querySelector("#rules").addEventListener("click", rulesVisibility);
-                        // Generate
-                        document.querySelector("#generate").addEventListener("click", generateSymbols);
-                        // Animationen
-                        document.querySelector("#startanimation").addEventListener("click", animateElementsStart);
-                        document.querySelector("#stopanimation").addEventListener("click", animateElementsStop);
-                        // Klick auf Canvas Größe
-                        document.querySelector("#standard").addEventListener("click", handleCanvasSize);
-                        document.querySelector("#small").addEventListener("click", handleCanvasSize);
-                        document.querySelector("#medium").addEventListener("click", handleCanvasSize);
-                        document.querySelector("#large").addEventListener("click", handleCanvasSize);
-                        // Delete Button, um den Canvas zu säubern
-                        document.querySelector("#delete").addEventListener("click", clearCanvas);
-                        // Name + Bild speichern
-                        document.querySelector("#save").addEventListener("click", savePicture);
-                        // Klick auf die verschiedenen Form Icons
-                        document.querySelector("#circleicon").addEventListener("click", setForm);
-                        document.querySelector("#triangleicon").addEventListener("click", setForm);
-                        document.querySelector("#squareicon").addEventListener("click", setForm);
-                        document.querySelector("#flashicon").addEventListener("click", setForm);
-                        // Klick auf die verschiedenen Animationsformen
-                        document.querySelector("#position").addEventListener("click", setAnimation);
-                        document.querySelector("#rotate").addEventListener("click", setAnimation);
-                        // Element verschieben
-                        canvas.addEventListener("mousedown", draganddrop);
-                        return [2 /*return*/];
-                }
+                canvas = document.querySelector("canvas");
+                if (!canvas)
+                    return [2 /*return*/];
+                MagicCanvas.crc2 = canvas.getContext("2d");
+                //Klick auf Hintergrundfarbe
+                document.querySelector("#white").addEventListener("click", setBackground);
+                document.querySelector("#black").addEventListener("click", setBackground);
+                document.querySelector("#beige").addEventListener("click", setBackground);
+                // Klick auf Farbe
+                document.querySelector("#red").addEventListener("click", setColor);
+                document.querySelector("#blue").addEventListener("click", setColor);
+                document.querySelector("#green").addEventListener("click", setColor);
+                document.querySelector("#yellow").addEventListener("click", setColor);
+                // Klick auf Regel Button
+                document.querySelector("#rules").addEventListener("click", rulesVisibility);
+                // Generate
+                document.querySelector("#generate").addEventListener("click", generateSymbols);
+                // Animationen
+                document.querySelector("#startanimation").addEventListener("click", animateElementsStart);
+                document.querySelector("#stopanimation").addEventListener("click", animateElementsStop);
+                // Klick auf Canvas Größe
+                document.querySelector("#standard").addEventListener("click", handleCanvasSize);
+                document.querySelector("#small").addEventListener("click", handleCanvasSize);
+                document.querySelector("#medium").addEventListener("click", handleCanvasSize);
+                document.querySelector("#large").addEventListener("click", handleCanvasSize);
+                // Delete Button, um den Canvas zu säubern
+                document.querySelector("#delete").addEventListener("click", clearCanvas);
+                // Name + Bild speichern
+                document.querySelector("#save").addEventListener("click", savePicture);
+                // Klick auf die verschiedenen Form Icons
+                document.querySelector("#circleicon").addEventListener("click", setForm);
+                document.querySelector("#triangleicon").addEventListener("click", setForm);
+                document.querySelector("#squareicon").addEventListener("click", setForm);
+                document.querySelector("#flashicon").addEventListener("click", setForm);
+                // Klick auf die verschiedenen Animationsformen
+                document.querySelector("#position").addEventListener("click", setAnimation);
+                document.querySelector("#rotate").addEventListener("click", setAnimation);
+                // Element verschieben
+                canvas.addEventListener("mousedown", draganddrop);
+                return [2 /*return*/];
             });
         });
     }
     function savePicture(_event) {
         return __awaiter(this, void 0, void 0, function () {
-            var name, data, query, response;
+            var name, data, query, response, responseText;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -112,9 +103,13 @@ var MagicCanvas;
                         console.log("name:" + name);
                         data = JSON.stringify(MagicCanvas.symbols);
                         query = new URLSearchParams(data);
-                        return [4 /*yield*/, fetch("index.html?" + query.toString())];
+                        return [4 /*yield*/, fetch("index.html?" + name + "&" + query.toString())];
                     case 1:
                         response = _a.sent();
+                        return [4 /*yield*/, response.text()];
+                    case 2:
+                        responseText = _a.sent();
+                        console.log(responseText);
                         alert("Picture saved!");
                         return [2 /*return*/];
                 }
