@@ -5,12 +5,15 @@ namespace MagicCanvas {
     export let crc2: CanvasRenderingContext2D;
     export let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
 
+    let appurl: string = "https://magiccanvas3.herokuapp.com/";
+
     // ausgwählte Farbe zum Füllen
     let selectedcolor: string = "#ff0000";
     let selectedform: string = "circle";
     let selectedanimation: string = "position";
 
     export let symbols: CanvasElement[] = [];
+    
 
     let timeOut: any;
 
@@ -26,6 +29,9 @@ namespace MagicCanvas {
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
+        let response: Response = await fetch("Data.json");
+        let offer: string = await response.text();
+        
         //Klick auf Hintergrundfarbe
         document.querySelector("#white").addEventListener("click", setBackground);
         document.querySelector("#black").addEventListener("click", setBackground);
@@ -71,6 +77,19 @@ namespace MagicCanvas {
 
         // Element verschieben
         canvas.addEventListener("mousedown", draganddrop);
+    }
+
+    async function savePicture(_event: Event): Promise<void> {
+        // eingetragener Name des Nutzers
+        let name: string = (<HTMLInputElement>document.getElementById("picturename")).value;
+        console.log("name:" + name);
+
+        // let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
+        let data: string = JSON.stringify(symbols);
+        
+        let query: URLSearchParams = new URLSearchParams(<any>data);
+        let response: Response = await fetch("index.html?" + query.toString());
+        alert("Picture saved!");
     }
 
     function rulesVisibility(): void {
@@ -281,11 +300,6 @@ namespace MagicCanvas {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
         crc2.clearRect(0, 0, canvas.width, canvas.height);
         symbols = [];
-    }
-
-    function savePicture(): void {
-        let name: string = (<HTMLInputElement>document.getElementById("picturename")).value;
-        console.log("name:" + name);
     }
 
 
