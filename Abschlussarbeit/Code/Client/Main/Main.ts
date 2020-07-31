@@ -20,7 +20,7 @@ namespace MagicCanvas {
     export let index: number;
 
 
-    function handleLoad(_event: Event): void {
+    async function handleLoad(_event: Event): Promise<void> {
         let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
         if (!canvas)
             return;
