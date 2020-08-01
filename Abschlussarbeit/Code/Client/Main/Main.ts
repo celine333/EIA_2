@@ -101,7 +101,7 @@ namespace MagicCanvas {
         //let query: DataStructure = {name: nameSaved, data: datasymbols};
 
       
-        let response: Response = await fetch(appurl + "?" + "action#=insert&name=" + nameSaved + "&data=" + datasymbols);
+        let response: Response = await fetch(appurl + "?" + "action=insert&name=" + nameSaved + "&data=" + datasymbols);
         let responseText: string = await response.text();
         console.log(responseText);
         alert("Picture saved!");

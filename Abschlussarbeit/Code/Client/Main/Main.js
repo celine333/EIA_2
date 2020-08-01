@@ -109,7 +109,7 @@ var MagicCanvas;
                         nameSaved = document.getElementById("picturename").value;
                         console.log("name:" + nameSaved);
                         datasymbols = JSON.stringify(MagicCanvas.symbols);
-                        return [4 /*yield*/, fetch(appurl + "?" + "action#=insert&name=" + nameSaved + "&data=" + datasymbols)];
+                        return [4 /*yield*/, fetch(appurl + "?" + "action=insert&name=" + nameSaved + "&data=" + datasymbols)];
                     case 1:
                         response = _a.sent();
                         return [4 /*yield*/, response.text()];
