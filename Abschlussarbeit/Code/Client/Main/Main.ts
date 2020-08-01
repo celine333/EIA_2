@@ -7,6 +7,12 @@ namespace MagicCanvas {
 
     let appurl: string = "https://magiccanvas3.herokuapp.com/";
 
+    // Interface für Daten Übertragung
+    interface DataStructure {
+        name: string;
+        data: string;
+    }
+
     // ausgwählte Farbe zum Füllen
     let selectedcolor: string = "#ff0000";
     let selectedform: string = "circle";
@@ -91,9 +97,13 @@ namespace MagicCanvas {
 
         let data: string = JSON.stringify(symbols);
         
-        let query: URLSearchParams = new URLSearchParams(<any>data);
-        console.log("server path:" + appurl + "?" + "insert&" + data);
-        let response: Response = await fetch(appurl + "?" + "insert&" + data);
+        // let query: URLSearchParams = new URLSearchParams(<any>data);
+        let query: DataStructure;
+        query.name = name;
+        query.data = data;
+
+        console.log("server path:" + appurl + "?" + "insert&" + query);
+        let response: Response = await fetch(appurl + "?" + "insert&" + query);
         let responseText: string = await response.text();
         console.log(responseText);
         alert("Picture saved!");
