@@ -89,11 +89,10 @@ namespace MagicCanvas {
         let name: string = (<HTMLInputElement>document.getElementById("picturename")).value;
         console.log("name:" + name);
 
-        // let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
         let data: string = JSON.stringify(symbols);
         
         let query: URLSearchParams = new URLSearchParams(<any>data);
-        let response: Response = await fetch(appurl + "?" + "insert&" + query.toString());
+        let response: Response = await fetch(appurl + "?" + "insert&" + data);
         let responseText: string = await response.text();
         console.log(responseText);
         alert("Picture saved!");
