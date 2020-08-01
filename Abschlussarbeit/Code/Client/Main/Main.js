@@ -38,7 +38,7 @@ var MagicCanvas;
 (function (MagicCanvas) {
     window.addEventListener("load", handleLoad);
     MagicCanvas.canvas = document.querySelector("canvas");
-    var appurl = "https://magiccanvas3.herokuapp.com/";
+    var appurl = "https://magiccanvas3.herokuapp.com/?name=hallo";
     // ausgwählte Farbe zum Füllen
     var selectedcolor = "#ff0000";
     var selectedform = "circle";
@@ -93,9 +93,9 @@ var MagicCanvas;
                 document.querySelector("#position").addEventListener("click", setAnimation);
                 document.querySelector("#rotate").addEventListener("click", setAnimation);
                 // Element verschieben
-                canvas.addEventListener("mousedown", function (e) { startMove(canvas, e); });
-                canvas.addEventListener("mousemove", function (e) { nowMove(canvas, e); });
-                canvas.addEventListener("mouseup", function (e) { stopMove(canvas, e); });
+                canvas.addEventListener("mousedown", function (event) { startMove(canvas, event); });
+                canvas.addEventListener("mousemove", function (event) { nowMove(canvas, event); });
+                canvas.addEventListener("mouseup", function (event) { stopMove(canvas, event); });
                 return [2 /*return*/];
             });
         });
@@ -110,7 +110,7 @@ var MagicCanvas;
                         console.log("name:" + name);
                         data = JSON.stringify(MagicCanvas.symbols);
                         query = new URLSearchParams(data);
-                        return [4 /*yield*/, fetch("index.html?" + name + "&" + query.toString())];
+                        return [4 /*yield*/, fetch(appurl + "?" + query.toString())];
                     case 1:
                         response = _a.sent();
                         return [4 /*yield*/, response.text()];

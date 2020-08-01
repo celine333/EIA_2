@@ -5,7 +5,7 @@ namespace MagicCanvas {
     export let crc2: CanvasRenderingContext2D;
     export let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
 
-    let appurl: string = "https://magiccanvas3.herokuapp.com/";
+    let appurl: string = "https://magiccanvas3.herokuapp.com/?name=hallo";
 
     // ausgwählte Farbe zum Füllen
     let selectedcolor: string = "#ff0000";
@@ -79,9 +79,9 @@ namespace MagicCanvas {
         document.querySelector("#rotate").addEventListener("click", setAnimation);
 
         // Element verschieben
-        canvas.addEventListener("mousedown", function(e) {startMove(canvas,e)});
-        canvas.addEventListener("mousemove", function(e) {nowMove(canvas,e)});
-        canvas.addEventListener("mouseup", function(e) {stopMove(canvas,e)});
+        canvas.addEventListener("mousedown", function(event) {startMove(canvas, event); });
+        canvas.addEventListener("mousemove", function(event) {nowMove(canvas, event); });
+        canvas.addEventListener("mouseup", function(event) {stopMove(canvas, event); });
     }
 
     async function savePicture(_event: Event): Promise<void> {
@@ -93,7 +93,7 @@ namespace MagicCanvas {
         let data: string = JSON.stringify(symbols);
         
         let query: URLSearchParams = new URLSearchParams(<any>data);
-        let response: Response = await fetch("index.html?" + name + "&" + query.toString());
+        let response: Response = await fetch(appurl + "?" + query.toString());
         let responseText: string = await response.text();
         console.log(responseText);
         alert("Picture saved!");

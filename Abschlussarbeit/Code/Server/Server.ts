@@ -14,6 +14,7 @@ export namespace MagicCanvas {
 
     server.listen(port);
     server.addListener("request", handleRequest);
+    
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
         console.log("Whats up?");
