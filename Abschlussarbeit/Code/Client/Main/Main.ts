@@ -92,16 +92,16 @@ namespace MagicCanvas {
 
     async function savePicture(_event: Event): Promise<void> {
         // eingetragener Name des Nutzers
-        let name: string = (<HTMLInputElement>document.getElementById("picturename")).value;
-        console.log("name:" + name);
+        let nameSaved: string = (<HTMLInputElement>document.getElementById("picturename")).value;
+        console.log("name:" + nameSaved);
 
-        let data: string = JSON.stringify(symbols);
+        let datasymbols: string = JSON.stringify(symbols);
         
         // let query: URLSearchParams = new URLSearchParams(<any>data);
-        let query: DataStructure = {name: name, data: data};
+        //let query: DataStructure = {name: nameSaved, data: datasymbols};
 
         console.log("server path:" + appurl + "?" + "insert&" + query);
-        let response: Response = await fetch(appurl + "?" + "insert&" + query);
+        let response: Response = await fetch(appurl + "?" + "action#=insert&name=" + nameSaved + "&data=" + datasymbols);
         let responseText: string = await response.text();
         console.log(responseText);
         alert("Picture saved!");

@@ -102,16 +102,17 @@ var MagicCanvas;
     }
     function savePicture(_event) {
         return __awaiter(this, void 0, void 0, function () {
-            var name, data, query, response, responseText;
+            var nameSaved, datasymbols, response, responseText;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        name = document.getElementById("picturename").value;
-                        console.log("name:" + name);
-                        data = JSON.stringify(MagicCanvas.symbols);
-                        query = { name: name, data: data };
+                        nameSaved = document.getElementById("picturename").value;
+                        console.log("name:" + nameSaved);
+                        datasymbols = JSON.stringify(MagicCanvas.symbols);
+                        // let query: URLSearchParams = new URLSearchParams(<any>data);
+                        //let query: DataStructure = {name: nameSaved, data: datasymbols};
                         console.log("server path:" + appurl + "?" + "insert&" + query);
-                        return [4 /*yield*/, fetch(appurl + "?" + "insert&" + query)];
+                        return [4 /*yield*/, fetch(appurl + "?" + "action#=insert&name=" + nameSaved + "&data=" + datasymbols)];
                     case 1:
                         response = _a.sent();
                         return [4 /*yield*/, response.text()];

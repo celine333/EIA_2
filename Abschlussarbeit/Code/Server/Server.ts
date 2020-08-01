@@ -8,6 +8,12 @@ export namespace MagicCanvas {
     
     let CanvasCollection: Mongo.Collection;
 
+    // Interface für Daten Übertragung
+    interface DataStructure {
+        name: string;
+        data: string;
+    }
+
     let port: number | string | undefined = process.env.PORT;
     if (port == undefined)
         port = 5001;
@@ -40,7 +46,9 @@ export namespace MagicCanvas {
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
         console.log("Whats up?");
-
+        let action: string;
+        let data: string;
+        let name: string;    
         _response.setHeader("content-type", "text/html; charset-utf-8");
         _response.setHeader("Access-Control-Allow-Origin", "*");
 
@@ -49,13 +57,17 @@ export namespace MagicCanvas {
             for (let key in url.query) {
                 _response.write(key + ":" + url.query[key] + "<br/>");
             }
-
-            let jsonString: string = JSON.stringify(url.query);
+            
+            let value: string = "name:" + url.query["name"] + ", data:" + url.query["data"];
+            _response.write("value:" + value);
+            
+            let jsonString: string = JSON.stringify(value);
             _response.write(jsonString);
 
-            storeCanvasCollection(url.query);
+            if ( url.query["action"] == "insert")
+                storeCanvasCollection(jsonString);
+            
         }
-
         _response.write("This is my response");
         _response.end();
     }
