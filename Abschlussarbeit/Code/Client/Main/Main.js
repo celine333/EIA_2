@@ -109,8 +109,7 @@ var MagicCanvas;
                         name = document.getElementById("picturename").value;
                         console.log("name:" + name);
                         data = JSON.stringify(MagicCanvas.symbols);
-                        query.name = name;
-                        query.data = data;
+                        query = { name: name, data: data };
                         console.log("server path:" + appurl + "?" + "insert&" + query);
                         return [4 /*yield*/, fetch(appurl + "?" + "insert&" + query)];
                     case 1:
