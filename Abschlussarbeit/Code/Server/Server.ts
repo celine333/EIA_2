@@ -6,7 +6,7 @@ export namespace MagicCanvas {
     let server: Http.Server = Http.createServer();
     console.log(server);
     
-    let pictures: Mongo.Collection;
+    let CanvasCollection: Mongo.Collection;
 
     let port: number | string | undefined = process.env.PORT;
     if (port == undefined)
@@ -34,8 +34,8 @@ export namespace MagicCanvas {
         let options: Mongo.MongoClientOptions = {useNewUrlParser: true, useUnifiedTopology: true};
         let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
         await mongoClient.connect();
-        // pictures = mongoClient.db("Homehelper").collection("Orders");
-        console.log("Database connection" + pictures != undefined);
+        CanvasCollection = mongoClient.db("MagicCanvas").collection("CanvasCollection");
+        console.log("Database connection" + CanvasCollection != undefined);
     }
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {

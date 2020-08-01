@@ -5,7 +5,7 @@ namespace MagicCanvas {
     export let crc2: CanvasRenderingContext2D;
     export let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
 
-    let appurl: string = "https://magiccanvas3.herokuapp.com/?name=hallo";
+    let appurl: string = "https://magiccanvas3.herokuapp.com/";
 
     // ausgwählte Farbe zum Füllen
     let selectedcolor: string = "#ff0000";

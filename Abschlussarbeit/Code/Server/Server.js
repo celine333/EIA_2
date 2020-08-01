@@ -43,7 +43,7 @@ var MagicCanvas;
 (function (MagicCanvas) {
     var server = Http.createServer();
     console.log(server);
-    var pictures;
+    var CanvasCollection;
     var port = process.env.PORT;
     if (port == undefined)
         port = 5001;
@@ -68,8 +68,8 @@ var MagicCanvas;
                         return [4 /*yield*/, mongoClient.connect()];
                     case 1:
                         _a.sent();
-                        // pictures = mongoClient.db("Homehelper").collection("Orders");
-                        console.log("Database connection" + pictures != undefined);
+                        CanvasCollection = mongoClient.db("MagicCanvas").collection("CanvasCollection");
+                        console.log("Database connection" + CanvasCollection != undefined);
                         return [2 /*return*/];
                 }
             });
