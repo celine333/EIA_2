@@ -14,10 +14,10 @@ export namespace L07_Homehelper {
         port = 5001;
     
     // let databaseurl: string = "mongodb://localhost:27017";
-    let databaseurl: string = "mongodb+srv://Testuser:furtwangen@eia2-7ebry.mongodb.net/Homehelper?retryWrites=true&w=majority";
+    // let databaseurl: string = "mongodb+srv://Testuser:furtwangen@eia2-7ebry.mongodb.net/Homehelper?retryWrites=true&w=majority";
 
     startServer(port);
-    connectToDatabase(databaseurl);
+    // connectToDatabase(databaseurl);
 
     function startServer(_port: number | string): void {
     

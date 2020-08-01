@@ -4,7 +4,8 @@
   "description": "��#\u0000 \u0000E\u0000I\u0000A\u0000_\u00002\u0000\r\u0000 \u0000",
   "main": "index.js",
   "dependencies": {
-    "mongodb": "^3.5.8"
+    "@types/mongodb": "^3.5.25",
+    "mongodb": "^3.6.0"
   },
   "devDependencies": {},
   "scripts": {
