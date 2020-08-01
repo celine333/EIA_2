@@ -100,7 +100,7 @@ namespace MagicCanvas {
         // let query: URLSearchParams = new URLSearchParams(<any>data);
         //let query: DataStructure = {name: nameSaved, data: datasymbols};
 
-        console.log("server path:" + appurl + "?" + "insert&" + query);
+      
         let response: Response = await fetch(appurl + "?" + "action#=insert&name=" + nameSaved + "&data=" + datasymbols);
         let responseText: string = await response.text();
         console.log(responseText);

@@ -109,9 +109,6 @@ var MagicCanvas;
                         nameSaved = document.getElementById("picturename").value;
                         console.log("name:" + nameSaved);
                         datasymbols = JSON.stringify(MagicCanvas.symbols);
-                        // let query: URLSearchParams = new URLSearchParams(<any>data);
-                        //let query: DataStructure = {name: nameSaved, data: datasymbols};
-                        console.log("server path:" + appurl + "?" + "insert&" + query);
                         return [4 /*yield*/, fetch(appurl + "?" + "action#=insert&name=" + nameSaved + "&data=" + datasymbols)];
                     case 1:
                         response = _a.sent();
