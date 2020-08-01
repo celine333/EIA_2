@@ -110,6 +110,7 @@ var MagicCanvas;
                         console.log("name:" + name);
                         data = JSON.stringify(MagicCanvas.symbols);
                         query = new URLSearchParams(data);
+                        console.log("server path:" + appurl + "?" + "insert&" + data);
                         return [4 /*yield*/, fetch(appurl + "?" + "insert&" + data)];
                     case 1:
                         response = _a.sent();

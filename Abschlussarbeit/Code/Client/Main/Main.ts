@@ -92,6 +92,7 @@ namespace MagicCanvas {
         let data: string = JSON.stringify(symbols);
         
         let query: URLSearchParams = new URLSearchParams(<any>data);
+        console.log("server path:" + appurl + "?" + "insert&" + data);
         let response: Response = await fetch(appurl + "?" + "insert&" + data);
         let responseText: string = await response.text();
         console.log(responseText);
