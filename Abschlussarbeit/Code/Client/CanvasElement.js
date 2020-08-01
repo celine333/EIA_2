@@ -1,13 +1,12 @@
 var MagicCanvas;
 (function (MagicCanvas) {
     var CanvasElement = /** @class */ (function () {
-        // ELement ist aktiv wenn es nicht mehr in der Mitte ist
-        //     active: boolean;
         function CanvasElement(_form, _color, _animation, _position) {
             // super(_position);
-            this.rotateangle = Math.PI / 4;
             this.directionx = 1;
             this.directiony = 1;
+            this.angle = 0;
+            this.size = 0;
             if (_position)
                 this.position = _position;
             else
@@ -18,47 +17,37 @@ var MagicCanvas;
             this.selectedcolor = _color;
             this.selectedanimation = _animation;
         }
-        CanvasElement.prototype.animate = function () {
-            if (this.selectedanimation == "position")
-                this.move();
-            else if (this.selectedanimation == "rotate")
-                this.rotate();
-        };
-        CanvasElement.prototype.move = function () {
-            var canvas = document.querySelector("canvas");
-            MagicCanvas.xpos = MagicCanvas.symbols[MagicCanvas.index].position.x;
-            MagicCanvas.ypos = MagicCanvas.symbols[MagicCanvas.index].position.y;
-            if (MagicCanvas.xpos > canvas.width)
-                // -1 damit es sich in die entgegengesetze Richtung weiter bewegt
-                MagicCanvas.symbols[MagicCanvas.index].directionx = -1;
-            if (MagicCanvas.ypos > canvas.height)
-                MagicCanvas.symbols[MagicCanvas.index].directiony = -1;
-            if (MagicCanvas.xpos < 0)
-                MagicCanvas.symbols[MagicCanvas.index].directionx = 1;
-            if (MagicCanvas.ypos < 0)
-                MagicCanvas.symbols[MagicCanvas.index].directiony = 1;
-            MagicCanvas.xpos = MagicCanvas.xpos + MagicCanvas.symbols[MagicCanvas.index].directionx;
-            MagicCanvas.ypos = MagicCanvas.ypos + MagicCanvas.symbols[MagicCanvas.index].directiony;
-            MagicCanvas.symbols[MagicCanvas.index].position.x = MagicCanvas.xpos;
-            MagicCanvas.symbols[MagicCanvas.index].position.y = MagicCanvas.ypos;
-            // console.log("symbols[index].position.y: " + symbols[index].position.y.toString);
-            // console.log("symbols[index].directiony " + symbols[index].directiony.toString);
-            MagicCanvas.symbols[MagicCanvas.index].draw();
-        };
-        CanvasElement.prototype.rotate = function () {
-            // Matrix transformation
-            MagicCanvas.crc2.save();
-            MagicCanvas.crc2.translate(70, -10);
-            // um 45 Grad rotieren
-            for (MagicCanvas.index = 0; MagicCanvas.index < MagicCanvas.symbols.length; MagicCanvas.index++) {
-                MagicCanvas.crc2.rotate(Math.PI / 4);
-                MagicCanvas.symbols[MagicCanvas.index].draw();
+        CanvasElement.prototype.animate = function (canvasWidth, canvasHeight) {
+            if (this.selectedanimation == "position") {
+                // element.move();
+                MagicCanvas.xpos = this.position.x;
+                MagicCanvas.ypos = this.position.y;
+                // rechts
+                if (MagicCanvas.xpos + this.size > canvasWidth)
+                    // -1 damit es sich in die entgegengesetze Richtung weiter bewegt
+                    this.directionx = -1;
+                // unten    
+                if (MagicCanvas.ypos + this.size > canvasHeight)
+                    this.directiony = -1;
+                // links    
+                if (MagicCanvas.xpos < 0)
+                    this.directionx = 1;
+                // oben    
+                if (MagicCanvas.ypos < 0)
+                    this.directiony = 1;
+                MagicCanvas.xpos = MagicCanvas.xpos + this.directionx;
+                MagicCanvas.ypos = MagicCanvas.ypos + this.directiony;
+                // Kommentar einfügen
+                this.position.x = MagicCanvas.xpos;
+                this.position.y = MagicCanvas.ypos;
             }
-            // Nullpunkt auf die Mitte des Canvas
-            // let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
-            // crc2.translate(canvas.width / 2, canvas.height / 2);    
-            // crc2.rotate(this.rotateangle);
-            // crc2.restore();   
+            else if (this.selectedanimation == "rotate") {
+                if (this.angle < 360)
+                    this.angle = this.angle + 1;
+                else
+                    this.angle = 0;
+            }
+            this.draw();
         };
         CanvasElement.prototype.draw = function () {
             if (this.selectedform == "circle")
@@ -71,14 +60,10 @@ var MagicCanvas;
                 this.drawFlash();
         };
         CanvasElement.prototype.drawCircle = function () {
-            var r = 4;
-            MagicCanvas.crc2.save();
-            MagicCanvas.crc2.translate(this.position.x, this.position.y);
-            // Skalierung vertikal und horizontal
-            MagicCanvas.crc2.scale(5, 5);
-            // crc2.translate(-50, -50);
+            var r = 20;
+            this.size = 20;
             MagicCanvas.crc2.beginPath();
-            MagicCanvas.crc2.arc(this.position.x, this.position.y, r, 0, 2 * Math.PI);
+            MagicCanvas.crc2.arc(this.position.x + this.size, this.position.y + this.size, r, 0, 2 * Math.PI);
             MagicCanvas.crc2.closePath();
             MagicCanvas.crc2.restore();
             // Linienfarbe
@@ -89,10 +74,17 @@ var MagicCanvas;
             MagicCanvas.crc2.fill();
         };
         CanvasElement.prototype.drawTriangle = function () {
+            this.size = 40;
+            if (this.selectedanimation == "rotate") {
+                // Matrix transformation
+                MagicCanvas.crc2.translate(this.position.x + (this.size / 2), this.position.y + (this.size / 2));
+                MagicCanvas.crc2.rotate(this.angle * Math.PI / 180);
+                MagicCanvas.crc2.translate(-1 * (this.position.x + (this.size / 2)), -1 * (this.position.y + (this.size / 2)));
+            }
             MagicCanvas.crc2.beginPath();
-            MagicCanvas.crc2.moveTo(this.position.x + 70, this.position.y + 70);
-            MagicCanvas.crc2.lineTo(this.position.x + 10, this.position.y + 70);
-            MagicCanvas.crc2.lineTo(this.position.x + 10, this.position.y + 25);
+            MagicCanvas.crc2.moveTo(this.position.x + 20, this.position.y + 0);
+            MagicCanvas.crc2.lineTo(this.position.x + 40, this.position.y + 40);
+            MagicCanvas.crc2.lineTo(this.position.x + 0, this.position.y + 40);
             MagicCanvas.crc2.closePath();
             // Linienfarbe
             MagicCanvas.crc2.strokeStyle = "#000000";
@@ -100,8 +92,21 @@ var MagicCanvas;
             // mit Farbe füllen
             MagicCanvas.crc2.fillStyle = this.selectedcolor;
             MagicCanvas.crc2.fill();
+            if (this.selectedanimation == "rotate") {
+                // Matrix transformation
+                MagicCanvas.crc2.translate(this.position.x + (this.size / 2), this.position.y + (this.size / 2));
+                MagicCanvas.crc2.rotate(-this.angle * Math.PI / 180);
+                MagicCanvas.crc2.translate(-1 * (this.position.x + (this.size / 2)), -1 * (this.position.y + (this.size / 2)));
+            }
         };
         CanvasElement.prototype.drawSquare = function () {
+            this.size = 40;
+            if (this.selectedanimation == "rotate") {
+                // Matrix transformation
+                MagicCanvas.crc2.translate(this.position.x + (this.size / 2), this.position.y + (this.size / 2));
+                MagicCanvas.crc2.rotate(this.angle * Math.PI / 180);
+                MagicCanvas.crc2.translate(-1 * (this.position.x + (this.size / 2)), -1 * (this.position.y + (this.size / 2)));
+            }
             MagicCanvas.crc2.beginPath();
             MagicCanvas.crc2.rect(this.position.x, this.position.y, 55, 40);
             // Linienfarbe
@@ -110,10 +115,24 @@ var MagicCanvas;
             // mit Farbe füllen
             MagicCanvas.crc2.fillStyle = this.selectedcolor;
             MagicCanvas.crc2.fill();
+            if (this.selectedanimation == "rotate") {
+                // Matrix transformation
+                MagicCanvas.crc2.translate(this.position.x + (this.size / 2), this.position.y + (this.size / 2));
+                MagicCanvas.crc2.rotate(-this.angle * Math.PI / 180);
+                MagicCanvas.crc2.translate(-1 * (this.position.x + (this.size / 2)), -1 * (this.position.y + (this.size / 2)));
+            }
         };
         CanvasElement.prototype.drawFlash = function () {
+            this.size = 20;
+            if (this.selectedanimation == "rotate") {
+                // Matrix transformation
+                MagicCanvas.crc2.translate(this.position.x + (this.size / 2), this.position.y + (this.size / 2));
+                // Canvas wird um einen kleinen Winkel rotiert
+                MagicCanvas.crc2.rotate(this.angle * Math.PI / 180);
+                MagicCanvas.crc2.translate(-1 * (this.position.x + (this.size / 2)), -1 * (this.position.y + (this.size / 2)));
+            }
             MagicCanvas.crc2.beginPath();
-            MagicCanvas.crc2.translate(40, 40);
+            // crc2.translate(40, 40);
             MagicCanvas.crc2.moveTo(this.position.x, this.position.y);
             MagicCanvas.crc2.lineTo(this.position.x + 20, this.position.y);
             MagicCanvas.crc2.lineTo(this.position.x + 15, this.position.y + 25);
@@ -129,6 +148,12 @@ var MagicCanvas;
             // mit Farbe füllen
             MagicCanvas.crc2.fillStyle = this.selectedcolor;
             MagicCanvas.crc2.fill();
+            if (this.selectedanimation == "rotate") {
+                // Matrix transformation
+                MagicCanvas.crc2.translate(this.position.x + (this.size / 2), this.position.y + (this.size / 2));
+                MagicCanvas.crc2.rotate(-this.angle * Math.PI / 180);
+                MagicCanvas.crc2.translate(-1 * (this.position.x + (this.size / 2)), -1 * (this.position.y + (this.size / 2)));
+            }
         };
         return CanvasElement;
     }());

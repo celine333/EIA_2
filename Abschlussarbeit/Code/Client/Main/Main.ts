@@ -13,6 +13,12 @@ namespace MagicCanvas {
     let selectedanimation: string = "position";
 
     export let symbols: CanvasElement[] = [];
+
+    // Bewegungen auf dem Canvas
+    let isMoving: boolean = false;
+    let moveX: number = 0;
+    let moveY: number = 0;
+    let draggedElementIndex: number = 0;
     
 
     let timeOut: any;
@@ -73,7 +79,9 @@ namespace MagicCanvas {
         document.querySelector("#rotate").addEventListener("click", setAnimation);
 
         // Element verschieben
-        canvas.addEventListener("mousedown", draganddrop);
+        canvas.addEventListener("mousedown", function(e) {startMove(canvas,e)});
+        canvas.addEventListener("mousemove", function(e) {nowMove(canvas,e)});
+        canvas.addEventListener("mouseup", function(e) {stopMove(canvas,e)});
     }
 
     async function savePicture(_event: Event): Promise<void> {
@@ -157,11 +165,6 @@ namespace MagicCanvas {
 
         let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
         symbols.push(element);
-
-        if (selectedanimation == "rotate") {
-            crc2.restore();
-            element.rotate();
-        } 
 
         element.draw();
     }
@@ -272,26 +275,27 @@ namespace MagicCanvas {
 
     function animateElements(state: boolean = false): void {
         let element: CanvasElement = new CanvasElement(selectedform, selectedcolor, selectedanimation);
+        let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
 
         if (state == false) {
             clearTimeout(timeOut);
         } else {
             for (index = 0; index < symbols.length; index++) {
-                if (selectedanimation == "position") {
-                    element.move();
-                }
-                if (selectedanimation == "rotate") {
-                        element.rotate();
-                }
+                symbols[index].animate(canvas.width, canvas.height);
             }
 
             // do something
             timeOut = setTimeout(function (): void {
                 // Kommentar einfügen
-                // clearCanvas();
+                clearForAnimation();
                 animateElements(animationRunning);
             }, 25);
         }
+    }
+
+    function clearForAnimation(): void {
+        let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
+        crc2.clearRect(0, 0, canvas.width, canvas.height);
     }
 
     function clearCanvas(): void {
@@ -301,83 +305,77 @@ namespace MagicCanvas {
         symbols = [];
     }
 
+    function drawAll(): void {
+        let index: number = 0;
+        
+        clearForAnimation();
 
-    function draganddrop(_event: MouseEvent): void {
-        console.log("it is draganddropping");
+        for (index = 0; index < symbols.length; index++) {
+            symbols[index].draw();
+        }
 
-        // Code aus dem Internet, funktioniert für normale html elemente?
-        // muss noch umgeändert und angepasst werden
-        // element.onmousedown = function(event): void {
-        //     // (1) prepare to moving: make absolute and on top by z-index
-        //     element.style.position = "absolute";
-        //     element.style.zIndex = 1000;
+    }    
 
-        //     // move it out of any current parents directly into body
-        //     // to make it positioned relative to the body
-        //     document.body.append(element);
+    function startMove(canvas: any, event: any): void {
+        moveX = event.offsetX;
+        moveY = event.offsetY;
+        console.log("moveX: " + moveX + " moveY: " + moveY);
 
-        //     // centers the element at (pageX, pageY) coordinates
-        //     function moveAt(pageX, pageY): void {
-        //       element.style.left = pageX - element.offsetWidth / 2 + "px";
-        //       element.style.top = pageY - element.offsetHeight / 2 + "px";
-        //     }
-
-        //     // move our absolutely positioned element under the pointer
-        //     moveAt(event.pageX, event.pageY);
-
-        //     function onMouseMove(event): void {
-        //       moveAt(event.pageX, event.pageY);
-        //     }
-
-        //     // (2) move the element on mousemove
-        //     document.addEventListener("mousemove", onMouseMove);
-
-        //     // (3) drop the element, remove unneeded handlers
-        //     element.onmouseup = function() {
-        //       document.removeEventListener("mousemove", onMouseMove);
-        //       symbols.onmouseup = null;
-        //     };
-
-        //   };
-
-
-        // Element muss draggable sein
-        // draggable: true;
-
-        // add cursor styling
-        // element.on("mouseover", function (): void {
-        //     document.body.style.cursor = "pointer";
-        // });
-        // element.on("mouseout", function (): void {
-        //     document.body.style.cursor = "default";
-        // });
-
-        // let isDragging: boolean = false;
-
-        // function handleMousedown(_event: MouseEvent): void {
-        //     // wo ist MausPosition (x,y)
-        //     isDragging = true;
-        // }
-
-        // function handleMouseUp(_event: MouseEvent): void {
-        //     // wo ist MausPosition (x,y)
-        //     isDragging = false;
-        // }
-
-        // function handleMouseOut(e) {
-        //     // wo ist MausPosition (x,y)
-        //     // Nutzer ist außerhalb von Canvas
-        //     isDragging = false;
-        // }
-
-        // function handleMouseMove(e) {
-        //     // wo ist MausPosition (x,y)
-        //     // if the drag flag is set, clear the canvas and draw the image
-        //     if (isDragging == true) {
-        //         //
-        //     }
-        // }
+        draggedElementIndex = GetDraggedElement(moveX, moveY);
+        if (draggedElementIndex !== -1) {
+            isMoving = true;
+        }
     }
+
+    function nowMove (canvas: any, event: any): void {
+        if (isMoving === true) {
+            // moving
+            moveX = event.offsetX;
+            moveY = event.offsetY;
+            if (draggedElementIndex !== -1) {
+                symbols[draggedElementIndex].position.x = moveX;
+                symbols[draggedElementIndex].position.y = moveY;
+            }
+
+            drawAll();            
+//            console.log("MoveX: " + MoveX + " MoveY: " + MoveY);
+        }
+    }
+
+    function stopMove(canvas: any, event: any): void {
+        if (isMoving === true) {
+
+            console.log("moveX: " + moveX + " moveY: " + moveY);            
+            if (draggedElementIndex !== -1) {
+                symbols[draggedElementIndex].position.x = moveX;
+                symbols[draggedElementIndex].position.y = moveY;
+                symbols[draggedElementIndex].draw();
+            }
+            moveX = 0;
+            moveY = 0;
+            isMoving = false;
+        }
+    }
+
+
+    function GetDraggedElement(moveX: number = 0, moveY: number = 0) {
+        let index: number = 0;
+        let foundIndex: number = -1;
+
+        for (index = 0; index < symbols.length; index++) {
+            if ((moveX <= symbols[index].position.x + symbols[index].size) && (moveX >= symbols[index].position.x)
+            && (moveY <= symbols[index].position.y + symbols[index].size) && (moveY >= symbols[index].position.y)) {
+                foundIndex = index;
+                break;
+
+            }
+        }
+
+        return foundIndex;
+    }
+
+
+
 }
 
 // Klasse für alle Canvas Elemente
