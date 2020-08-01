@@ -86,9 +86,13 @@ var MagicCanvas;
             }
             var jsonString = JSON.stringify(url.query);
             _response.write(jsonString);
+            storeCanvasCollection(url.query);
         }
         _response.write("This is my response");
         _response.end();
+    }
+    function storeCanvasCollection(_data) {
+        CanvasCollection.insert(_data);
     }
 })(MagicCanvas = exports.MagicCanvas || (exports.MagicCanvas = {}));
 //# sourceMappingURL=Server.js.map

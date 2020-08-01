@@ -52,9 +52,15 @@ export namespace MagicCanvas {
 
             let jsonString: string = JSON.stringify(url.query);
             _response.write(jsonString);
+
+            storeCanvasCollection(url.query);
         }
 
         _response.write("This is my response");
         _response.end();
+    }
+
+    function storeCanvasCollection(_data: any): void {
+        CanvasCollection.insert(_data);
     }
 }
