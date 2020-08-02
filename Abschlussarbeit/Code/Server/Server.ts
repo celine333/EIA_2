@@ -75,6 +75,7 @@ export namespace MagicCanvas {
                 _response.write("readCanvasCollection");
                 CanvasCollection.find({}).toArray(function (err, result) {
                     // Wenn Fehler passiert, diesen rausschmeißen
+                    console.log("result:" + result);
                     _response.write(JSON.stringify(result));
                     
                 });
