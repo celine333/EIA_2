@@ -110,6 +110,7 @@ var MagicCanvas;
         // err = error
         CanvasCollection.find({}).toArray(function (err, result) {
             // Wenn Fehler passiert, diesen rausschmeißen
+            _response.write("vor error");
             if (err)
                 throw err;
             _response.write(result);
