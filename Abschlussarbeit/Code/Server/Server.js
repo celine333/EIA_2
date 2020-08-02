@@ -106,15 +106,13 @@ var MagicCanvas;
     function storeCanvasCollection(_data) {
         CanvasCollection.insert(_data);
     }
-    function readCanvasCollection(_response) {
+    function readCanvasCollection() {
         // err = error
+        var result;
         CanvasCollection.find({}).toArray(function (err, result) {
             // Wenn Fehler passiert, diesen rausschmeißen
-            _response.write("vor error");
-            if (err)
-                throw err;
-            _response.write(result);
         });
+        return result;
     }
 })(MagicCanvas = exports.MagicCanvas || (exports.MagicCanvas = {}));
 //# sourceMappingURL=Server.js.map

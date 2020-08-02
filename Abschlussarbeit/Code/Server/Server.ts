@@ -85,14 +85,14 @@ export namespace MagicCanvas {
         CanvasCollection.insert(_data);
     }
 
-    function readCanvasCollection(_response: Http.ServerResponse): void {
+    function readCanvasCollection(): void {
         // err = error
+        let result: any;
         CanvasCollection.find({}).toArray(function (err, result) {
             // Wenn Fehler passiert, diesen rausschmeißen
-            _response.write("vor error");
-            if (err) throw err;
-            _response.write(result);
+          
             
         });
+        return result;
     }
 }
