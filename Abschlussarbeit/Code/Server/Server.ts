@@ -72,7 +72,12 @@ export namespace MagicCanvas {
             }
 
             if ( url.query["action"] == "select") {
-                _response.write("radCanvasCollection");
+                _response.write("readCanvasCollection");
+                CanvasCollection.find({}).toArray(function (err, result) {
+                    // Wenn Fehler passiert, diesen rausschmeißen
+                    _response.write(JSON.stringify(result));
+                    
+                });
                 // readCanvasCollection(_response);
             }
             
@@ -85,14 +90,4 @@ export namespace MagicCanvas {
         CanvasCollection.insert(_data);
     }
 
-    function readCanvasCollection(): void {
-        // err = error
-        let result: any;
-        CanvasCollection.find({}).toArray(function (err, result) {
-            // Wenn Fehler passiert, diesen rausschmeißen
-          
-            
-        });
-        return result;
-    }
 }
