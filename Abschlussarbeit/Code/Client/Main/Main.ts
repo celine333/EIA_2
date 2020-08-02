@@ -386,6 +386,7 @@ namespace MagicCanvas {
     }
 
     async function fillList(): Promise<void> {
+        // key = action, value = select
         let response: Response = await fetch(appurl + "?" + "action=select");
         let responseText: string = await response.text();
         console.log(responseText);

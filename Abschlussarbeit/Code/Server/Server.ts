@@ -57,18 +57,21 @@ export namespace MagicCanvas {
             for (let key in url.query) {
                 _response.write(key + ":" + url.query[key] + "<br/>");
             }
-            
-            let value: string = "name:" + url.query["name"] + ", data:" + url.query["data"];
-            _response.write("value:" + value);
-            
-            let jsonString: string = JSON.stringify(value);
-            _response.write(jsonString);
 
-            if ( url.query["action"] == "insert")
+            if ( url.query["action"] == "insert") {
+                let value: string = "name:" + url.query["name"] + ", data:" + url.query["data"];
+                _response.write("value:" + value);
+                
+                let jsonString: string = JSON.stringify(value);
+                _response.write(jsonString);
+                
                 storeCanvasCollection(jsonString);
+            }
 
-            if ( url.query["action"] == "select")
+            if ( url.query["action"] == "select") {
+                _response.write("radCanvasCollection");
                 readCanvasCollection(_response);
+            }
             
         }
         _response.write("This is my response");

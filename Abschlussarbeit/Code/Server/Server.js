@@ -87,14 +87,17 @@ var MagicCanvas;
             for (var key in url.query) {
                 _response.write(key + ":" + url.query[key] + "<br/>");
             }
-            var value = "name:" + url.query["name"] + ", data:" + url.query["data"];
-            _response.write("value:" + value);
-            var jsonString = JSON.stringify(value);
-            _response.write(jsonString);
-            if (url.query["action"] == "insert")
+            if (url.query["action"] == "insert") {
+                var value = "name:" + url.query["name"] + ", data:" + url.query["data"];
+                _response.write("value:" + value);
+                var jsonString = JSON.stringify(value);
+                _response.write(jsonString);
                 storeCanvasCollection(jsonString);
-            if (url.query["action"] == "select")
+            }
+            if (url.query["action"] == "select") {
+                _response.write("radCanvasCollection");
                 readCanvasCollection(_response);
+            }
         }
         _response.write("This is my response");
         _response.end();
