@@ -82,7 +82,7 @@ var MagicCanvas;
         var name;
         _response.setHeader("content-type", "text/html; charset-utf-8");
         // _response.setHeader("Access-Control-Allow-Origin", "*");
-        _response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
+        _response.setHeader("Access-Control-Allow-Origin", "*");
         if (_request.url) {
             var url = Url.parse(_request.url, true);
             for (var key in url.query) {
