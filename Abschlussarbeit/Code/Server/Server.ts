@@ -73,7 +73,7 @@ export namespace MagicCanvas {
 
             if ( url.query["action"] == "select") {
                 _response.write("radCanvasCollection");
-                readCanvasCollection(_response);
+                // readCanvasCollection(_response);
             }
             
         }
