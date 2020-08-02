@@ -40,6 +40,9 @@ namespace MagicCanvas {
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
+
+        // Lade alle gespeicherten Bilder
+        fillList();
         
         //Klick auf Hintergrundfarbe
         document.querySelector("#white").addEventListener("click", setBackground);
@@ -382,7 +385,11 @@ namespace MagicCanvas {
         return foundIndex;
     }
 
-
+    async function fillList(): Promise<void> {
+        let response: Response = await fetch(appurl + "?" + "action=select");
+        let responseText: string = await response.text();
+        console.log(responseText);
+    }
 
 }
 

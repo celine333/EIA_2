@@ -93,12 +93,23 @@ var MagicCanvas;
             _response.write(jsonString);
             if (url.query["action"] == "insert")
                 storeCanvasCollection(jsonString);
+            if (url.query["action"] == "select")
+                readCanvasCollection(_response);
         }
         _response.write("This is my response");
         _response.end();
     }
     function storeCanvasCollection(_data) {
         CanvasCollection.insert(_data);
+    }
+    function readCanvasCollection(_response) {
+        // err = error
+        CanvasCollection.find({}).toArray(function (err, result) {
+            // Wenn Fehler passiert, diesen rausschmeißen
+            if (err)
+                throw err;
+            _response.write(result);
+        });
     }
 })(MagicCanvas = exports.MagicCanvas || (exports.MagicCanvas = {}));
 //# sourceMappingURL=Server.js.map

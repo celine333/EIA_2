@@ -59,6 +59,8 @@ var MagicCanvas;
                 if (!canvas)
                     return [2 /*return*/];
                 MagicCanvas.crc2 = canvas.getContext("2d");
+                // Lade alle gespeicherten Bilder
+                fillList();
                 //Klick auf Hintergrundfarbe
                 document.querySelector("#white").addEventListener("click", setBackground);
                 document.querySelector("#black").addEventListener("click", setBackground);
@@ -366,6 +368,23 @@ var MagicCanvas;
             }
         }
         return foundIndex;
+    }
+    function fillList() {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, responseText;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch(appurl + "?" + "action=select")];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.text()];
+                    case 2:
+                        responseText = _a.sent();
+                        console.log(responseText);
+                        return [2 /*return*/];
+                }
+            });
+        });
     }
 })(MagicCanvas || (MagicCanvas = {}));
 // Klasse für alle Canvas Elemente

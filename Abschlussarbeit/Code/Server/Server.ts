@@ -66,6 +66,9 @@ export namespace MagicCanvas {
 
             if ( url.query["action"] == "insert")
                 storeCanvasCollection(jsonString);
+
+            if ( url.query["action"] == "select")
+                readCanvasCollection(_response);
             
         }
         _response.write("This is my response");
@@ -74,5 +77,14 @@ export namespace MagicCanvas {
 
     function storeCanvasCollection(_data: any): void {
         CanvasCollection.insert(_data);
+    }
+
+    function readCanvasCollection(_response: Http.ServerResponse): void {
+        // err = error
+        CanvasCollection.find({}).toArray(function (err, result) {
+            // Wenn Fehler passiert, diesen rausschmeißen
+            if (err) throw err;
+            _response.write(result);
+        });
     }
 }
