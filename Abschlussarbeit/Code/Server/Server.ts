@@ -83,7 +83,7 @@ export namespace MagicCanvas {
             }
             
         }
-        _response.write("This is my response");
+        _response.write("This is my response!!!");
         _response.end();
     }
 
