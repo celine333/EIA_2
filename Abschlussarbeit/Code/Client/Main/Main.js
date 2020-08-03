@@ -38,18 +38,22 @@ var MagicCanvas;
 (function (MagicCanvas) {
     window.addEventListener("load", handleLoad);
     MagicCanvas.canvas = document.querySelector("canvas");
+    // Heroku App Verlinkung
     var appurl = "https://magiccanvas3.herokuapp.com/";
-    // ausgwählte Farbe zum Füllen
+    // Speichern von ausgewählter Farbe, Form und Animation
     var selectedcolor = "#ff0000";
     var selectedform = "circle";
     var selectedanimation = "position";
+    // Array mit allen Eigenschaften
     MagicCanvas.symbols = [];
     // Bewegungen auf dem Canvas
-    var isMoving = false;
-    var moveX = 0;
-    var moveY = 0;
-    var draggedElementIndex = 0;
+    var isMoving = false; // bewegt sich das Element
+    var moveX = 0; // Bewegung in x Richtung
+    var moveY = 0; // Bewegung in y Richtung
+    var draggedElementIndex = 0; // welches Element wird angesprochen ???
+    // Zeitvariable, zum Neuladen ab bestimmter Zeit
     var timeOut;
+    // läuft die Animation
     var animationRunning = false;
     function handleLoad(_event) {
         return __awaiter(this, void 0, void 0, function () {
@@ -127,6 +131,8 @@ var MagicCanvas;
     function rulesVisibility() {
         console.log("show rules");
         var rulesdiv = document.querySelector("#overlay");
+        // Funktion wird mit klick aufgerufen, dann wird abgefragt, ob der div gerade sichtbar ist
+        // wenn nein, dann einblenden, sonst ausgeblendet lassen
         if (rulesdiv.style.display == "none") {
             rulesdiv.style.display = "block";
         }
@@ -135,12 +141,13 @@ var MagicCanvas;
         }
     }
     function handleCanvasSize() {
-        // Canvas sizes
+        // Canvas sizes als Radio Input Element
         var canvas = document.querySelector("canvas");
         var standardsize = document.querySelector("#standard");
         var smallsize = document.querySelector("#small");
         var mediumsize = document.querySelector("#medium");
         var largesize = document.querySelector("#large");
+        // überprüft welcher Radiobutton "checked" ist und passt dann die Größe an
         if (standardsize.checked == true) {
             canvas.setAttribute("style", "width: 500px");
             canvas.setAttribute("style", "height: 300px");
@@ -182,8 +189,11 @@ var MagicCanvas;
     }
     function generateSymbols(_event) {
         console.log("generate Symbols");
+        // ruft Constructor auf (durch new), Eigenschaften werden dem Element zugeordnet
         var element = new MagicCanvas.CanvasElement(selectedform, selectedcolor, selectedanimation);
+        // element wird dem Array hinzugefügt
         MagicCanvas.symbols.push(element);
+        // Elemnet wird gezeichnet
         element.draw();
     }
     function setColor(event) {
@@ -281,29 +291,32 @@ var MagicCanvas;
         }
     }
     function animateElementsStop() {
+        // Stop Button stoppt die Animation
         animationRunning = false;
         animateElements(animationRunning);
         console.log("Stop");
     }
     function animateElementsStart() {
+        // Start Button startet die Animation
         animationRunning = true;
         animateElements(animationRunning);
         console.log("Start");
     }
     function animateElements(state) {
         if (state === void 0) { state = false; }
-        var element = new MagicCanvas.CanvasElement(selectedform, selectedcolor, selectedanimation);
         var canvas = document.querySelector("canvas");
         if (state == false) {
+            // Verhindern das die Funktion erneut ausgeführt wird und Animation beenden
             clearTimeout(timeOut);
         }
         else {
             for (MagicCanvas.index = 0; MagicCanvas.index < MagicCanvas.symbols.length; MagicCanvas.index++) {
+                // alle Symbols werden animiert innerhalb des Canvas
                 MagicCanvas.symbols[MagicCanvas.index].animate(canvas.width, canvas.height);
             }
-            // do something
+            // alle 25ms wird die Animation neugeladen, damit sie sich bewegen
             timeOut = setTimeout(function () {
-                // Kommentar einfügen
+                // soll keinen "Schweif" hinter sich herziehen, canvas muss immer wieder neu geziechnet werdeb
                 clearForAnimation();
                 animateElements(animationRunning);
             }, 25);
@@ -312,45 +325,54 @@ var MagicCanvas;
     function clearForAnimation() {
         var canvas = document.querySelector("canvas");
         MagicCanvas.crc2.clearRect(0, 0, canvas.width, canvas.height);
+        // Background wird immer neu geladen
         setBackground();
     }
     function clearCanvas() {
+        // Nutzer kann mit delete Buuton alle Elemente des Canvas löschen
         console.log("delete");
         var canvas = document.querySelector("canvas");
         MagicCanvas.crc2.clearRect(0, 0, canvas.width, canvas.height);
         MagicCanvas.symbols = [];
+        // Background wird trotzdem gesaved
         setBackground();
     }
     function drawAll() {
         var index = 0;
+        // Elemente des Canvas immer wieder löschen, damit neu gezeichnet werden kann
         clearForAnimation();
+        // alle Elemente zeichnen
         for (index = 0; index < MagicCanvas.symbols.length; index++) {
             MagicCanvas.symbols[index].draw();
         }
     }
     function startMove(canvas, event) {
+        // Maus Position 
         moveX = event.offsetX;
         moveY = event.offsetY;
-        // scale from display coordinates to model coordinates
+        // neu skalieren für unterschiedliche Bildschirmgrößen
         moveX = Math.round(event.offsetX * (canvas.width / canvas.offsetWidth));
         moveY = Math.round(event.offsetY * (canvas.height / canvas.offsetHeight));
         console.log("moveX: " + moveX + " moveY: " + moveY);
-        draggedElementIndex = GetDraggedElement(moveX, moveY);
+        // Elemenet das verschoben werden soll ermitteln
+        draggedElementIndex = getDraggedElement(moveX, moveY);
+        // innerhalb von Canvas darf sich das Element bewegen
         if (draggedElementIndex !== -1) {
             isMoving = true;
         }
     }
     function nowMove(canvas, event) {
         if (isMoving === true) {
-            // moving
+            // Aktuelle Position der Maus
             moveX = event.offsetX;
             moveY = event.offsetY;
             if (draggedElementIndex !== -1) {
+                // Position der Elemente werden der Maus Position zugeschrieben --> kleben an der Maus
                 MagicCanvas.symbols[draggedElementIndex].position.x = moveX;
                 MagicCanvas.symbols[draggedElementIndex].position.y = moveY;
             }
+            // alle Elemente müssen wieder neu gezeichnet werden
             drawAll();
-            //            console.log("MoveX: " + MoveX + " MoveY: " + MoveY);
         }
     }
     function stopMove(canvas, event) {
@@ -363,15 +385,18 @@ var MagicCanvas;
             }
             moveX = 0;
             moveY = 0;
+            // Bewegung zuende
             isMoving = false;
         }
     }
-    function GetDraggedElement(moveX, moveY) {
+    function getDraggedElement(moveX, moveY) {
         if (moveX === void 0) { moveX = 0; }
         if (moveY === void 0) { moveY = 0; }
         var index = 0;
+        // Index des Elementes, welches durch den Benuter verschoben werden soll
         var foundIndex = -1;
         for (index = 0; index < MagicCanvas.symbols.length; index++) {
+            // Maus Position muss auf dem Element sein, um es zu bewegen
             if ((moveX <= MagicCanvas.symbols[index].position.x + MagicCanvas.symbols[index].size) && (moveX >= MagicCanvas.symbols[index].position.x)
                 && (moveY <= MagicCanvas.symbols[index].position.y + MagicCanvas.symbols[index].size) && (moveY >= MagicCanvas.symbols[index].position.y)) {
                 foundIndex = index;
@@ -398,11 +423,4 @@ var MagicCanvas;
         });
     }
 })(MagicCanvas || (MagicCanvas = {}));
-// Klasse für alle Canvas Elemente
-// Main: alle Werte holen (Farbe, Form, Animationsform)
-// die Infos werden mit new Canvaselement mit paramtern mitgegeben (müssen im Constructor 
-// vorher auch mitgegeben werden)
-// neues Element wird in ein Array gepusht --> alle Canvas Elmente
-// dieses array läuft durch eine Dauerschleife (für alle die sich bewegen oder rotieren)
-// Optional: alle Elemente hören sich auf zu bewegen während das neue ELement verschoben wird
 //# sourceMappingURL=Main.js.map

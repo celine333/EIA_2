@@ -2,7 +2,6 @@ var MagicCanvas;
 (function (MagicCanvas) {
     var CanvasElement = /** @class */ (function () {
         function CanvasElement(_form, _color, _animation, _position) {
-            // super(_position);
             this.directionx = 1;
             this.directiony = 1;
             this.angle = 0;
@@ -19,7 +18,6 @@ var MagicCanvas;
         }
         CanvasElement.prototype.animate = function (canvasWidth, canvasHeight) {
             if (this.selectedanimation == "position") {
-                // element.move();
                 MagicCanvas.xpos = this.position.x;
                 MagicCanvas.ypos = this.position.y;
                 // rechts
@@ -35,18 +33,21 @@ var MagicCanvas;
                 // oben    
                 if (MagicCanvas.ypos < 0)
                     this.directiony = 1;
+                // Bewegung wird hinzugefügt dass es in die richtige Richtung fliegt
                 MagicCanvas.xpos = MagicCanvas.xpos + this.directionx;
                 MagicCanvas.ypos = MagicCanvas.ypos + this.directiony;
-                // Kommentar einfügen
+                // aktualisierte Positionen
                 this.position.x = MagicCanvas.xpos;
                 this.position.y = MagicCanvas.ypos;
             }
             else if (this.selectedanimation == "rotate") {
                 if (this.angle < 360)
+                    // Winkel wird immer um 1 vergrößert (eig Canvas gedreht)
                     this.angle = this.angle + 1;
                 else
                     this.angle = 0;
             }
+            // immer neu zeichnen, damit sie immer eine neue Position haben können
             this.draw();
         };
         CanvasElement.prototype.draw = function () {

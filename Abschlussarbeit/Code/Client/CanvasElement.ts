@@ -13,8 +13,6 @@ namespace MagicCanvas {
         
 
         constructor(_form: string, _color: string, _animation: string, _position?: Vector) {
-            // super(_position);
-
             if (_position)
                 this.position = _position;
             else
@@ -30,7 +28,6 @@ namespace MagicCanvas {
 
         public animate(canvasWidth: number, canvasHeight: number): void {
             if (this.selectedanimation == "position") {
-                // element.move();
                 xpos = this.position.x;
                 ypos = this.position.y;
 
@@ -51,20 +48,22 @@ namespace MagicCanvas {
                 if (ypos < 0)
                     this.directiony = 1;
 
+                // Bewegung wird hinzugefügt dass es in die richtige Richtung fliegt
                 xpos = xpos + this.directionx;
                 ypos = ypos + this.directiony;
 
-                // Kommentar einfügen
+                // aktualisierte Positionen
                 this.position.x = xpos;
                 this.position.y = ypos;
             }
             else if (this.selectedanimation == "rotate") {
                 if (this.angle < 360)
+                    // Winkel wird immer um 1 vergrößert (eig Canvas gedreht)
                     this.angle = this.angle + 1;
                 else
                     this.angle = 0;                
             }
-
+            // immer neu zeichnen, damit sie immer eine neue Position haben können
             this.draw();            
 
         }
